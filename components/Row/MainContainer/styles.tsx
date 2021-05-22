@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import { preventAutoHide } from 'expo-splash-screen';
 
 
 const styles = StyleSheet.create({
@@ -25,7 +24,7 @@ marginTop: 5,
   flexDirection:'row',
 },
 blueText: {
-color: 'rgb(0,122,255)',
+color: '#FF5733',
 },
 name: {
     marginRight: 5,
@@ -47,7 +46,7 @@ dltbtn: {
     height: 35,
 },
 frzbtn: {
-    backgroundColor: 'rgb(0,122,255)',
+    backgroundColor: '#FF5733',
     borderRadius: 30,
     width: 105,
     height: 35,
@@ -67,7 +66,7 @@ editText: {
     fontSize: 12,
 },
 closeText: {
-    color: 'rgb(0,122,255)',
+    color: '#FF5733',
     textTransform: 'uppercase',
     fontSize: 12,
     marginVertical: 15,

@@ -21,7 +21,7 @@ filterRow: {
     marginRight: 'auto',
     height: 40,
     width: 200,
-    backgroundColor: '#30303b',
+    backgroundColor: '#FF5733',
     borderRadius: 20,
 },
 filterText: {

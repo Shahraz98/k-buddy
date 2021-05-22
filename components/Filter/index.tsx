@@ -32,7 +32,7 @@ const Filter = ({filterby, filterto}:FilterProps) => {
 return (
    <View >
        <TouchableOpacity onPress={() => setShow(!show)}>
-           <Text style={{marginRight: 'auto',  marginLeft: 'auto', marginTop: 20, color: 'rgb(0,122,255)'}}>{filterto}</Text>
+           <Text style={{marginRight: 'auto',  marginLeft: 'auto', marginTop: 20, color: '#30303b'}}>{filterto}</Text>
        </TouchableOpacity>
 
        {show?

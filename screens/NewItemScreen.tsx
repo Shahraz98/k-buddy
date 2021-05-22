@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect} from 'react';
-import { StyleSheet, Button,ScrollView, TouchableWithoutFeedback, Keyboard, Picker, Alert} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet,Image,Button,ScrollView, TouchableWithoutFeedback, Keyboard, Picker, Alert} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import firebase from '../utils/firebase.js';
 import { format} from 'date-fns'
@@ -11,8 +10,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function NewItemScreen() {
-
-    const navigation = useNavigation();
 
     const [name, setName] = useState<string>('');
     const [brand, setBrand] = useState<string>('');
@@ -54,13 +51,14 @@ export default function NewItemScreen() {
           console.log("error", err)
       }
   };
-
+  
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+      return <>
+          <Text style={{fontStyle: 'italic', marginRight: 'auto', marginLeft: 'auto', marginTop: 15}}>Requesting for camera permission.</Text>
+          <Text style={{fontWeight: 'bold', marginRight: 'auto', marginLeft: 'auto', marginTop: 15}}>Scanning items is only possible through camera access.</Text>
+          </>;
   }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
+
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -140,7 +138,7 @@ export default function NewItemScreen() {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
             <ScrollView>
                 {added? 
-                <View style={{marginLeft: 25, marginTop: '50%'}}>
+                <View style={{marginLeft:'auto', marginRight: 'auto'}}>
                     <Text style={styles.headerText}>Item has been successfully added.</Text>
                     <Text>Go to the next tab to view it,</Text>
                     <Text>or</Text>
@@ -155,21 +153,21 @@ export default function NewItemScreen() {
                         onChangeText={(e) => setName(e)}
                         numberOfLines={3}
                         multiline={true}
-                        style={styles.tweetInput}
+                        style={styles.mainInput}
                         placeholder={"Please provide a name for your ingredient."}></TextInput>
                     <TextInput
                         value={brand}
                         onChangeText={(e) => setBrand(e)}
                         numberOfLines={3}
                         multiline={true}
-                        style={styles.tweetInput}
+                        style={styles.mainInput}
                         placeholder={"Please provide a brand for your ingredient."}></TextInput>
                     <TextInput
                         value={category}
                         onChangeText={(e) => setCategory(e)}
                         numberOfLines={3}
                         multiline={true}
-                        style={styles.tweetInput}
+                        style={styles.mainInput}
                         placeholder={"Please provide a category for your ingredient."}></TextInput>
                         {showMaturity? 
                         <View>
@@ -207,9 +205,9 @@ export default function NewItemScreen() {
                         onChangeText={(e) => setLocation(e)}
                         numberOfLines={3}
                         multiline={true}
-                        style={styles.tweetInput}
+                        style={styles.mainInput}
                         placeholder={"Please provide a location for your ingredient."}></TextInput>
-                    <Button title="Select Expiry Date" onPress={showDatePicker} />
+                    <Button color='#FF5733' title="Select Expiry Date" onPress={showDatePicker} />
                     <DateTimePickerModal
                     isVisible={isDatePickerVisible}
                     mode="date"
@@ -219,16 +217,20 @@ export default function NewItemScreen() {
                     <TouchableOpacity style={styles.button} onPress={addItem}>
                     <Text style={styles.buttonText}>Add</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.scanButton} onPress={()=>setScanner(true)}>
+                    {hasPermission? <><TouchableOpacity style={styles.scanButton} onPress={()=>setScanner(true)}>
                     <Text style={styles.buttonText}>Scan QR Code</Text>
                     </TouchableOpacity>
                     {scanner?
                     <>
-                    <Button title={'Close'} onPress={() => setScanner(false)}></Button>
                     <BarCodeScanner
                     onBarCodeScanned={handleBarCodeScanned}
-                    style={{width: '100%', height: '95%', position: 'absolute'}}
-                    /></>
+                    style={StyleSheet.absoluteFill}>
+                    <Text style={{color:'#ffffff', fontSize: 35, marginRight: 'auto', marginLeft:'auto', marginVertical: 50}}>Scan your QR Code</Text>
+                    <Image style={{height: 200, width: 200, marginRight: 'auto', marginLeft:'auto', marginVertical: 50}} source={require('../assets/images/scan.png')}/>
+                    <Button color='white' title={'Close'} onPress={() => setScanner(false)}></Button>
+                    </BarCodeScanner>
+                    </>
+                    : <View></View>}</>
                     : <View></View>}
                   </View>
                 }
@@ -245,20 +247,18 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         marginLeft: 'auto',
     },
-    headerContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+    inputContainer: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     headerText: {
         marginLeft: 'auto',
         marginRight: 'auto',
         fontSize: 24,
         marginBottom: 20,
-        color: '#30303b',
+        color: '#FF5733',
     },
-    tweetInput: {
-        marginLeft: 'auto',
-        marginRight: 'auto',
+    mainInput: {
         height: 50,
         width: 350,
         fontSize: 14,
@@ -270,15 +270,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#F3F3F4',
     },
     button: {
-        marginTop: 20,
-        backgroundColor: '#30303b',
+        marginTop: 15,
+        marginBottom: 10,
+        backgroundColor: '#FF5733',
         borderRadius: 30,
         width: 100,
         marginRight: 'auto',
         marginLeft: 'auto',
     },
     scanButton: {
-        marginTop: 20,
+        marginTop: 15,
         marginBottom: 20,
         backgroundColor: '#30303b',
         borderRadius: 30,
@@ -287,7 +288,7 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
     },
     anotherbutton: {
-        backgroundColor: '#30303b',
+        backgroundColor: '#FF5733',
         borderRadius: 30,
         width: 180,
         marginTop: 20,

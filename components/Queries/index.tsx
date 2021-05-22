@@ -35,6 +35,7 @@ const ripewords = ['2 days','a day', 'hour', 'second', 'minute','year', 'month']
 return (
 <ScrollView style={styles.container}>
     <Text style={styles.headerText}>Please check Maturity Status</Text>
+    <Text style={{marginRight: 'auto', marginLeft: 'auto', fontSize: 10, marginBottom: 10}}>(no items will be shown if every item has been checked recently.)</Text>
     {displayList?
     displayList.filter((product) => product.confection === 'Fresh').filter( (item) => formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[0]) === false 
     && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[1]) === false

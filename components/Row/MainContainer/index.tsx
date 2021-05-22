@@ -32,7 +32,7 @@ const translateRipeness = (ripeness:string) => {
 const translateRipenessColor = (ripeness:string) => {
     if(ripeness === 'Underripe') return '#FFCC66';
     if(ripeness === 'Barely Ripe') return '#FF9966';
-    if(ripeness === 'Ripe') return '#FF6666';
+    if(ripeness === 'Ripe') return '#FF5733';
     if(ripeness === 'Very Ripe') return '#FF3366';
     else return '#FF0066';
 }
@@ -154,7 +154,7 @@ return (
         <MaterialCommunityIcons name="cube" size={50} color="black" />
                 <Text style={{marginLeft: 'auto', marginRight: 'auto'}}>Closed</Text>
                 <TouchableOpacity onPress={handleOpen}>
-            <Text style={{color: 'rgb(0,122,255)', marginTop: 10}} >Open it</Text>
+            <Text style={{color: '#FF5733', marginTop: 10}} >Open it</Text>
         </TouchableOpacity>
             </View>}
     </View>
