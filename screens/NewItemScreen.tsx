@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { StyleSheet, ScrollView, TouchableWithoutFeedback, Keyboard, Picker, Alert} from 'react-native';
+import { useState, useEffect} from 'react';
+import { StyleSheet, Button,ScrollView, TouchableWithoutFeedback, Keyboard, Picker, Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 import firebase from '../utils/firebase.js';
-import moment from 'moment';
+import { format} from 'date-fns'
 import { View, Text } from '../components/Themed';
 import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function NewItemScreen() {
 
@@ -20,13 +21,63 @@ export default function NewItemScreen() {
     const [confection, setConfection] = useState<string>('');
     const [maturity, setMaturity] = useState<string>('');
     const [showMaturity, setshowMaturity] = useState<boolean>(false);
-    const [datepick, setDatepick] = useState(new Date(moment().format('YYYY-MM-DD')));
+    const [datepick, setDatepick] = useState(new Date());
     const [added, setAdded] = useState<boolean>(false);
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+    const [scanner, setScanner] = useState<boolean>(false);
 
+  useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  const toJson = (response: Response): Promise<any> => {
+    if (!response.ok) 
+      throw new Error("error in the response: " + response.status)
+    return response.json()
+  }
+
+  const handleBarCodeScanned = async ({data}:any) => {
+    setScanner(false);
+    try {
+        const response = await fetch(`https://world.openfoodfacts.org/api/v0/product/${data}`)
+        const json = await toJson(response)
+        const categoryName = json.product.categories_hierarchy[0].substring(3);
+        const fixedCategory = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+        setName(json.product.product_name)
+        setCategory(fixedCategory)
+        setBrand(json.product.brands)
+      } catch(err) {
+          console.log("error", err)
+      }
+  };
+
+  if (hasPermission === null) {
+    return <Text>Requesting for camera permission</Text>;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+      };
+    
+      const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+      };
+
+      const onConfirm = (selectedDate:Date) => {
+        setDatepick(selectedDate);
+        hideDatePicker();
+    };
 
     const addItem = () => {
-        const now = moment().format('YYYY-MM-DD HH');
-        const expiry = moment(datepick).format('YYYY-MM-DD HH');
+        const now = format(new Date(),"yyyy-MM-dd'T'HH:mm");
+        const expiry = format(datepick,"yyyy-MM-dd'T'HH:mm");
         if(name != '') {
             const ProductRef = firebase.database().ref("Product");
             if(confection != 'Fresh'){
@@ -70,11 +121,6 @@ export default function NewItemScreen() {
         else Alert.alert('Name required','To be able to add your ingredient a name will be necessary, please fill out the first text-field.');
     }
 
-    const onChange = (event:any, selectedDate:Date | void) => {
-        const currentDate = selectedDate || datepick;
-        setDatepick(currentDate);
-    };
-
     const handleReset = () => {
         setAdded(false);
         setshowMaturity(false);
@@ -84,7 +130,7 @@ export default function NewItemScreen() {
         setBrand('');
         setLocation('');
         setConfection('');
-        setDatepick(new Date(moment().format('YYYY-MM-DD')));
+        setDatepick(new Date());
 
     }
 
@@ -163,18 +209,27 @@ export default function NewItemScreen() {
                         multiline={true}
                         style={styles.tweetInput}
                         placeholder={"Please provide a location for your ingredient."}></TextInput>
-                    <Text style={{marginLeft: 'auto', marginRight: 'auto', marginVertical: 20,}}>Provide an expiry date:</Text>
-                    <DateTimePicker
-                    testID="dateTimePicker"
-                    style={{marginLeft: '33%'}}
-                    value={datepick}
-                    mode='date'
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}/>
+                    <Button title="Select Expiry Date" onPress={showDatePicker} />
+                    <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={onConfirm}
+                    onCancel={hideDatePicker}
+                    />
                     <TouchableOpacity style={styles.button} onPress={addItem}>
                     <Text style={styles.buttonText}>Add</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.scanButton} onPress={()=>setScanner(true)}>
+                    <Text style={styles.buttonText}>Scan QR Code</Text>
+                    </TouchableOpacity>
+                    {scanner?
+                    <>
+                    <Button title={'Close'} onPress={() => setScanner(false)}></Button>
+                    <BarCodeScanner
+                    onBarCodeScanned={handleBarCodeScanned}
+                    style={{width: '100%', height: '95%', position: 'absolute'}}
+                    /></>
+                    : <View></View>}
                   </View>
                 }
             </ScrollView>
@@ -185,16 +240,14 @@ export default function NewItemScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'flex-start',
+        width: '100%',
         backgroundColor: 'white',
-
+        marginRight: 'auto',
+        marginLeft: 'auto',
     },
     headerContainer: {
-        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 15,
     },
     headerText: {
         marginLeft: 'auto',
@@ -203,10 +256,9 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: '#30303b',
     },
-    inputContainer: {
-        marginLeft: 15,
-    },
     tweetInput: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
         height: 50,
         width: 350,
         fontSize: 14,
@@ -216,14 +268,6 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderWidth: 0,
         backgroundColor: '#F3F3F4',
-        
-    },
-    dateInput: {
-        width: 200,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginTop: 10,
-        borderRadius: 15,
     },
     button: {
         marginTop: 20,
@@ -232,7 +276,15 @@ const styles = StyleSheet.create({
         width: 100,
         marginRight: 'auto',
         marginLeft: 'auto',
-        
+    },
+    scanButton: {
+        marginTop: 20,
+        marginBottom: 20,
+        backgroundColor: '#30303b',
+        borderRadius: 30,
+        width: 185,
+        marginRight: 'auto',
+        marginLeft: 'auto',
     },
     anotherbutton: {
         backgroundColor: '#30303b',

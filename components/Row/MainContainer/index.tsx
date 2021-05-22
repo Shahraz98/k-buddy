@@ -4,7 +4,7 @@ import { ProductType } from '../../../types';
 import styles from './styles';
 import {ProgressBar} from 'react-native-paper';
 import firebase from 'firebase';
-import moment from 'moment';
+import { sub,format, formatDistanceToNow, add, isAfter} from 'date-fns'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Modal from '../../Modal';
 import { FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -16,7 +16,6 @@ product: ProductType,
 const MainContainer = ({product}: MainContainerProps) => {
 const [modal, OpenModal] = useState<boolean>(true);
 const [freeze, setFreeze] = useState<boolean>(false);
-const [open, setOpen] = useState<boolean>(false);
 
 const handleEdit = () => {
    OpenModal(!modal);
@@ -47,15 +46,31 @@ const handleDelete = async () => {
 
 const handleOpen = async () => {
     try {
-    setOpen(!open);
-    await ProductRef.update({
-     isOpen: open,
-    })
+        if(formatDistanceToNow(new Date(product.expiry!)).includes('year')
+        || formatDistanceToNow(new Date(product.expiry!)).includes('month')
+        || formatDistanceToNow(new Date(product.expiry!)).includes('days')){
+            const temp = add(new Date(), {
+                days: 1,
+              })
+            const minEx = format(temp, "yyyy-MM-dd'T'HH:mm")
+            await ProductRef.update({
+             expiry: minEx,
+             isOpen: true,
+            })
+        } else {
+            await ProductRef.update({
+             isOpen: true,
+            })
+        }
  } catch(error) {console.log('error',error)}
 }
 
 const handleFreeze = async () => {
-    try {const extended = moment(product.expiry).add(6,'months').format('YYYY-MM-DD hh');
+    try {
+    const temp = add(new Date(product.expiry!), {
+        months: 6,
+      })
+    const extended = format(temp, "yyyy-MM-dd'T'HH:mm")
     await ProductRef.update({
      expiry: extended
     })
@@ -64,7 +79,11 @@ const handleFreeze = async () => {
 }
 
 const unFreeze = async () => {
-  try {const unfrozen = moment(product.expiry).subtract(6,'months').format('YYYY-MM-DD hh');
+  try {
+  const temp = sub(new Date(product.expiry!), {
+        months: 6,
+   })
+   const unfrozen = format(temp, "yyyy-MM-dd'T'HH:mm")
    await ProductRef.update({
     expiry: unfrozen
    }) 
@@ -82,16 +101,17 @@ return (
             <Text style={styles.name}>{product.name}</Text>
             <Text>({product.category})</Text>
             <Text style={styles.location}> in {product.location},</Text>
-            <Text> expiring <Text style={styles.blueText}>{moment(product.expiry).fromNow()}.</Text></Text>
+            {isAfter(new Date(), new Date(product.expiry!))? <Text style={styles.blueText}>currently expired.</Text>
+            : <Text> expiring <Text style={styles.blueText}>{formatDistanceToNow(new Date(product.expiry!), { addSuffix: true })}.</Text></Text>}
         </View>
     </View>
     
     <View style={styles.rowContainer}>
-    <Text>Added <Text style={styles.blueText}>{moment(product.addedOn).fromNow()}</Text>.</Text>
+    <Text>Added <Text style={styles.blueText}>{formatDistanceToNow(new Date(product.addedOn), { addSuffix: true })}</Text>.</Text>
     <Text> Confection Type: {product.confection}.</Text>
     {product.maturity?
     <View>
-    <Text style={{marginTop: 5}}>Checked within {moment(product.maturitydate).fromNow()}: 
+    <Text style={{marginTop: 5}}>Checked {formatDistanceToNow(new Date(product.maturitydate!), { addSuffix: true })}: 
     <Text style={{color: translateRipenessColor(product.maturity)}}> {product.maturity}</Text>
     </Text>
     <ProgressBar 
@@ -129,9 +149,6 @@ return (
         {product.isOpen?  <View style={{marginRight: 'auto', marginLeft: 'auto', marginTop: 10}}>
     <FontAwesome name="dropbox" size={65} color="black" />
     <Text style={{marginLeft: 'auto', marginRight: 'auto'}}>Open</Text>
-    <TouchableOpacity onPress={handleOpen}>
-            <Text style={{color: '#FF0066', marginTop: 10, marginLeft: 'auto', marginRight: 'auto'}} >Close it</Text>
-        </TouchableOpacity>
         </View>
         :  <View style={{marginRight: 'auto', marginLeft: 'auto'}}>
         <MaterialCommunityIcons name="cube" size={50} color="black" />

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Text, ScrollView, View} from 'react-native';
 import firebase from '../../utils/firebase.js';
-import moment from 'moment';
+import { formatDistanceToNow} from 'date-fns'
 import styles from './styles';
 import Row from '../Row';
 import { ProductType } from '../../types';
@@ -30,16 +30,17 @@ useEffect(()=> {
     })
 }, []);
 
-const words = ['day', 'hour'] //Used to filter recently added items
-const ripewords = ['2 days','a day', 'hour'] //Used to filter ripeness status check of items
+const ripewords = ['2 days','a day', 'hour', 'second', 'minute','year', 'month'] //Used to filter ripeness status check of items and recently added items
 
 return (
 <ScrollView style={styles.container}>
     <Text style={styles.headerText}>Please check Maturity Status</Text>
     {displayList?
-    displayList.filter((product) => moment(product.maturitydate).fromNow().includes(ripewords[0]) === false 
-    && moment(product.maturitydate).fromNow().includes(ripewords[1]) === false
-    && moment(product.maturitydate).fromNow().includes(ripewords[2]) === false).map((product) => <Row key={product.id} item={product}/>)
+    displayList.filter((product) => product.confection === 'Fresh').filter( (item) => formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[0]) === false 
+    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[1]) === false
+    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[2]) === false
+    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[3]) === false
+    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[4]) === false).map((product) => <Row key={product.id} item={product}/>)
     : <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>
     }
 
@@ -113,8 +114,8 @@ return (
 
 <Text style={styles.headerText}>Added during last month</Text>
 {   displayList?
-    displayList.filter((product) => moment(product.addedOn).fromNow().indexOf(words[0]) > -1 
-    || moment(product.addedOn).fromNow().indexOf(words[1]) > -1).map((product) => <Row key={product.id} item={product}/>)
+    displayList.filter((product) => formatDistanceToNow(new Date(product.addedOn!), { addSuffix: true }).indexOf(ripewords[5]) < 1 
+    && formatDistanceToNow(new Date(product.addedOn!), { addSuffix: true }).indexOf(ripewords[6]) < 1).map((product) => <Row key={product.id} item={product}/>)
     : <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>
 }
 

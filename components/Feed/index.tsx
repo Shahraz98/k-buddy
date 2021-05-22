@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, ScrollView, View} from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import moment from 'moment';
+import { formatDistanceToNow} from 'date-fns'
 import styles from './styles';
 import Row from '../Row';
 import firebase from '../../utils/firebase.js';
@@ -48,7 +48,7 @@ const Feed = () => {
         }
       };
 
-    const words = ['day', 'hour'] //Used to filter moment dates and determine items soon expiring
+    const words = ['day', 'hour', 'minute','second'] //Used to filter moment dates and determine items soon expiring
 
 return (
 <ScrollView style={styles.container}>
@@ -82,10 +82,13 @@ return (
 
    {/*Expiring BEFORE next month, items expiring exactly in 1 month are ignored.*/}
 
-   <Text style={styles.headerText}>Expiring before a month</Text>
+   <Text style={styles.headerText}>Expiring soon</Text>
    {   fullList ?
-    fullList.filter((product) => moment(product.expiry).fromNow().indexOf(words[0]) > -1 
-    || moment(product.expiry).fromNow().indexOf(words[1]) > -1).map((product, i) => <Row key={i} item={product}/>) 
+    fullList.filter((product) => formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[0]) > -1 
+    || formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[1]) > -1
+    || formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[2]) > -1
+    || formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[3]) > -1
+    || product.maturity === 'Ripe').map((product, i) => <Row key={i} item={product}/>) 
     : <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>
     }
 

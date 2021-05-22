@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, TextInput, Picker} from 'react-native';
+import {View, Text, Button, TouchableOpacity, TextInput, Picker} from 'react-native';
 import {ProductType} from '../../types';
 import styles from './styles';
 import firebase from '../../utils/firebase.js';
-import moment from 'moment';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import {format} from 'date-fns';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export type ProductProps = {
 item: ProductType,
@@ -18,16 +18,25 @@ const Modal = ({item}: ProductProps) => {
     const [itemlocation, setLocation] = useState(item.location);
     const [itemmaturity, setMaturity] = useState(item.maturity);
     const [itemconfection, setConfection] = useState(item.confection);
-    const [itemexpiry, setExpiry] = useState(new Date(moment(item.expiry).format('YYYY-MM-DD')));
+    const [itemexpiry, setExpiry] = useState(new Date(item.expiry!));
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-    const onChange = (event:any, selectedDate:Date | void) => {
-        const currentDate = selectedDate || itemexpiry;
-        setExpiry(currentDate);
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+      };
+    
+      const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+      };
+
+      const onConfirm = (selectedDate:Date) => {
+        setExpiry(selectedDate);
+        hideDatePicker();
     };
 
     const handleChange = async () => {
     try {
-       const now = moment().format('YYYY-MM-DD HH');
+       const now = format(new Date(),"yyyy-MM-dd'T'HH:mm");
        const ProductRef = firebase.database().ref("Product").child(item.id);
        if(itemmaturity){
         await ProductRef.update({
@@ -36,7 +45,7 @@ const Modal = ({item}: ProductProps) => {
            location: itemlocation,
            maturity: itemmaturity,
            maturitydate: now,
-           expiry: moment(itemexpiry).format('YYYY-MM-DD HH')
+           expiry: format(itemexpiry,"yyyy-MM-dd'T'HH:mm")
         })
        } else {
            await ProductRef.update({
@@ -44,7 +53,7 @@ const Modal = ({item}: ProductProps) => {
            category: itemcategory,
            location: itemlocation,
            confection: itemconfection,
-           expiry: moment(itemexpiry).format('YYYY-MM-DD HH')
+           expiry: format(itemexpiry,"yyyy-MM-dd'T'HH:mm")
        })};
        setChanged(true);}
        catch(error) {console.log('error', error)}
@@ -111,15 +120,13 @@ return (
                         multiline={true}
                         style={styles.itemInput}
                         placeholder={"Please provide a location for your ingredient."}></TextInput>
-                    <Text style={{marginLeft: 'auto', marginRight: 'auto', marginVertical: 20, color: 'rgb(0,122,255)'}}>Current expiry date:</Text>
-                    <DateTimePicker
-                    testID="dateTimePicker"
-                    style={{marginLeft: '33%'}}
-                    value={itemexpiry}
-                    mode='date'
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}/>
+                    <Button title="Select Expiry Date" onPress={showDatePicker} />
+                    <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={onConfirm}
+                    onCancel={hideDatePicker}
+                    />
                     <TouchableOpacity style={styles.button} onPress={handleChange}>
                     <Text style={styles.buttonText}>Add Changes</Text>
                     </TouchableOpacity>
