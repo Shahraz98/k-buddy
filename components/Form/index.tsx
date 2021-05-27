@@ -7,7 +7,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import styles from './styles';
 import Colors from '../../constants/Colors'
 import { ProductType, StringCallback} from '../../types.js';
-import ModalSelector from 'react-native-modal-selector'
+import { Select, Option } from "react-native-single-select";
+
 
 export type FormProps = {
     onDataReady: StringCallback,
@@ -21,27 +22,11 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
     const [brand, setBrand] = useState<string | undefined>(product? product.brand : '');
     const [category, setCategory] = useState<string | undefined>(product? product.category : '');
     const [location, setLocation] = useState<string | undefined>(product? product.location : '');
-    const [confection, setConfection] = useState<string | undefined>(product? product.confection : '');
-    const [maturity, setMaturity] = useState<string | undefined>(product? product.maturity? product.maturity : '' : '');
+    const [confection, setConfection] = useState<string>(product? product.confection? product.confection : '' : '');
+    const [maturity, setMaturity] = useState<string>(product? product.maturity? product.maturity : '' : '');
     const [datepick, setDatepick] = useState<Date | undefined>(product? new Date(product.expiry!) : new Date());
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [scanner, setScanner] = useState<boolean>(false);
-    let index = 0;
-    const confections = [
-            { key: index++, label: 'Canned' },
-            { key: index++, label: 'Fresh' },
-            { key: index++, label: 'Cured' },
-            { key: index++, label: 'Bag'},
-            { key: index++, label: 'Liquid'},
-            { key: index++, label: 'Box'},
-        ];
-    const ripeness = [
-            { key: index++, label: 'Underripe' },
-            { key: index++, label: 'Barely Ripe' },
-            { key: index++, label: 'Ripe' },
-            { key: index++, label: 'Very Ripe'},
-            { key: index++, label: 'Overripe'},
-        ];
 
     const gradient = { uri: "https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-076-premium-dark.png" };
 
@@ -65,6 +50,22 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
       }
   };
 
+const ripeness = [
+    { id: "Underripe", name: "Underripe" },
+    { id: "Barely Ripe", name: "Barely Ripe" },
+    { id: "Ripe", name: "Ripe" },
+    { id: "Very Ripe", name: "Very Ripe" },
+    { id: "Overripe", name: "Overripe" },
+];
+
+  const confections = [
+    { id: "Canned", name: "Canned" },
+    { id: "Fresh", name: "Fresh" },
+    { id: "Cured", name: "Cured" },
+    { id: "Box", name: "Box" },
+    { id: "Bag", name: "Bag" },
+    { id: "Liquid", name: "Liquid" },
+  ];
 return (
 
 <View style={styles.inputContainer}>
@@ -97,14 +98,17 @@ return (
                         placeholderTextColor={Colors.light.tint}></TextInput>
                         <View>
                           <Text style={{marginRight:'auto', marginLeft:'auto', marginTop: 10, color: Colors.light.background}}>Please select a confection:</Text>
-                          <ModalSelector
-                        style={{marginHorizontal: 15, marginVertical: 10, borderRadius: 15}}
-                        selectStyle={{height: 40,borderRadius: 15, backgroundColor: Colors.light.background}}
-                        optionTextStyle={{color: Colors.light.gray}}
-                        initValueTextStyle={{color: Colors.light.gray}}
-                    data={confections}
-                    initValue={confection}
-                    onChange={(option)=>setConfection(option.label)} />
+                          <Select
+          onSelect={(v:string) => setConfection(v)}
+          defaultText={confection}
+          style={{ backgroundColor: 'white', borderRadius: 15, height: 40, marginLeft: 'auto', marginRight: 'auto', marginVertical: 10}}
+          textStyle={{color: 'black', marginLeft: 'auto', marginRight: 'auto'}}
+          backdropStyle={{opacity: 1, borderRadius: 30}}
+          optionListStyle={{ position: 'absolute',backgroundColor: "#F5FCFF", borderRadius: 5, width: '90%'}}
+          transparent
+          data={confections}
+          value={confection}
+        />
                           </View>
                         {confection === 'Fresh'? 
                         <View >
@@ -112,14 +116,17 @@ return (
                          style={{marginRight:'auto', marginLeft:'auto', color: Colors.light.background}}>
                              Ripeness Status of your ingredient:
                         </Text>
-                        <ModalSelector
-                    style={{marginHorizontal: 15, marginVertical: 10}}
-                    selectStyle={{height: 40,borderRadius: 15, backgroundColor: Colors.light.background}}
-                    optionTextStyle={{color: Colors.light.gray}}
-                    initValueTextStyle={{color: Colors.light.gray}}
-                    data={ripeness}
-                    initValue={maturity}
-                    onChange={(option)=>setMaturity(option.label)} />
+                        <Select
+          onSelect={(value) => setMaturity(value)}
+          defaultText={maturity}
+          style={{ backgroundColor: 'white', borderRadius: 15, height: 40, marginLeft: 'auto', marginRight: 'auto', marginVertical: 10}}
+          textStyle={{color: 'black', marginLeft: 'auto', marginRight: 'auto'}}
+          backdropStyle={{opacity: 1, borderRadius: 30}}
+          optionListStyle={{ position: 'absolute',backgroundColor: "#F5FCFF", borderRadius: 5, width: '85%'}}
+          transparent
+          data={ripeness}
+          value={maturity}
+        />
                         </View>
                         : <View></View>
                         }

@@ -71,7 +71,7 @@ export default function NewItemScreen() {
     return (
     <SafeAreaView style={styles.container}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
-            <ScrollView>
+            <ScrollView style={{flex: 0}}>
                 {added? 
                 <Success addAnother={() => setAdded(false)}></Success>
                 : <View>
