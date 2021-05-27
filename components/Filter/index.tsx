@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import firebase from '../../utils/firebase.js';
-import {View, Text} from 'react-native';
+import {View, Text, ActivityIndicator} from 'react-native';
 import { ProductType } from '../../types';
 import Square from '../Square';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export type FilterProps = {
     filterby: string, //Property, e.g. location, category, confection
@@ -13,7 +12,6 @@ export type FilterProps = {
 const Filter = ({filterby, filterto}:FilterProps) => {
 
     const [tempList, settempList] = useState<ProductType[] | undefined>(undefined);
-    const [show, setShow] = useState<boolean>(false)
     
     useEffect(()=> {
         const ProductRef = firebase.database().ref("Product");
@@ -31,19 +29,13 @@ const Filter = ({filterby, filterto}:FilterProps) => {
 
 return (
    <View >
-       <TouchableOpacity onPress={() => setShow(!show)}>
            <Text style={{marginRight: 'auto',  marginLeft: 'auto', marginTop: 20, color: '#30303b'}}>{filterto}</Text>
-       </TouchableOpacity>
-
-       {show?
        <View style={{flexDirection: 'row', marginRight: 'auto', marginLeft: 'auto', flexWrap: 'wrap'}}>
-           {   tempList?
-           tempList.map((product) => <Square key={product.id} proname={product.name}></Square>)
-           : <Text style={{marginRight: 'auto', marginLeft: 'auto'}}>Loading ..</Text>
+           {tempList?
+           tempList.map((product) => <Square key={product.id} proname={product.name} proadd={product.addedOn} proexp={product.expiry? product.expiry : ''}></Square>)
+           : <ActivityIndicator size="large" color="#00FA9A" />
            }
         </View> 
-        : <Text></Text> 
-        }
 </View>
 
 

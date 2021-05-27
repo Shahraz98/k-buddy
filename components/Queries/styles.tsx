@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../../constants/Colors'
 
 
 const styles = StyleSheet.create({
@@ -11,7 +12,8 @@ headerText: {
     marginLeft: 'auto',
     marginTop: 30,
     marginRight: 'auto',
-    fontSize: 24,
+    fontSize: 20,
+    fontWeight: 'bold',
     marginBottom: 5,
     color: '#30303b',
 },
@@ -21,15 +23,14 @@ filterRow: {
     marginRight: 'auto',
     height: 40,
     width: 200,
-    backgroundColor: '#FF5733',
-    borderRadius: 20,
 },
 filterText: {
     marginLeft: 'auto',
     paddingTop: 5,
     marginRight: 'auto',
     fontSize: 20,
-    color: 'white',
+    fontWeight: 'bold',
+    color: Colors.light.gray,
 }
 
 });

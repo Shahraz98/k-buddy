@@ -3,7 +3,8 @@
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
 
-import { Ionicons, MaterialCommunityIcons} from '@expo/vector-icons';
+import { Ionicons, Entypo} from '@expo/vector-icons';
+import {View, Text} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
@@ -23,7 +24,8 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
-      tabBarOptions={{ 
+      tabBarOptions={{
+        tabStyle: {backgroundColor: 'black'},
         activeTintColor: Colors[colorScheme].tint,
         showLabel: false}}>
       <BottomTab.Screen
@@ -37,7 +39,7 @@ export default function BottomTabNavigator() {
         name="List"
         component={HomeNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-folder" color={color} />,
+          tabBarIcon: ({ color }) => <View style={{marginTop: -30, backgroundColor: '#30303b', width: 70, height: 70, borderRadius: 35, paddingLeft: 21, paddingTop: 18}}><TabBarIcon name="ios-folder" color={color} /></View>,
         }}
       />
        <BottomTab.Screen
@@ -45,6 +47,7 @@ export default function BottomTabNavigator() {
         component={Queries}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="md-search" color={color} />,
+          
         }}
       />
     </BottomTab.Navigator>
@@ -68,15 +71,21 @@ function HomeNavigator() {
         name="HomeScreen"
         component={HomeScreen}
         options={{ 
+          headerStyle: {
+            backgroundColor: '#f5f5f5',
+            height: 60,
+            shadowRadius: 0,
+            shadowOffset: {
+              height: 0
+            },
+          },
     headerTitle: () => (
-      <MaterialCommunityIcons name={'spa'} size={30} color={Colors.light.tint}/>
+      <View style={{flexDirection: 'row', marginTop: 10}}>
+      <Text style={{fontSize: 16, color: '#30303b'}}>Kitchen </Text>
+      <Entypo name={'leaf'} size={20} color={Colors.light.tint}/>
+      <Text style={{fontSize: 16, color: '#30303b'}}> Buddy</Text>
+      </View>
       ),
-    headerRightContainerStyle: {
-      marginRight: 15,
-    },
-    headerLeftContainerStyle: {
-      marginLeft: 15,
-    },
   }}
       />
     </TabOneStack.Navigator>
@@ -92,15 +101,21 @@ function NewItem() {
         name="NewItemScreen"
         component={NewItemScreen}
         options={{ 
-          headerTitle: () => (
-            <MaterialCommunityIcons name={'spa'} size={30} color={Colors.light.tint}/>
-            ),
-          headerRightContainerStyle: {
-            marginRight: 15,
+          headerStyle: {
+            backgroundColor: '#f5f5f5',
+            height: 60,
+            shadowRadius: 0,
+            shadowOffset: {
+              height: 0
+            },
           },
-          headerLeftContainerStyle: {
-            marginLeft: 15,
-          },
+    headerTitle: () => (
+      <View style={{flexDirection: 'row', marginTop: 10}}>
+      <Text style={{fontSize: 16, color: '#30303b'}}>Kitchen </Text>
+      <Entypo name={'leaf'} size={20} color={Colors.light.tint}/>
+      <Text style={{fontSize: 16, color: '#30303b'}}> Buddy</Text>
+      </View>
+      ),
         }}
       />
     </TabTwoStack.Navigator>
@@ -116,15 +131,21 @@ function Queries() {
         name="QueriesScreen"
         component={QueriesScreen}
         options={{ 
-          headerTitle: () => (
-            <MaterialCommunityIcons name={'spa'} size={30} color={Colors.light.tint}/>
-            ),
-          headerRightContainerStyle: {
-            marginRight: 15,
+          headerStyle: {
+            backgroundColor: '#f5f5f5',
+            height: 60,
+            shadowRadius: 0,
+            shadowOffset: {
+              height: 0
+            },
           },
-          headerLeftContainerStyle: {
-            marginLeft: 15,
-          },
+    headerTitle: () => (
+      <View style={{flexDirection: 'row', marginTop: 10}}>
+      <Text style={{fontSize: 16, color: '#30303b'}}>Kitchen </Text>
+      <Entypo name={'leaf'} size={20} color={Colors.light.tint}/>
+      <Text style={{fontSize: 16, color: '#30303b'}}> Buddy</Text>
+      </View>
+      ),
         }}
       />
     </TabThreeStack.Navigator>

@@ -1,97 +1,54 @@
 import React, {useEffect, useState} from 'react';
-import {Text, ScrollView, View} from 'react-native';
-import { SearchBar } from 'react-native-elements';
-import { formatDistanceToNow} from 'date-fns'
+import {ScrollView, View, Button, ActivityIndicator} from 'react-native';
 import styles from './styles';
-import Row from '../Row';
 import firebase from '../../utils/firebase.js';
 import { ProductType } from '../../types';
+import ExpiringSoon from './ExpiringSoon';
+import DefaultList from './DefaultList';
+import Colors from '../../constants/Colors'
 
 const Feed = () => {
-
-    const [displayList, setdisplayList] = useState<ProductType[] | undefined>(undefined);
+  
+    const [showExpiring, setShowExpiring] = useState<boolean>(false)
+    const [listColor, setlistColor] = useState<string>('#FF5733')
+    const [expColor, setexpColor] = useState<string>('#30303b')
     const [fullList, setfullList] = useState<ProductType[] | undefined>(undefined);
-    const [showFull, setshowFull] = useState<boolean>(true);
-    const [search, setSearch] = useState<string>('');
 
     useEffect(()=> {
-        const ProductRef = firebase.database().ref("Product"); //Get products from Firebase
+    const ProductRef = firebase.database().ref("Product"); //Get products from Firebase
 
-        ProductRef.on("value", (snapshot) => {
-            const elements = snapshot.val();
-            const productList:Array<ProductType> = [];
-            for (let id in elements){
-                productList.push({id, ...elements[id]});
-            }
-            setfullList(productList);
-        })
-    }, []);
-
-    const searchFilterFunction = (text:string) => {
-        // Check if searched text is not blank
-        if (text) {
-          if(fullList){
-            const newData:ProductType[] = fullList.filter(function (item) {
-              const itemData:string = item.name
-                ? item.name.toUpperCase()
-                : ''.toUpperCase();
-              const textData:string = text.toUpperCase();
-              return itemData.indexOf(textData) > -1;
-            });
-            setshowFull(false);
-            setdisplayList(newData);
-            setSearch(text);
-          }
-        } else {
-          setshowFull(true);
-          setSearch(text);
+    ProductRef.on("value", (snapshot) => {
+        const elements = snapshot.val();
+        const productList:Array<ProductType> = [];
+        for (let id in elements){
+            productList.push({id, ...elements[id]});
         }
-      };
+        setfullList(productList);
+    })
+}, []);
 
-    const words = ['day', 'hour', 'minute','second'] //Used to filter moment dates and determine items soon expiring
+    const activeExpiring = () => {
+      setShowExpiring(true);
+      setexpColor(Colors.light.tint);
+      setlistColor(Colors.light.gray);
+  }
+  
+  const activeList = () => {
+      setShowExpiring(false);
+      setexpColor(Colors.light.gray);
+      setlistColor(Colors.light.tint);
+  }
 
 return (
 <ScrollView style={styles.container}>
-
-    <Text style={styles.headerText}>Your Ingredients</Text>
-        <SearchBar 
-          round
-          searchIcon={{ size: 24 }}
-          placeholder="Type Here..."
-          onChangeText={(text:string) => searchFilterFunction(text)}
-          onClear={() => searchFilterFunction('')}
-          value={search}
-          containerStyle={{backgroundColor: 'white', borderBottomColor: 'transparent', borderTopColor: 'transparent'}}
-          color='white'>
-        </SearchBar>
-
-        {showFull?
-          <View>
-           {fullList ?
-           fullList.map((product, i) => <Row key={i} item={product}/> ) 
-           : <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>
-           }
-          </View>
-          :  <View>
-          {displayList ?
-          displayList.map((product, i) => <Row key={i} item={product}/> ) 
-          : <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>
-          }
-         </View>
-        }
-
-   {/*Expiring BEFORE next month, items expiring exactly in 1 month are ignored.*/}
-
-   <Text style={styles.headerText}>Expiring soon</Text>
-   {   fullList ?
-    fullList.filter((product) => formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[0]) > -1 
-    || formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[1]) > -1
-    || formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[2]) > -1
-    || formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[3]) > -1
-    || product.maturity === 'Ripe').map((product, i) => <Row key={i} item={product}/>) 
-    : <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>
-    }
-
+<View style={{display: 'flex', flexDirection: 'row', marginRight: 'auto', marginLeft: 'auto'}}>
+<Button color={listColor} title="Ingredients List" onPress={activeList}></Button>
+<Button color={expColor} title="Expiring soon" onPress={activeExpiring}></Button>
+</View>
+    {showExpiring?
+      <View>{fullList? <ExpiringSoon items={fullList}></ExpiringSoon> : <ActivityIndicator size="large" color="#00FA9A" />}</View>
+    : <View>{fullList? <DefaultList items={fullList}></DefaultList> : <ActivityIndicator size="large" color="#00FA9A" />}</View>
+   }
 </ScrollView>
 )}
 

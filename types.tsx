@@ -28,8 +28,18 @@ export type QueriesParamList = {
   QueriesScreen: undefined;
 };
 
+export type  StringCallback = (
+  name:string, 
+  brand?:string, 
+  category?:string, 
+  location?:string, 
+  confection?:string, 
+  maturity?:string, 
+  datepick?:Date) => void
+
 export type ProductType = {
   id: string,
+  brand?: string,
   category?: string,
   name: string,
   expiry?: string,
@@ -39,4 +49,12 @@ export type ProductType = {
   maturity?: string,
   maturitydate?: string,
   isOpen?: boolean,
+}
+
+export type DefListProps = {
+  items: ProductType[],
+}
+
+export type RowProps = {
+  product: ProductType,
 }

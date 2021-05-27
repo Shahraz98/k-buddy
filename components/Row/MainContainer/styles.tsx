@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../../../constants/Colors'
 
 
 const styles = StyleSheet.create({
@@ -8,13 +9,24 @@ container: {
 },
 block: {
    marginTop: 15,
-   paddingBottom: 10,
-   paddingHorizontal:8,
-   borderRadius: 15,
-   backgroundColor: '#F3F3F4',
+   marginBottom: 10,
+   paddingHorizontal:1,
+   shadowColor: 'black',
+   shadowOffset: {
+    width: 2,
+    height: 6
+  },
+  shadowOpacity: 0.3,
+},
+wrapper: {
+   paddingHorizontal: 20,
+   paddingVertical: 10,
+},
+columnContainer: {
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
 },
 rowContainer: {
-    marginTop: 5,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
@@ -24,31 +36,38 @@ marginTop: 5,
   flexDirection:'row',
 },
 blueText: {
-color: '#FF5733',
+color: 'white',
+marginTop: 5,
 },
 name: {
     marginRight: 5,
     fontWeight: 'bold',
+    fontSize: 24,
+    color: 'white',
 },
 location: {
     marginRight: 1,
+    color: "#00FA9A"
 },
 editbtn: {
-    backgroundColor: '#FF0066',
+    backgroundColor: '#30303b',
     borderRadius: 30,
-    width: 74,
+    width: 93,
+    marginTop: 10,
     height: 35,
 },
 dltbtn: {
     backgroundColor: '#30303b',
     borderRadius: 30,
     width: 93,
+    marginTop: 10,
     height: 35,
 },
 frzbtn: {
-    backgroundColor: '#FF5733',
+    backgroundColor: '#00FA9A',
     borderRadius: 30,
-    width: 105,
+    marginTop: 10,
+    width: 93,
     height: 35,
 },
 openbtn: {
@@ -61,7 +80,7 @@ editText: {
     marginRight: 'auto',
     marginLeft: 'auto',
     paddingVertical: 10,
-    color: 'white',
+    color: "#00FA9A",
     textTransform: 'uppercase',
     fontSize: 12,
 },
