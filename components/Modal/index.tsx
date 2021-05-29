@@ -5,6 +5,8 @@ import {format} from 'date-fns';
 import Form from '../Form'
 import {ProductProps} from '../../types';
 import mystyle from '../../constants/mystyle';
+import {Feather} from '@expo/vector-icons';
+import Colors from '../../constants/Colors'
 
 const Modal = ({item}: ProductProps) => {
     const [changed, setChanged] = useState<boolean>(false);
@@ -41,9 +43,10 @@ return (
 
 <View style={[mystyle.myModalContainer, mystyle.myMainWhiteBtn]}>
     {changed? 
-    <View style={{marginLeft: 25, marginTop: '50%'}}>
+    <View style={[mystyle.centered,{marginTop: '50%'}]}>
+        <Feather style={mystyle.centered} name="check-circle" size={30} color={Colors.light.tint} />
         <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Item changed successfully.</Text>
-        <Text >You can now close this modal.</Text>
+        <Text style={mystyle.centered}>You can now close this modal.</Text>
     </View> 
     : <Form onDataReady={handleChange} editor={true} product={item}></Form>
 }

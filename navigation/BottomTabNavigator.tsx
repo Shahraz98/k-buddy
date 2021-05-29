@@ -25,7 +25,8 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        tabStyle: {backgroundColor: 'black'},
+        tabStyle: { 
+        backgroundColor: 'white'},
         activeTintColor: Colors[colorScheme].tint,
         showLabel: false}}>
       <BottomTab.Screen
@@ -38,8 +39,12 @@ export default function BottomTabNavigator() {
       <BottomTab.Screen
         name="List"
         component={HomeNavigator}
+        
         options={{
-          tabBarIcon: ({ color }) => <View style={{marginTop: -30, backgroundColor: '#30303b', width: 70, height: 70, borderRadius: 35, paddingLeft: 21, paddingTop: 18}}><TabBarIcon name="ios-folder" color={color} /></View>,
+          tabBarIcon: ({ color }) => <View style={{marginRight: 'auto', marginLeft: 'auto', marginTop: -30, 
+          backgroundColor: Colors.light.gray, width: 70, height: 70, borderRadius: 35}}>
+            <Entypo style={{marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto'}} name={'leaf'} size={30} color={color}/>
+            </View>,
         }}
       />
        <BottomTab.Screen
@@ -47,7 +52,6 @@ export default function BottomTabNavigator() {
         component={Queries}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="md-search" color={color} />,
-          
         }}
       />
     </BottomTab.Navigator>

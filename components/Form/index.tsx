@@ -19,7 +19,8 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
   const [datepick, setDatepick] = useState<Date | undefined>(product? new Date(product.expiry!) : new Date());
   const [open, setOpen] = useState(false);
   const [scanner, setScanner] = useState<boolean>(false);
-
+  const confections:Array<string> = ['Box', 'Fresh', 'Canned', 'Bag', 'Liquid', 'Cured'];
+  const ripeness:Array<string>  = ['Underripe', 'Barely Ripe', 'Ripe', 'Very Ripe', 'Overripe'];
     
   const onConfirmSingle = React.useCallback(
       (params) => {
@@ -28,7 +29,6 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
       },
       [setOpen, setDatepick]
   );
-
 
   const handleBarCodeScanned = async ({data}:any) => {
     setScanner(false);
@@ -53,6 +53,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
   <View style={[mystyle.myFormContainer, mystyle.centered, mystyle.myMainWhiteBtn]}>
     {editor? <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Edit {name}</Text>
     : <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Add Ingredient</Text>}
+                    <View style={{flexDirection: 'row'}}>
                     <TextInput
                         value={name}
                         onChangeText={(e) => setName(e)}
@@ -69,6 +70,8 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                         style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
                         placeholder={"Brand"}
                         placeholderTextColor={Colors.light.gray}></TextInput>
+                    </View>
+                    <View style={{flexDirection: 'row'}}>
                     <TextInput
                         value={category}
                         onChangeText={(e) => setCategory(e)}
@@ -77,18 +80,21 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                         style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
                         placeholder={"Category"}
                         placeholderTextColor={Colors.light.gray}></TextInput>
+                    <TextInput
+                        value={location}
+                        onChangeText={(e) => setLocation(e)}
+                        numberOfLines={3}
+                        multiline={true}
+                        style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
+                        placeholder={"Location"}
+                        placeholderTextColor={Colors.light.gray}></TextInput>
+                    </View>
                     <View>
                       <List.Section style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
                         <List.Accordion
-                        titleStyle={{color: Colors.light.tint}}
-                        title={confection === ''? 'Choose Confection' : confection}
-                        left={props => <List.Icon {...props} color={Colors.light.tint} icon="basket" />}>
-                          <List.Item onPress={() => setConfection('Canned')} title="Canned" />
-                          <List.Item onPress={() => setConfection('Fresh')} title="Fresh" />
-                          <List.Item onPress={() => setConfection('Bag')} title="Bag" />
-                          <List.Item onPress={() => setConfection('Cured')} title="Cured" />
-                          <List.Item onPress={() => setConfection('Liquid')} title="Liquid" />
-                          <List.Item onPress={() => setConfection('Basket')} title="Basket" />
+                        titleStyle={mystyle.blackText}
+                        title={confection === ''? 'Choose Confection' : confection}>
+                          {confections.map((c) => <List.Item style={{paddingVertical: 2}} titleStyle={[mystyle.centered, mystyle.xsText, mystyle.blackText,]} key={c} onPress={() => setConfection(c)} title={c} />)}
                         </List.Accordion>
                       </List.Section>
                     </View>
@@ -96,20 +102,15 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                     <View>
                       <List.Section style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
                         <List.Accordion
-                        titleStyle={{color: Colors.light.tint}}
-                        title={maturity === ''? 'Choose Ripeness' : maturity}
-                        left={props => <List.Icon {...props} color={Colors.light.tint} icon="circle" />}>
-                          <List.Item onPress={() => setMaturity('Underripe')} title="Underripe" />
-                          <List.Item onPress={() => setMaturity('Almost Ripe')} title="Almost Ripe" />
-                          <List.Item onPress={() => setMaturity('Ripe')} title="Ripe" />
-                          <List.Item onPress={() => setMaturity('Very Ripe')} title="Very Ripe" />
-                          <List.Item onPress={() => setMaturity('Overripe')} title="Overripe" />
+                        titleStyle={mystyle.blackText}
+                        title={maturity === ''? 'Choose Ripeness' : maturity}>
+                          {ripeness.map((m) => <List.Item style={{paddingVertical: 2}}  titleStyle={[mystyle.centered, mystyle.xsText, mystyle.blackText]} key={m} onPress={() => setMaturity(m)} title={m} />)}
                         </List.Accordion>
                       </List.Section>
                     </View>
                     : <View></View>}
                     <TouchableOpacity style={mystyle.myMainWhiteBtn} onPress={() => setOpen(true)}>
-                      <Text style={[mystyle.coloredText, mystyle.centered, mystyle.smText]}>Select Expiry Date</Text>
+                      <Text style={[mystyle.coloredText, mystyle.centered, mystyle.smText, {marginVertical: 22}]}>Select Expiry Date</Text>
                     </TouchableOpacity> 
                     <DatePickerModal
                     mode="single"
@@ -121,14 +122,6 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                       startDate: new Date(),
                     }}
                     saveLabel="Confirm"/>
-                    <TextInput
-                        value={location}
-                        onChangeText={(e) => setLocation(e)}
-                        numberOfLines={3}
-                        multiline={true}
-                        style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
-                        placeholder={"Location"}
-                        placeholderTextColor={Colors.light.gray}></TextInput>
                   {editor?
                     <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]} onPress={() => onDataReady(name, brand, category, location,confection, maturity, datepick)}>
                     <Text style={[mystyle.myformBtnText, mystyle.smText, mystyle.whiteText]}>Edit</Text>
@@ -154,5 +147,4 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                   </>}
   </View>
 )}
-
 export default Form;

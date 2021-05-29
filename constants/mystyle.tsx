@@ -58,13 +58,13 @@ const mystyle = StyleSheet.create({
     },
     myMainInput: {
         height: 40,
-        width: '95%',
+        width: '45%',
         paddingLeft: 10,
         paddingTop: 10,
         marginTop: 10,
         borderRadius: 15,
-        borderWidth: 0,
         borderBottomWidth: 0.5,
+        borderBottomColor: Colors.light.tint
     },
     myScannerText: {
         fontSize: 35, 

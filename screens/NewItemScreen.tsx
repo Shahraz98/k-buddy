@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect} from 'react';
-import { View, Text, StyleSheet,ScrollView, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
+import { View, Text, ScrollView, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
 import firebase from '../utils/firebase';
 import { format} from 'date-fns'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Success from '../components/Success';
 import Form from '../components/Form/index';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import Colors from '../constants/Colors'
+import mystyle from '../constants/mystyle';
 
 export default function NewItemScreen() {
     const [added, setAdded] = useState<boolean>(false);
@@ -70,7 +70,7 @@ export default function NewItemScreen() {
     }
     
     return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[mystyle.centered, mystyle.myMainWhiteBtn, {width: '100%'}]}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
             <ScrollView style={{flex: 0}}>
                 {added? 
@@ -84,12 +84,3 @@ export default function NewItemScreen() {
     </SafeAreaView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        width: '100%',
-        backgroundColor: Colors.light.background,
-        marginRight: 'auto',
-        marginLeft: 'auto',
-    }
-});

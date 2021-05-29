@@ -26,8 +26,7 @@ return (
         <Text style={[mystyle.coloredText, {marginRight: 1}]}>in {product.location}.</Text>
     </View>
 
-    <Text style={[mystyle.whiteText, {marginTop: 5}]}>Added {formatDistanceToNow(new Date(product.addedOn), { addSuffix: true })} 
-    <AntDesign name="check" size={14} color={Colors.light.tint} /></Text>
+    <Text style={[mystyle.whiteText, {marginTop: 5}]}>Added {formatDistanceToNow(new Date(product.addedOn), { addSuffix: true })} <AntDesign name="check" size={14} color={Colors.light.tint} /></Text>
 
     {isAfter(new Date(), new Date(product.expiry!))? 
     <Text style={[mystyle.coloredText, {marginTop: 5}]}>Expired <MaterialCommunityIcons name="alert-circle" size={14} color={Colors.light.tint} /></Text>
