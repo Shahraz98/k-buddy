@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
 import {Text,View} from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import styles from '../styles';
 import { ProductType, DefListProps} from '../../../types';
 import SingleList from './SingleList';
+import mystyle from '../../../constants/mystyle'
 
 const DefaultList = ({items}: DefListProps) => {
-
-    const [displayList, setdisplayList] = useState<ProductType[] | undefined>(undefined);
-    const [showFull, setshowFull] = useState<boolean>(true);
-    const [search, setSearch] = useState<string>('');
-
-    const searchFilterFunction = (text:string) => {
+  const [displayList, setdisplayList] = useState<ProductType[] | undefined>(undefined);
+  const [showFull, setshowFull] = useState<boolean>(true);
+  const [search, setSearch] = useState<string>('');
+  
+  const searchFilterFunction = (text:string) => {
         // Check if searched text is not blank
         if (text) {
           if(items){
@@ -30,11 +29,12 @@ const DefaultList = ({items}: DefListProps) => {
           setshowFull(true);
           setSearch(text);
         }
-      };
+  };
 
 return (
 <>
-<View><Text style={styles.headerText}>Your Ingredients</Text>
+<View>
+  <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Your Ingredients</Text>
     <SearchBar 
       round
       searchIcon={{ size: 24 }}
@@ -48,12 +48,14 @@ return (
 
     {showFull?
       <View>
-       <SingleList items={items}></SingleList>
+        <SingleList items={items}></SingleList>
       </View>
       :  <View>
-          {displayList? <SingleList items={displayList}></SingleList> : <View></View>}
-     </View>
-    }</View>
+          {displayList? <SingleList items={displayList}></SingleList> 
+          : <View></View>}
+         </View>
+    }
+</View>
 </>
 )}
 

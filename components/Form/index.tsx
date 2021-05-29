@@ -1,39 +1,34 @@
 import * as React from 'react';
 import { useState} from 'react';
-import { View, Text, StyleSheet,Image,Button,Picker, ImageBackground} from 'react-native';
+import { View, Text, StyleSheet,Image,Button} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import styles from './styles';
 import Colors from '../../constants/Colors'
-import { ProductType, StringCallback} from '../../types.js';
-import { Select, Option } from "react-native-single-select";
-
-
-export type FormProps = {
-    onDataReady: StringCallback,
-    product?: ProductType,
-    editor: boolean
-}
+import { DatePickerModal } from 'react-native-paper-dates';
+import { List } from 'react-native-paper';
+import {FormProps} from '../../types';
+import mystyle from '../../constants/mystyle'
 
 const Form = ({onDataReady, product, editor}:FormProps)  => {
+  const [name, setName] = useState<string>(product? product.name : '');
+  const [brand, setBrand] = useState<string | undefined>(product? product.brand : '');
+  const [category, setCategory] = useState<string | undefined>(product? product.category : '');
+  const [location, setLocation] = useState<string | undefined>(product? product.location : '');
+  const [confection, setConfection] = useState<string>(product? product.confection? product.confection : '' : '');
+  const [maturity, setMaturity] = useState<string>(product? product.maturity? product.maturity : '' : '');
+  const [datepick, setDatepick] = useState<Date | undefined>(product? new Date(product.expiry!) : new Date());
+  const [open, setOpen] = useState(false);
+  const [scanner, setScanner] = useState<boolean>(false);
 
-    const [name, setName] = useState<string>(product? product.name : '');
-    const [brand, setBrand] = useState<string | undefined>(product? product.brand : '');
-    const [category, setCategory] = useState<string | undefined>(product? product.category : '');
-    const [location, setLocation] = useState<string | undefined>(product? product.location : '');
-    const [confection, setConfection] = useState<string>(product? product.confection? product.confection : '' : '');
-    const [maturity, setMaturity] = useState<string>(product? product.maturity? product.maturity : '' : '');
-    const [datepick, setDatepick] = useState<Date | undefined>(product? new Date(product.expiry!) : new Date());
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [scanner, setScanner] = useState<boolean>(false);
+    
+  const onConfirmSingle = React.useCallback(
+      (params) => {
+        setOpen(false);
+        setDatepick(params.date);
+      },
+      [setOpen, setDatepick]
+  );
 
-    const gradient = { uri: "https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-076-premium-dark.png" };
-
-    const onConfirm = (selectedDate:Date) => {
-        setDatepick(selectedDate);
-        setDatePickerVisibility(false);
-    };
 
   const handleBarCodeScanned = async ({data}:any) => {
     setScanner(false);
@@ -49,124 +44,115 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
           console.log("error", err)
       }
   };
-
-const ripeness = [
-    { id: "Underripe", name: "Underripe" },
-    { id: "Barely Ripe", name: "Barely Ripe" },
-    { id: "Ripe", name: "Ripe" },
-    { id: "Very Ripe", name: "Very Ripe" },
-    { id: "Overripe", name: "Overripe" },
-];
-
-  const confections = [
-    { id: "Canned", name: "Canned" },
-    { id: "Fresh", name: "Fresh" },
-    { id: "Cured", name: "Cured" },
-    { id: "Box", name: "Box" },
-    { id: "Bag", name: "Bag" },
-    { id: "Liquid", name: "Liquid" },
-  ];
-return (
-
-<View style={styles.inputContainer}>
-<ImageBackground source={gradient} style={{width: '100%'}} imageStyle={{ borderRadius: 15}}>
-    {editor? <Text style={styles.headerText}>Edit Ingredient</Text>
-: <Text style={styles.headerText}>Add Ingredient</Text>}
+  
+  const onDismiss = () => {
+  setDatepick(new Date())
+  setOpen(false);
+  }
+  return (
+  <View style={[mystyle.myFormContainer, mystyle.centered, mystyle.myMainWhiteBtn]}>
+    {editor? <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Edit {name}</Text>
+    : <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Add Ingredient</Text>}
                     <TextInput
                         value={name}
                         onChangeText={(e) => setName(e)}
                         numberOfLines={3}
                         multiline={true}
-                        style={styles.mainInput}
-                        placeholder={"What should we call your ingredient?"}
-                        placeholderTextColor={Colors.light.tint}></TextInput>
+                        style={[mystyle.myMainInput, mystyle.myMainWhiteBtn,mystyle.centered, mystyle.smText, mystyle.blackText]}
+                        placeholder={"Name"}
+                        placeholderTextColor={Colors.light.gray}></TextInput>
                     <TextInput
                         value={brand}
                         onChangeText={(e) => setBrand(e)}
                         numberOfLines={3}
                         multiline={true}
-                        style={styles.mainInput}
-                        placeholder={"Your ingredient's brand goes here."}
-                        placeholderTextColor={Colors.light.tint}></TextInput>
+                        style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
+                        placeholder={"Brand"}
+                        placeholderTextColor={Colors.light.gray}></TextInput>
                     <TextInput
                         value={category}
                         onChangeText={(e) => setCategory(e)}
                         numberOfLines={3}
                         multiline={true}
-                        style={styles.mainInput}
-                        placeholder={"How would you categorize your ingredient?"}
-                        placeholderTextColor={Colors.light.tint}></TextInput>
-                        <View>
-                          <Text style={{marginRight:'auto', marginLeft:'auto', marginTop: 10, color: Colors.light.background}}>Please select a confection:</Text>
-                          <Select
-          onSelect={(v:string) => setConfection(v)}
-          defaultText={confection}
-          style={{ backgroundColor: 'white', borderRadius: 15, height: 40, marginLeft: 'auto', marginRight: 'auto', marginVertical: 10}}
-          textStyle={{color: 'black', marginLeft: 'auto', marginRight: 'auto'}}
-          backdropStyle={{opacity: 1, borderRadius: 30}}
-          optionListStyle={{ position: 'absolute',backgroundColor: "#F5FCFF", borderRadius: 5, width: '90%'}}
-          transparent
-          data={confections}
-          value={confection}
-        />
-                          </View>
-                        {confection === 'Fresh'? 
-                        <View >
-                         <Text 
-                         style={{marginRight:'auto', marginLeft:'auto', color: Colors.light.background}}>
-                             Ripeness Status of your ingredient:
-                        </Text>
-                        <Select
-          onSelect={(value) => setMaturity(value)}
-          defaultText={maturity}
-          style={{ backgroundColor: 'white', borderRadius: 15, height: 40, marginLeft: 'auto', marginRight: 'auto', marginVertical: 10}}
-          textStyle={{color: 'black', marginLeft: 'auto', marginRight: 'auto'}}
-          backdropStyle={{opacity: 1, borderRadius: 30}}
-          optionListStyle={{ position: 'absolute',backgroundColor: "#F5FCFF", borderRadius: 5, width: '85%'}}
-          transparent
-          data={ripeness}
-          value={maturity}
-        />
-                        </View>
-                        : <View></View>
-                        }
+                        style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
+                        placeholder={"Category"}
+                        placeholderTextColor={Colors.light.gray}></TextInput>
+                    <View>
+                      <List.Section style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
+                        <List.Accordion
+                        titleStyle={{color: Colors.light.tint}}
+                        title={confection === ''? 'Choose Confection' : confection}
+                        left={props => <List.Icon {...props} color={Colors.light.tint} icon="basket" />}>
+                          <List.Item onPress={() => setConfection('Canned')} title="Canned" />
+                          <List.Item onPress={() => setConfection('Fresh')} title="Fresh" />
+                          <List.Item onPress={() => setConfection('Bag')} title="Bag" />
+                          <List.Item onPress={() => setConfection('Cured')} title="Cured" />
+                          <List.Item onPress={() => setConfection('Liquid')} title="Liquid" />
+                          <List.Item onPress={() => setConfection('Basket')} title="Basket" />
+                        </List.Accordion>
+                      </List.Section>
+                    </View>
+                    {confection === 'Fresh'? 
+                    <View>
+                      <List.Section style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
+                        <List.Accordion
+                        titleStyle={{color: Colors.light.tint}}
+                        title={maturity === ''? 'Choose Ripeness' : maturity}
+                        left={props => <List.Icon {...props} color={Colors.light.tint} icon="circle" />}>
+                          <List.Item onPress={() => setMaturity('Underripe')} title="Underripe" />
+                          <List.Item onPress={() => setMaturity('Almost Ripe')} title="Almost Ripe" />
+                          <List.Item onPress={() => setMaturity('Ripe')} title="Ripe" />
+                          <List.Item onPress={() => setMaturity('Very Ripe')} title="Very Ripe" />
+                          <List.Item onPress={() => setMaturity('Overripe')} title="Overripe" />
+                        </List.Accordion>
+                      </List.Section>
+                    </View>
+                    : <View></View>}
+                    <TouchableOpacity style={mystyle.myMainWhiteBtn} onPress={() => setOpen(true)}>
+                      <Text style={[mystyle.coloredText, mystyle.centered, mystyle.smText]}>Select Expiry Date</Text>
+                    </TouchableOpacity> 
+                    <DatePickerModal
+                    mode="single"
+                    visible={open}
+                    onDismiss={onDismiss}
+                    date={datepick}
+                    onConfirm={onConfirmSingle}
+                    validRange={{
+                      startDate: new Date(),
+                    }}
+                    saveLabel="Confirm"/>
                     <TextInput
                         value={location}
                         onChangeText={(e) => setLocation(e)}
                         numberOfLines={3}
                         multiline={true}
-                        style={styles.mainInput}
-                        placeholder={"Your ingredient's current location goes here."}
-                        placeholderTextColor={Colors.light.tint}></TextInput>
-                    <Button color={Colors.light.tint} title="Select Expiry Date" onPress={() => setDatePickerVisibility(true)} />
-                    <DateTimePickerModal
-                    isVisible={isDatePickerVisible}
-                    mode="date"
-                    onConfirm={onConfirm}
-                    onCancel={() => setDatePickerVisibility(false)}
-                    />
-                    <TouchableOpacity style={styles.button} onPress={() => onDataReady(name, brand, category, location,confection, maturity, datepick)}>
-                    <Text style={styles.buttonText}>Add</Text>
-                    </TouchableOpacity>
-                    {editor? <View></View> 
+                        style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
+                        placeholder={"Location"}
+                        placeholderTextColor={Colors.light.gray}></TextInput>
+                  {editor?
+                    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]} onPress={() => onDataReady(name, brand, category, location,confection, maturity, datepick)}>
+                    <Text style={[mystyle.myformBtnText, mystyle.smText, mystyle.whiteText]}>Edit</Text>
+                    </TouchableOpacity> 
                     : <>
-                    <TouchableOpacity style={styles.scanButton} onPress={()=>setScanner(true)}>
-                    <Text style={[styles.buttonText, {color: Colors.light.tint}]}>Scan QR Code</Text>
+                    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]} onPress={() => onDataReady(name, brand, category, location,confection, maturity, datepick)}>
+                    <Text style={[mystyle.myformBtnText, mystyle.smText, mystyle.whiteText]}>Add</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainBlackBtn, mystyle.centered]} onPress={()=>setScanner(true)}>
+                    <Text style={[mystyle.myformBtnText, mystyle.smText, mystyle.whiteText]}>Scan QR Code</Text>
                     </TouchableOpacity>
                     {scanner?
                     <>
                     <BarCodeScanner
                     onBarCodeScanned={handleBarCodeScanned}
                     style={StyleSheet.absoluteFill}>
-                    <Text style={{color:'#ffffff', fontSize: 35, marginRight: 'auto', marginLeft:'auto', marginVertical: 50}}>Scan your QR Code</Text>
-                    <Image style={{height: 200, width: 200, marginRight: 'auto', marginLeft:'auto', marginVertical: 50}} source={require('../../assets/images/scan.png')}/>
-                    <Button color='white' title={'Close'} onPress={() => setScanner(false)}></Button>
+                      <Text style={[mystyle.myScannerText, mystyle.centered, mystyle.whiteText]}>Scan your QR Code</Text>
+                      <Image style={[mystyle.centered, mystyle.myScannerImg]} source={require('../../assets/images/scan.png')}/>
+                      <Button color={Colors.light.background} title={'Close'} onPress={() => setScanner(false)}></Button>
                     </BarCodeScanner>
                     </>
                     : <View></View>}
-                    </>}
-                    </ImageBackground>
-</View>
+                  </>}
+  </View>
 )}
 
 export default Form;

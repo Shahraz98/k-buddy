@@ -1,16 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import firebase from '../../utils/firebase.js';
+import firebase from '../../utils/firebase';
 import {View, Text, ActivityIndicator} from 'react-native';
 import { ProductType } from '../../types';
 import Square from '../Square';
-
-export type FilterProps = {
-    filterby: string, //Property, e.g. location, category, confection
-    filterto: string  //Property name, e.g. fridge, fruit, fresh
-    }
+import {FilterProps} from '../../types';
+import mystyle from '../../constants/mystyle'
+import Colors from '../../constants/Colors';
 
 const Filter = ({filterby, filterto}:FilterProps) => {
-
     const [tempList, settempList] = useState<ProductType[] | undefined>(undefined);
     
     useEffect(()=> {
@@ -28,17 +25,15 @@ const Filter = ({filterby, filterto}:FilterProps) => {
     
 
 return (
-   <View >
-           <Text style={{marginRight: 'auto',  marginLeft: 'auto', marginTop: 20, color: '#30303b'}}>{filterto}</Text>
-       <View style={{flexDirection: 'row', marginRight: 'auto', marginLeft: 'auto', flexWrap: 'wrap'}}>
+   <View>
+       <Text style={[mystyle.centered, mystyle.blackText, {marginTop: 20}]}>{filterto}</Text>
+       <View style={[mystyle.centered, {flexDirection: 'row',flexWrap: 'wrap'}]}>
            {tempList?
            tempList.map((product) => <Square key={product.id} proname={product.name} proadd={product.addedOn} proexp={product.expiry? product.expiry : ''}></Square>)
-           : <ActivityIndicator size="large" color="#00FA9A" />
+           : <ActivityIndicator style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
            }
-        </View> 
-</View>
-
-
+       </View> 
+   </View>
 )}
 
 export default Filter;

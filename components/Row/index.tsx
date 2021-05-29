@@ -1,19 +1,15 @@
 import React from 'react';
 import {View} from 'react-native';
 import MainContainer from './MainContainer';
-import {ProductType} from '../../types';
-import styles from './styles';
-
-export type ProductProps = {
-item: ProductType,
-}
+import {ProductProps} from '../../types';
 
 const Row = ({item}: ProductProps) => {
-return (
-<View style={styles.container}>
-    <MainContainer product={item}/>
-</View>
-)
+    
+    return (
+    <View style={{width: '100%', flexDirection: 'row'}}>
+        <MainContainer product={item}/>
+    </View>
+    )
 }
 
 export default Row;

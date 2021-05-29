@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {Text, ScrollView, View, Button} from 'react-native';
-import firebase from '../../utils/firebase.js';
-import styles from './styles';
+import {ActivityIndicator, ScrollView, View, Button} from 'react-native';
+import firebase from '../../utils/firebase';
+import mystyle from '../../constants/mystyle'
 import { ProductType } from '../../types';
 import Grouped from './Grouped';
 import Maturity from './Maturity';
@@ -41,22 +41,24 @@ const activeAdditional = () => {
 }
 
 return (
-<ScrollView style={styles.container}>
-<View style={{display: 'flex', flexDirection: 'row', marginRight: 'auto', marginLeft: 'auto'}}>
-<Button color={filterColor} title="Filtered Views" onPress={activeFiltered}></Button>
-<Button color={addColor} title="Additional Info" onPress={activeAdditional}></Button>
-</View>
-{showfiltered?
- displayList? <Grouped items={displayList}></Grouped> : <Text style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20}}>Loading</Text>
-: <View>
-{ displayList? <Maturity items={displayList}></Maturity> : <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>} 
-<View>
-{ displayList? <Missing items={displayList}></Missing> : <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>} 
-</View>
-<View>
-{ displayList? <Recent items={displayList}></Recent> : <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>} 
-</View>
-</View>}
+<ScrollView style={mystyle.myFeedContainer}>
+    <View style={[mystyle.centered, {flexDirection: 'row'}]}>
+    <Button color={filterColor} title="Filtered Views" onPress={activeFiltered}></Button>
+    <Button color={addColor} title="Additional Info" onPress={activeAdditional}></Button>
+    </View>
+    
+    {showfiltered?
+    displayList? <Grouped items={displayList}></Grouped> 
+    : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
+    : <View>
+        { displayList? <Maturity items={displayList}></Maturity> : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />} 
+      <View>
+        { displayList? <Missing items={displayList}></Missing> : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />} 
+      </View>
+      <View>
+        { displayList? <Recent items={displayList}></Recent> : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />} 
+      </View>
+      </View>}
 </ScrollView>
 )}
 

@@ -2,12 +2,27 @@
  * Learn more about using TypeScript with React Navigation:
  * https://reactnavigation.org/docs/typescript/
  */
+export type SuccessProps = {
+  addAnother: any,
+}
+
+export type FilterProps = {
+  filterby: string, //Property, e.g. location, category, confection
+  filterto: string  //Property name, e.g. fridge, fruit, fresh
+}
 
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
   AddItem: undefined;
+  Home: undefined;
   QueriesScreen: undefined;
+};
+
+export type SquareProps = {
+  proname: string,
+  proexp: string,
+  proadd: string,
 };
 
 export type BottomTabParamList = {
@@ -37,6 +52,12 @@ export type  StringCallback = (
   maturity?:string, 
   datepick?:Date) => void
 
+export type FormProps = {
+    onDataReady: StringCallback,
+    product?: ProductType,
+    editor: boolean
+}
+
 export type ProductType = {
   id: string,
   brand?: string,
@@ -55,6 +76,15 @@ export type DefListProps = {
   items: ProductType[],
 }
 
+export type ProductProps = {
+  item: ProductType,
+}
+
 export type RowProps = {
   product: ProductType,
+}
+
+export type GroupProps = {
+  items: ProductType[],
+  filterby: "Category" | "Location" | "Confection",
 }

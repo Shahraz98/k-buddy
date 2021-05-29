@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import { RowProps} from '../../../../types';
-import styles from '../styles';
 import firebase from '../../../../utils/firebase'
 import { sub,format, add} from 'date-fns'
+import mystyle from '../../../../constants/mystyle'
 
 const RowMid = ({product}: RowProps) => {
 
@@ -42,25 +42,24 @@ const RowMid = ({product}: RowProps) => {
     }
 
 return (
-<>
-<View style={[styles.columnContainer, {marginTop: 'auto', marginBottom:'auto'}]}>
-        <TouchableOpacity style={styles.dltbtn} onPress={handleDelete}>
-            <Text style={styles.editText} >Delete</Text>
-        </TouchableOpacity>
-        {product.maturity?
-        <View>{product.confection === 'Frozen'? 
-            <TouchableOpacity style={styles.frzbtn} onPress={unFreeze}>
-            <Text style={styles.editText}>Unfreeze</Text>
-             </TouchableOpacity>
-        :  <TouchableOpacity style={styles.frzbtn} onPress={handleFreeze}>
-           <Text style={[styles.editText, {color: '#30303b'}]}>Freeze</Text>
-            </TouchableOpacity>
-        }
-        </View>
-        : <View></View>
-        }
+<View style={[mystyle.myClmContainer, {marginTop: 'auto', marginBottom:'auto'}]}>
+    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainBlackBtn]}  onPress={handleDelete}>
+        <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.coloredText, mystyle.centered]} >Delete</Text>
+    </TouchableOpacity>
+    
+    {product.maturity?
+    <View>
+    {product.confection === 'Frozen'? 
+    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn]} onPress={unFreeze}>
+        <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.whiteText, mystyle.centered]}>Unfreeze</Text>
+    </TouchableOpacity>
+    : <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn]}  onPress={handleFreeze}>
+        <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.whiteText, mystyle.centered]}>Freeze</Text>
+      </TouchableOpacity>
+    }
     </View>
-</>
+    : <View></View>}
+</View>
 )}
 
 export default RowMid;

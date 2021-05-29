@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, View, Button, ActivityIndicator} from 'react-native';
-import styles from './styles';
-import firebase from '../../utils/firebase.js';
+import firebase from '../../utils/firebase';
 import { ProductType } from '../../types';
 import ExpiringSoon from './ExpiringSoon';
 import DefaultList from './DefaultList';
 import Colors from '../../constants/Colors'
+import mystyle from '../../constants/mystyle'
 
 const Feed = () => {
-  
     const [showExpiring, setShowExpiring] = useState<boolean>(false)
     const [listColor, setlistColor] = useState<string>('#FF5733')
     const [expColor, setexpColor] = useState<string>('#30303b')
@@ -25,7 +24,7 @@ const Feed = () => {
         }
         setfullList(productList);
     })
-}, []);
+    }, []);
 
     const activeExpiring = () => {
       setShowExpiring(true);
@@ -40,15 +39,15 @@ const Feed = () => {
   }
 
 return (
-<ScrollView style={styles.container}>
-<View style={{display: 'flex', flexDirection: 'row', marginRight: 'auto', marginLeft: 'auto'}}>
-<Button color={listColor} title="Ingredients List" onPress={activeList}></Button>
-<Button color={expColor} title="Expiring soon" onPress={activeExpiring}></Button>
-</View>
+<ScrollView style={mystyle.myFeedContainer}>
+    <View style={[mystyle.centered, {flexDirection: 'row'}]}>
+        <Button color={listColor} title="Ingredients List" onPress={activeList}></Button>
+        <Button color={expColor} title="Expiring soon" onPress={activeExpiring}></Button>
+    </View>
     {showExpiring?
-      <View>{fullList? <ExpiringSoon items={fullList}></ExpiringSoon> : <ActivityIndicator size="large" color="#00FA9A" />}</View>
-    : <View>{fullList? <DefaultList items={fullList}></DefaultList> : <ActivityIndicator size="large" color="#00FA9A" />}</View>
-   }
+      <View>{fullList? <ExpiringSoon items={fullList}></ExpiringSoon> : <View></View>}</View>
+    : <View>{fullList? <DefaultList items={fullList}></DefaultList> : <ActivityIndicator style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />}</View>
+    }
 </ScrollView>
 )}
 

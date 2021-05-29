@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect} from 'react';
 import { View, Text, StyleSheet,ScrollView, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
-import firebase from '../utils/firebase.js';
+import firebase from '../utils/firebase';
 import { format} from 'date-fns'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Success from '../components/Success';
 import Form from '../components/Form/index';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import Colors from '../constants/Colors'
 
 export default function NewItemScreen() {
     const [added, setAdded] = useState<boolean>(false);
@@ -87,7 +88,7 @@ export default function NewItemScreen() {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: Colors.light.background,
         marginRight: 'auto',
         marginLeft: 'auto',
     }

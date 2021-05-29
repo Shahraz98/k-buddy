@@ -1,40 +1,52 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text, View} from 'react-native';
 import Colors from '../../constants/Colors';
-import { formatDistanceToNowStrict} from 'date-fns';
+import { formatDistanceToNowStrict, isAfter} from 'date-fns';
+import { DataTable } from 'react-native-paper';
+import { AntDesign, Ionicons} from '@expo/vector-icons'; 
+import mystyle from '../../constants/mystyle';
+import {SquareProps} from '../../types';
 
 
-export type SquareProps = {
-proname: string,
-proexp: string,
-proadd: string,
-}
 
 const Square = ({proname, proadd, proexp}: SquareProps) => {
-    const added:Array<string> = formatDistanceToNowStrict(new Date(proadd), { addSuffix: false }).split(' ');
-    const expired:Array<string> = formatDistanceToNowStrict(new Date(proexp), { addSuffix: false }).split(' ');
+  
+  const added:Array<string> = formatDistanceToNowStrict(new Date(proadd), { addSuffix: false }).split(' ');
+  const expiry:Array<string> = formatDistanceToNowStrict(new Date(proexp), { addSuffix: false }).split(' ');
     
 return (
-<View style={{
-    backgroundColor: '#FFFFFF', 
-    borderRadius: 15, width: 105, height: 80, 
-    marginLeft: 15, marginTop: 10, shadowColor: 'black',
-    shadowOffset: {
-     width: 0,
-     height: 1
-   },
-   shadowOpacity: 0.3,}}>
-    <Text style={{marginLeft: 10, marginRight: 'auto', color: Colors.light.tint, marginTop: 5, marginBottom: 'auto', fontWeight: 'bold', fontSize: 11}}>{proname}</Text>
-    <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-        <View style={{flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto'}}>
-    <Text style={{fontSize: 11}}>Added </Text>
-    <Text style={{fontSize: 11}}> Expiring</Text></View>
-    <View style={{flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto', marginBottom: 5}}>
-<View style={{flexDirection: 'column', marginRight: 10}}><Text style={{fontSize: 16, color: Colors.light.tint}}>{added[0]}</Text><Text style={{fontSize: 11}}>{added[1]}</Text></View>
-        <View style={{flexDirection: 'column', marginRight: 10}}><Text style={{fontSize: 16, color: Colors.light.tint}}>{expired[0]}</Text><Text style={{fontSize: 11}}>{expired[1]}</Text></View>
-    </View>
-</View>
-</View>
+    <DataTable style={mystyle.mydTable}>
+      <DataTable.Header style={{borderBottomWidth: 0}}>
+        <Text style={[mystyle.mydTableheader, mystyle.smText, mystyle.coloredText]}>
+          {isAfter(new Date(), new Date(proexp))? 
+          <Ionicons name="sad" size={21} color={Colors.light.gray} /> 
+          : <AntDesign name="smile-circle" size={18} color={Colors.light.gray} />} {proname}
+        </Text>
+      </DataTable.Header>
+
+      <DataTable.Row style={{borderBottomWidth: 0}}>
+        <DataTable.Cell style={mystyle.mydTableCellRight}>Add <AntDesign name="check" size={14} color={Colors.light.tint}/></DataTable.Cell>
+        <DataTable.Cell style={{paddingLeft: 10}}>Exp <AntDesign name="clockcircleo" size={14} color={Colors.light.tint}/></DataTable.Cell>
+      </DataTable.Row>
+
+      <DataTable.Row style={{borderBottomWidth: 0}}>
+        <DataTable.Cell style={mystyle.mydTableCellRight}>
+          <View style={{flexDirection: 'column'}}>
+            <Text style={[mystyle.stnText, mystyle.coloredText, {fontWeight: 'bold'}]}>{added[0]}</Text>
+            <Text>{added[1]}</Text>
+          </View>
+        </DataTable.Cell>
+        <DataTable.Cell style={[mystyle.mydTableCellRight,{paddingLeft: 10, borderRightWidth: 0}]}>
+          {isAfter(new Date(), new Date(proexp))? <View style={{flexDirection: 'column'}}>
+            <Text style={[mystyle.stnText, mystyle.coloredText, {fontWeight: 'bold'}]}>Oops</Text>
+            <Text>expired</Text></View>
+            : <View style={{flexDirection: 'column'}}>
+              <Text style={[mystyle.stnText, mystyle.coloredText, {fontWeight: 'bold'}]}>{expiry[0]}</Text>
+              <Text>{expiry[1]}</Text></View>}
+        </DataTable.Cell>
+      </DataTable.Row>
+    <View style={{height: 15}}></View>
+    </DataTable>
 )}
 
 export default Square;

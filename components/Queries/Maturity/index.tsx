@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import styles from '../styles';
 import { DefListProps} from '../../../types';
-import {Text} from 'react-native';
+import {Text, ActivityIndicator} from 'react-native';
 import { formatDistanceToNow} from 'date-fns'
+import Colors from '../../../constants/Colors'
 import Row from '../../Row';
 import { ProductType } from '../../../types';
+import mystyle from '../../../constants/mystyle';
 
 const Maturity = ({items}: DefListProps) => {
 
@@ -18,15 +19,15 @@ const Maturity = ({items}: DefListProps) => {
 
 return (
 <>
-<Text style={styles.headerText}>Unchecked Ripeness</Text>
-<Text style={{marginRight: 'auto', marginLeft: 'auto', fontSize: 10, marginBottom: 10}}>(no items will be shown if every item has been checked recently.)</Text>
+<Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Unchecked Ripeness</Text>
+<Text style={[mystyle.centered, mystyle.xsText, {marginBottom: 10}]}>(no items will be shown if every item has been checked recently.)</Text>
 {freshList?
-freshList.filter((product) => product.confection === 'Fresh').filter( (item) => formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[0]) === false 
-&& formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[1]) === false
-&& formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[2]) === false
-&& formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[3]) === false
-&& formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[4]) === false).map((product) => <Row key={product.id} item={product}/>)
-: <Text style={{marginRight: 'auto', marginLeft: 'auto', marginVertical: 10}}>Loading ..</Text>
+   freshList.filter((product) => product.confection === 'Fresh').filter( (item) => formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[0]) === false 
+   && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[1]) === false
+   && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[2]) === false
+   && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[3]) === false
+   && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[4]) === false).map((product) => <Row key={product.id} item={product}/>)
+   : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
 }
 </>
 )}

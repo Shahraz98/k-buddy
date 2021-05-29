@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "twit",
-    "slug": "twit",
+    "name": "kitchen-buddy",
+    "slug": "kitchen-buddy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
