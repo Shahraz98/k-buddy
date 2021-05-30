@@ -10,17 +10,20 @@ import {FormProps} from '../../types';
 import mystyle from '../../constants/mystyle'
 
 const Form = ({onDataReady, product, editor}:FormProps)  => {
-  const [name, setName] = useState<string>(product? product.name : '');
-  const [brand, setBrand] = useState<string | undefined>(product? product.brand : '');
-  const [category, setCategory] = useState<string | undefined>(product? product.category : '');
-  const [location, setLocation] = useState<string | undefined>(product? product.location : '');
-  const [confection, setConfection] = useState<string>(product? product.confection? product.confection : '' : '');
-  const [maturity, setMaturity] = useState<string>(product? product.maturity? product.maturity : '' : '');
-  const [datepick, setDatepick] = useState<Date | undefined>(product? new Date(product.expiry!) : new Date());
+  const [datepick, setDatepick] = useState<Date | undefined>(product? 
+  product.expiry? new Date(product.expiry) : new Date() : new Date());
   const [open, setOpen] = useState(false);
   const [scanner, setScanner] = useState<boolean>(false);
+  const [inputsArray, setInputsArray] = useState<string[]>(product?
+  [product.name, product.brand? product.brand : '', product.category? product.category : '', 
+  product.location? product.location : '', product.confection? product.confection : '', 
+  product.maturity? product.maturity : ''] : ['','','','','', '']);
   const confections:Array<string> = ['Box', 'Fresh', 'Canned', 'Bag', 'Liquid', 'Cured'];
   const ripeness:Array<string>  = ['Underripe', 'Barely Ripe', 'Ripe', 'Very Ripe', 'Overripe'];
+
+  const handleUpdate = (val:string,i:number) => {
+    let items = [...inputsArray]; items[i] = val; setInputsArray(items);
+  }
     
   const onConfirmSingle = React.useCallback(
       (params) => {
@@ -37,9 +40,9 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
         const json = await response.json();
         const categoryName = json.product.categories_hierarchy[0].substring(3);
         const fixedCategory = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
-        setName(json.product.product_name)
-        setCategory(fixedCategory)
-        setBrand(json.product.brands)
+        handleUpdate(json.product.product_name, 0);
+        handleUpdate(json.product.brands, 1);
+        handleUpdate(fixedCategory, 2);
       } catch(err) {
           console.log("error", err)
       }
@@ -49,22 +52,23 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
   setDatepick(new Date())
   setOpen(false);
   }
+  
   return (
   <View style={[mystyle.myFormContainer, mystyle.centered, mystyle.myMainWhiteBtn]}>
-    {editor? <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Edit {name}</Text>
+    {editor? <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Edit {inputsArray[0]}</Text>
     : <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Add Ingredient</Text>}
                     <View style={{flexDirection: 'row'}}>
                     <TextInput
-                        value={name}
-                        onChangeText={(e) => setName(e)}
+                        value={inputsArray[0]}
+                        onChangeText={(e) => handleUpdate(e, 0)}
                         numberOfLines={3}
                         multiline={true}
                         style={[mystyle.myMainInput, mystyle.myMainWhiteBtn,mystyle.centered, mystyle.smText, mystyle.blackText]}
                         placeholder={"Name"}
                         placeholderTextColor={Colors.light.gray}></TextInput>
                     <TextInput
-                        value={brand}
-                        onChangeText={(e) => setBrand(e)}
+                        value={inputsArray[1]}
+                        onChangeText={(e) => handleUpdate(e,1)}
                         numberOfLines={3}
                         multiline={true}
                         style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
@@ -73,16 +77,16 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                     </View>
                     <View style={{flexDirection: 'row'}}>
                     <TextInput
-                        value={category}
-                        onChangeText={(e) => setCategory(e)}
+                        value={inputsArray[2]}
+                        onChangeText={(e) => handleUpdate(e, 2)}
                         numberOfLines={3}
                         multiline={true}
                         style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
                         placeholder={"Category"}
                         placeholderTextColor={Colors.light.gray}></TextInput>
                     <TextInput
-                        value={location}
-                        onChangeText={(e) => setLocation(e)}
+                        value={inputsArray[3]}
+                        onChangeText={(e) => handleUpdate(e, 3)}
                         numberOfLines={3}
                         multiline={true}
                         style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.blackText]}
@@ -93,18 +97,24 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                       <List.Section style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
                         <List.Accordion
                         titleStyle={mystyle.blackText}
-                        title={confection === ''? 'Choose Confection' : confection}>
-                          {confections.map((c) => <List.Item style={{paddingVertical: 2}} titleStyle={[mystyle.centered, mystyle.xsText, mystyle.blackText,]} key={c} onPress={() => setConfection(c)} title={c} />)}
+                        title={inputsArray[4] === ''? 'Choose Confection' : inputsArray[4]}>
+                          {confections.map((c) => 
+                          <List.Item style={{paddingVertical: 2}} 
+                          titleStyle={[mystyle.centered, mystyle.xsText, mystyle.blackText,]} 
+                          key={c} onPress={() => handleUpdate(c, 4)} title={c} />)}
                         </List.Accordion>
                       </List.Section>
                     </View>
-                    {confection === 'Fresh'? 
+                    {inputsArray[4] === 'Fresh'? 
                     <View>
                       <List.Section style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
                         <List.Accordion
                         titleStyle={mystyle.blackText}
-                        title={maturity === ''? 'Choose Ripeness' : maturity}>
-                          {ripeness.map((m) => <List.Item style={{paddingVertical: 2}}  titleStyle={[mystyle.centered, mystyle.xsText, mystyle.blackText]} key={m} onPress={() => setMaturity(m)} title={m} />)}
+                        title={inputsArray[5] === ''? 'Choose Ripeness' : inputsArray[5]}>
+                          {ripeness.map((m) => 
+                          <List.Item style={{paddingVertical: 2}}  
+                          titleStyle={[mystyle.centered, mystyle.xsText, mystyle.blackText]} 
+                          key={m} onPress={() => handleUpdate(m, 5)} title={m} />)}
                         </List.Accordion>
                       </List.Section>
                     </View>
@@ -123,11 +133,15 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                     }}
                     saveLabel="Confirm"/>
                   {editor?
-                    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]} onPress={() => onDataReady(name, brand, category, location,confection, maturity, datepick)}>
+                    <TouchableOpacity 
+                    style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]} 
+                    onPress={() => onDataReady(inputsArray[0], inputsArray[1], inputsArray[2], inputsArray[3], inputsArray[4], inputsArray[5], datepick)}>
                     <Text style={[mystyle.myformBtnText, mystyle.smText, mystyle.whiteText]}>Edit</Text>
                     </TouchableOpacity> 
                     : <>
-                    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]} onPress={() => onDataReady(name, brand, category, location,confection, maturity, datepick)}>
+                    <TouchableOpacity 
+                    style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]} 
+                    onPress={() => onDataReady(inputsArray[0], inputsArray[1], inputsArray[2], inputsArray[3], inputsArray[4], inputsArray[5], datepick)}>
                     <Text style={[mystyle.myformBtnText, mystyle.smText, mystyle.whiteText]}>Add</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainBlackBtn, mystyle.centered]} onPress={()=>setScanner(true)}>

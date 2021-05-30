@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, ScrollView, View, Button} from 'react-native';
+import {ActivityIndicator, ScrollView, View, Button, TouchableOpacity, Text} from 'react-native';
 import firebase from '../../utils/firebase';
 import mystyle from '../../constants/mystyle'
 import { ProductType } from '../../types';
@@ -42,11 +42,15 @@ const activeAdditional = () => {
 
 return (
 <ScrollView style={mystyle.myFeedContainer}>
-    <View style={[mystyle.centered, {flexDirection: 'row'}]}>
-    <Button color={filterColor} title="Filtered Views" onPress={activeFiltered}></Button>
-    <Button color={addColor} title="Additional Info" onPress={activeAdditional}></Button>
+    <View style={[mystyle.centered, {flexDirection: 'row', marginTop: 'auto', marginBottom: 'auto'}]}>
+        <TouchableOpacity onPress={activeFiltered}>
+        <Text style={[mystyle.myHeaderText, mystyle.stnText,{color: filterColor, paddingHorizontal: 10}]}>Filtered Views </Text>
+        </TouchableOpacity>
+        <View style={{height: 50,width: 1,backgroundColor: Colors.light.tint}}></View>
+        <TouchableOpacity onPress={activeAdditional}>
+        <Text style={[mystyle.myHeaderText, mystyle.stnText, {color: addColor, paddingHorizontal: 10}]}> Additional Info</Text>
+        </TouchableOpacity>
     </View>
-    
     {showfiltered?
     displayList? <Grouped items={displayList}></Grouped> 
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />

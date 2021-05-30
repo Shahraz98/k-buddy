@@ -1,5 +1,5 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {Text, View, Animated} from 'react-native';
 import Colors from '../../constants/Colors';
 import { formatDistanceToNowStrict, isAfter} from 'date-fns';
 import { DataTable } from 'react-native-paper';
@@ -13,9 +13,22 @@ const Square = ({proname, proadd, proexp}: SquareProps) => {
   
   const added:Array<string> = formatDistanceToNowStrict(new Date(proadd), { addSuffix: false }).split(' ');
   const expiry:Array<string> = formatDistanceToNowStrict(new Date(proexp), { addSuffix: false }).split(' ');
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+    useEffect(() => {
+        Animated.timing(
+          fadeAnim,
+          {
+            toValue: 1,
+            duration: 1500,
+            useNativeDriver: true
+          }
+        ).start();
+      }, [])
+    
     
 return (
     <DataTable style={mystyle.mydTable}>
+      <Animated.View style={{opacity: fadeAnim}}>
       <DataTable.Header style={{borderBottomWidth: 0}}>
         <Text style={[mystyle.mydTableheader, mystyle.smText, mystyle.coloredText]}>
           {isAfter(new Date(), new Date(proexp))? 
@@ -46,6 +59,7 @@ return (
         </DataTable.Cell>
       </DataTable.Row>
     <View style={{height: 15}}></View>
+    </Animated.View>
     </DataTable>
 )}
 

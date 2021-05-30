@@ -34,7 +34,6 @@ const DefaultList = ({items}: DefListProps) => {
 return (
 <>
 <View>
-  <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Your Ingredients</Text>
     <SearchBar 
       round
       searchIcon={{ size: 24 }}
