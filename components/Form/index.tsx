@@ -94,16 +94,33 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                         placeholderTextColor={Colors.light.gray}></TextInput>
                     </View>
                     <View>
-                      <List.Section style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
+                    {editor?
+                    <View>
+                      {inputsArray[4] === 'Fresh'?
+                      <Text>Fresh Items chan't change category!</Text>
+                      : <List.Section 
+                        style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
                         <List.Accordion
                         titleStyle={mystyle.blackText}
                         title={inputsArray[4] === ''? 'Choose Confection' : inputsArray[4]}>
-                          {confections.map((c) => 
+                          {confections.map((c) =>
                           <List.Item style={{paddingVertical: 2}} 
                           titleStyle={[mystyle.centered, mystyle.xsText, mystyle.blackText,]} 
                           key={c} onPress={() => handleUpdate(c, 4)} title={c} />)}
                         </List.Accordion>
-                      </List.Section>
+                        </List.Section>}
+                    </View>
+                :  <List.Section
+                   style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
+                     <List.Accordion
+                     titleStyle={mystyle.blackText}
+                     title={inputsArray[4] === ''? 'Choose Confection' : inputsArray[4]}>
+                       {confections.map((c) => 
+                       <List.Item style={{paddingVertical: 2}} 
+                       titleStyle={[mystyle.centered, mystyle.xsText, mystyle.blackText,]} 
+                       key={c} onPress={() => handleUpdate(c, 4)} title={c} />)}
+                     </List.Accordion>
+                   </List.Section>}
                     </View>
                     {inputsArray[4] === 'Fresh'? 
                     <View>

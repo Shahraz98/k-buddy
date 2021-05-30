@@ -10,7 +10,7 @@ import mystyle from '../../../constants/mystyle';
 const Maturity = ({items}: DefListProps) => {
 
     const [freshList, setfreshList] =  useState<ProductType[] | undefined>(undefined)
-    const ripewords = ['2 days','a day', 'hour', 'second', 'minute','year', 'month'] //Used to filter ripeness status check of items and recently added items
+    const ripewords = ['2 days','a day', 'hour', 'second', 'minute'] //Used to filter ripeness status check of items and recently added items
 
     useEffect(()=> {
     const tempList:Array<ProductType> = items.filter((i) => i.maturity != undefined);
