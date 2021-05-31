@@ -43,6 +43,14 @@ export type QueriesParamList = {
   QueriesScreen: undefined;
 };
 
+export type myFormElementProps = {
+  handleUpdate: (title:string, index: number) => void,
+  titleArr: Array<string>,
+  arrIndex: number,
+  placeHold?: string,
+  groupArr?: Array<string>
+}
+
 export type  StringCallback = (
   name:string, 
   brand?:string, 

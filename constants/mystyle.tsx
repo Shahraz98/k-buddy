@@ -49,6 +49,7 @@ const mystyle = StyleSheet.create({
     },
     myFormContainer: {
         width: '95%',
+        height: '110%',
     },
     myModalContainer: {
         width:'100%',
@@ -68,7 +69,7 @@ const mystyle = StyleSheet.create({
     },
     myScannerText: {
         fontSize: 35, 
-        marginVertical: 50
+        marginVertical: 30
     },
     myScannerImg: {
         height: 200, 

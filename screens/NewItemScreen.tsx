@@ -70,15 +70,15 @@ export default function NewItemScreen() {
     }
     
     return (
-    <SafeAreaView style={[mystyle.centered, mystyle.myMainWhiteBtn, {width: '100%'}]}>
+    <SafeAreaView style={[mystyle.centered, mystyle.myMainWhiteBtn, {width: '100%', height: '100%'}]}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
             <ScrollView style={{flex: 0}}>
+              
                 {added? 
                 <Success addAnother={() => setAdded(false)}></Success>
-                : <View>
-                    <Form onDataReady={handleIncomingData} editor={false}></Form>
-                  </View>
+                : <View><Form onDataReady={handleIncomingData} editor={false}></Form></View>
                 }
+                
             </ScrollView>
         </TouchableWithoutFeedback>
     </SafeAreaView>
