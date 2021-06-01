@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {Text,View} from 'react-native';
+import {View} from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { ProductType, DefListProps} from '../../../types';
 import SingleList from './SingleList';
-import mystyle from '../../../constants/mystyle'
 
 const DefaultList = ({items}: DefListProps) => {
   const [displayList, setdisplayList] = useState<ProductType[] | undefined>(undefined);

@@ -6,9 +6,9 @@ const Grouped = ({items}: DefListProps) => {
 
 return (
 <>
-<SingleGroup items={items} filterby="Category"></SingleGroup>
-<SingleGroup items={items} filterby="Location"></SingleGroup>
-<SingleGroup items={items} filterby="Confection"></SingleGroup>
+<SingleGroup items={items} filterby="Category" groupIcon="fastfood"></SingleGroup>
+<SingleGroup items={items} filterby="Location" groupIcon="kitchen"></SingleGroup>
+<SingleGroup items={items} filterby="Confection" groupIcon="shopping-basket"></SingleGroup>
 </>
 )}
 

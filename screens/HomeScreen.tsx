@@ -5,9 +5,11 @@ import { View } from '../components/Themed';
 import Feed from '../components/Feed';
 export default function HomeScreen() {
   return (
+    
     <View style={styles.container}>
       <Feed/>
     </View>
+    
   );
 }
 

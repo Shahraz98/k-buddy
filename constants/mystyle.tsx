@@ -84,7 +84,7 @@ const mystyle = StyleSheet.create({
     mydTable: {
         backgroundColor: 'white', 
         borderRadius: 15, 
-        width: '40%', 
+        width: 150, 
         marginVertical: 5, 
         marginHorizontal: 18,  
         shadowColor: Colors.light.gray,

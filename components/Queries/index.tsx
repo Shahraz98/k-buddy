@@ -46,7 +46,7 @@ return (
         <TouchableOpacity onPress={activeFiltered}>
         <Text style={[mystyle.myHeaderText, mystyle.stnText,{color: filterColor, paddingHorizontal: 10}]}>Filtered Views </Text>
         </TouchableOpacity>
-        <View style={{height: 50,width: 1,backgroundColor: Colors.light.tint}}></View>
+        <View style={{height: 50,width: 0.5,backgroundColor: Colors.light.tint}}></View>
         <TouchableOpacity onPress={activeAdditional}>
         <Text style={[mystyle.myHeaderText, mystyle.stnText, {color: addColor, paddingHorizontal: 10}]}> Additional Info</Text>
         </TouchableOpacity>
@@ -55,12 +55,12 @@ return (
     displayList? <Grouped items={displayList}></Grouped> 
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
     : <View>
-        { displayList? <Maturity items={displayList}></Maturity> : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />} 
+        { displayList? <Maturity items={displayList}></Maturity> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
       <View>
-        { displayList? <Missing items={displayList}></Missing> : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />} 
+        { displayList? <Missing items={displayList}></Missing> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
       </View>
       <View>
-        { displayList? <Recent items={displayList}></Recent> : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />} 
+        { displayList? <Recent items={displayList}></Recent> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
       </View>
       </View>}
 </ScrollView>

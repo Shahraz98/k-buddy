@@ -8,6 +8,7 @@ import {View, Text} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
+import mystyle from '../constants/mystyle'
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -41,7 +42,7 @@ export default function BottomTabNavigator() {
         component={HomeNavigator}
         
         options={{
-          tabBarIcon: ({ color }) => <View style={{marginRight: 'auto', marginLeft: 'auto', marginTop: -30, 
+          tabBarIcon: ({ color }) => <View style={{marginTop: -30, 
           backgroundColor: Colors.light.gray, width: 70, height: 70, borderRadius: 35}}>
             <Entypo style={{marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto'}} name={'leaf'} size={30} color={color}/>
             </View>,
@@ -76,7 +77,7 @@ function HomeNavigator() {
         component={HomeScreen}
         options={{ 
           headerStyle: {
-            backgroundColor: '#f5f5f5',
+            backgroundColor: Colors.light.background,
             height: 60,
             shadowRadius: 0,
             shadowOffset: {
@@ -84,7 +85,7 @@ function HomeNavigator() {
             },
           },
     headerTitle: () => (
-      <View style={{flexDirection: 'row', marginTop: 10}}>
+      <View style={[mystyle.centered,{flexDirection: 'row', marginTop: 10}]}>
       <Text style={{fontSize: 16, color: '#30303b'}}>Kitchen </Text>
       <Entypo name={'leaf'} size={20} color={Colors.light.tint}/>
       <Text style={{fontSize: 16, color: '#30303b'}}> Buddy</Text>
@@ -106,7 +107,7 @@ function NewItem() {
         component={NewItemScreen}
         options={{ 
           headerStyle: {
-            backgroundColor: '#f5f5f5',
+            backgroundColor: Colors.light.background,
             height: 60,
             shadowRadius: 0,
             shadowOffset: {
@@ -114,7 +115,7 @@ function NewItem() {
             },
           },
     headerTitle: () => (
-      <View style={{flexDirection: 'row', marginTop: 10}}>
+      <View style={[mystyle.centered,{flexDirection: 'row', marginTop: 10}]}>
       <Text style={{fontSize: 16, color: '#30303b'}}>Kitchen </Text>
       <Entypo name={'leaf'} size={20} color={Colors.light.tint}/>
       <Text style={{fontSize: 16, color: '#30303b'}}> Buddy</Text>
@@ -136,7 +137,7 @@ function Queries() {
         component={QueriesScreen}
         options={{ 
           headerStyle: {
-            backgroundColor: '#f5f5f5',
+            backgroundColor: Colors.light.background,
             height: 60,
             shadowRadius: 0,
             shadowOffset: {
@@ -144,10 +145,10 @@ function Queries() {
             },
           },
     headerTitle: () => (
-      <View style={{flexDirection: 'row', marginTop: 10}}>
-      <Text style={{fontSize: 16, color: '#30303b'}}>Kitchen </Text>
+      <View style={[mystyle.centered,{flexDirection: 'row', marginTop: 10}]}>
+      <Text style={{fontSize: 16, color: Colors.light.gray}}>Kitchen </Text>
       <Entypo name={'leaf'} size={20} color={Colors.light.tint}/>
-      <Text style={{fontSize: 16, color: '#30303b'}}> Buddy</Text>
+      <Text style={{fontSize: 16, color: Colors.light.gray}}> Buddy</Text>
       </View>
       ),
         }}

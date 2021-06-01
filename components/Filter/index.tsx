@@ -26,7 +26,7 @@ const Filter = ({filterby, filterto}:FilterProps) => {
 
 return (
    <View>
-       <Text style={[mystyle.centered, mystyle.blackText, {marginTop: 20}]}>{filterto}</Text>
+       <Text style={[mystyle.centered, mystyle.smText, mystyle.coloredText, {marginTop: 20}]}>{filterto}</Text>
        <View style={[mystyle.centered, {flexDirection: 'row',flexWrap: 'wrap'}]}>
            {tempList?
            tempList.map((product) => <Square key={product.id} proname={product.name} proadd={product.addedOn} proexp={product.expiry? product.expiry : ''}></Square>)

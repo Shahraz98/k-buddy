@@ -95,4 +95,5 @@ export type RowProps = {
 export type GroupProps = {
   items: ProductType[],
   filterby: "Category" | "Location" | "Confection",
+  groupIcon?: string,
 }

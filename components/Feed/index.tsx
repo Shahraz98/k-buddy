@@ -42,16 +42,16 @@ return (
 <ScrollView style={mystyle.myFeedContainer}>
     <View style={[mystyle.centered, {flexDirection: 'row', marginTop: 'auto', marginBottom: 'auto'}]}>
         <TouchableOpacity onPress={activeList}>
-        <Text style={[mystyle.myHeaderText, mystyle.stnText,{color: listColor, paddingHorizontal: 10}]}>Ingredients List </Text>
+        <Text style={[mystyle.myHeaderText, mystyle.stnText,{color: listColor, paddingHorizontal: 10}]}>My Ingredients </Text>
         </TouchableOpacity>
-        <View style={{height: 50,width: 1,backgroundColor: Colors.light.tint}}></View>
+        <View style={{height: 50,width: 0.5,backgroundColor: Colors.light.tint}}></View>
         <TouchableOpacity onPress={activeExpiring}>
         <Text style={[mystyle.myHeaderText, mystyle.stnText, {color: expColor, paddingHorizontal: 10}]}> Expiring Soon</Text>
         </TouchableOpacity>
     </View>
     {showExpiring?
       <View>{fullList? <ExpiringSoon items={fullList}></ExpiringSoon> : <View></View>}</View>
-    : <View>{fullList? <DefaultList items={fullList}></DefaultList> : <ActivityIndicator style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />}</View>
+    : <View>{fullList? <DefaultList items={fullList}></DefaultList> : <ActivityIndicator style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />}</View>
     }
 </ScrollView>
 )}
