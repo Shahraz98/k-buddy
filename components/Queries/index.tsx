@@ -54,7 +54,7 @@ return (
     {showfiltered?
     displayList? <Grouped items={displayList}></Grouped> 
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
-    : <View>
+    : <View style={{marginTop: 20}}>
         { displayList? <Maturity items={displayList}></Maturity> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
       <View>
         { displayList? <Missing items={displayList}></Missing> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 

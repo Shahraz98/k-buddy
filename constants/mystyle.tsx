@@ -22,8 +22,14 @@ const mystyle = StyleSheet.create({
     coloredText: {
         color: Colors.light.tint
     },
+    secondaryColored: {
+        color: Colors.light.tsecondary
+    },
     blackText: {
         color: Colors.light.gray
+    },
+    secondaryBlack: {
+        color: Colors.light.dsecondary
     },
     whiteText: {
         color: Colors.light.background
@@ -44,7 +50,6 @@ const mystyle = StyleSheet.create({
         backgroundColor: Colors.light.background,
     },
     myHeaderText: {
-        fontWeight: 'bold',
         marginVertical: 15,
     },
     myFormContainer: {
@@ -52,7 +57,7 @@ const mystyle = StyleSheet.create({
         height: '110%',
     },
     myModalContainer: {
-        width:'100%',
+        width:'95%',
         height: 600,
         flexDirection: 'row',
         borderRadius: 30,
@@ -84,13 +89,13 @@ const mystyle = StyleSheet.create({
     mydTable: {
         backgroundColor: 'white', 
         borderRadius: 15, 
-        width: 150, 
-        marginVertical: 5, 
-        marginHorizontal: 18,  
+        width: 160, 
+        marginVertical: 10, 
+        marginHorizontal: 13,  
         shadowColor: Colors.light.gray,
         shadowOffset: {
-            width: 0,
-            height: 4
+            width: 2,
+            height: 3
         },
         shadowOpacity: 0.2,
     },
@@ -109,8 +114,8 @@ const mystyle = StyleSheet.create({
        marginBottom: 10,
        shadowColor: Colors.light.gray,
        shadowOffset: {
-        width: 0,
-        height: 7
+        width: 4,
+        height: 4
       },
       shadowOpacity: 0.3,
     },
@@ -140,7 +145,6 @@ const mystyle = StyleSheet.create({
     },
     myQueriesText: {
         paddingTop: 5,
-        fontWeight: 'bold',
     },
 });
 

@@ -5,8 +5,7 @@ import {format} from 'date-fns';
 import Form from '../Form'
 import {ProductProps} from '../../types';
 import mystyle from '../../constants/mystyle';
-import {Feather} from '@expo/vector-icons';
-import Colors from '../../constants/Colors'
+import Success from '../Success';
 
 const Modal = ({item}: ProductProps) => {
     const [changed, setChanged] = useState<boolean>(false);
@@ -52,13 +51,9 @@ const Modal = ({item}: ProductProps) => {
 
 return (
 <Animated.View style={{opacity: fadeAnim}}>
-<View style={[mystyle.myModalContainer, mystyle.myMainWhiteBtn]}>
+<View style={[mystyle.myModalContainer, mystyle.myMainWhiteBtn, mystyle.centered]}>
     {changed? 
-    <View style={[mystyle.centered,{marginTop: '50%'}]}>
-        <Feather style={mystyle.centered} name="check-circle" size={30} color={Colors.light.tint} />
-        <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Item changed successfully.</Text>
-        <Text style={mystyle.centered}>You can now close this modal.</Text>
-    </View> 
+    <Success mainText='Item changed successfully.' subText='You can now close this modal.'></Success>
     : <Form onDataReady={handleChange} editor={true} product={item}></Form>
 }
 </View>

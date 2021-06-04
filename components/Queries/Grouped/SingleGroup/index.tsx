@@ -6,20 +6,15 @@ import mystyle from '../../../../constants/mystyle'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Colors from '../../../../constants/Colors';
 import { MaterialIcons } from '@expo/vector-icons'; 
+import {LinearGradient} from 'expo-linear-gradient';
 
 
 const SingleGroup = ({items, filterby, groupIcon}: GroupProps) => {
-    const defList: string[] = []; 
-    const [show, setShow] = useState<boolean>(false);
+    const defList: string[] = [];
 
 return (
-<View style={{marginTop: 30}}>
-    <TouchableOpacity onPress={() => setShow(!show)} style={[mystyle.centered, {width: '60%', borderBottomWidth: 0.5, borderColor: Colors.light.tint}]}>
-    <View style={[mystyle.myQueriesRow, mystyle.centered, {marginTop: 'auto'}]}>
-            <Text style={[mystyle.myQueriesText, mystyle.centered, mystyle.stnText, mystyle.blackText]}>View by {filterby}</Text>
-    </View>
-    </TouchableOpacity>
-    {show? 
+<View>
+<View><MaterialIcons name={groupIcon} size={30} style={[mystyle.centered, {marginTop: 15}]} color={Colors.light.tint} /></View>
     <View>
         {items?
         items.map( (product) =>{ 
@@ -45,7 +40,7 @@ return (
         )
         : <View></View>
         }
-    </View> : <View><MaterialIcons name={groupIcon} size={35} style={[mystyle.centered, {marginTop: 30}]} color={Colors.light.tint} /></View>} 
+    </View>
     </View> 
 )}
 

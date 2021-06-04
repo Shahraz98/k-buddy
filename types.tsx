@@ -3,7 +3,10 @@
  * https://reactnavigation.org/docs/typescript/
  */
 export type SuccessProps = {
-  addAnother: any,
+  addAnother?: () => void,
+  mainText: string,
+  subText: string,
+  buttonText?: string
 }
 
 export type FilterProps = {

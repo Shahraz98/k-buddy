@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import mystyle from '../constants/mystyle'
+import {LinearGradient} from 'expo-linear-gradient';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -27,25 +28,28 @@ export default function BottomTabNavigator() {
       initialRouteName="Home"
       tabBarOptions={{
         tabStyle: { 
-        backgroundColor: 'white'},
+        backgroundColor: Colors.light.background},
         activeTintColor: Colors[colorScheme].tint,
         showLabel: false}}>
       <BottomTab.Screen
         name="Home"
         component={NewItem}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="md-add" color={color} />,
+          tabBarIcon: ({ color }) => <View><TabBarIcon name="md-add" color={color} /></View>,
         }}
       />
       <BottomTab.Screen
         name="List"
         component={HomeNavigator}
-        
         options={{
-          tabBarIcon: ({ color }) => <View style={{marginTop: -30, 
-          backgroundColor: Colors.light.gray, width: 70, height: 70, borderRadius: 35}}>
+          tabBarIcon: ({ color }) => 
+            <LinearGradient
+          colors={[Colors.light.gray,Colors.light.dsecondary]}
+          start={[0.3, 0.5]}
+          style={{marginTop: -30, 
+            backgroundColor: Colors.light.gray, width: 70, height: 70, borderRadius: 35}}>
             <Entypo style={{marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto'}} name={'leaf'} size={30} color={color}/>
-            </View>,
+            </LinearGradient>,
         }}
       />
        <BottomTab.Screen
@@ -77,7 +81,7 @@ function HomeNavigator() {
         component={HomeScreen}
         options={{ 
           headerStyle: {
-            backgroundColor: Colors.light.background,
+            backgroundColor: Colors.light.tint,
             height: 60,
             shadowRadius: 0,
             shadowOffset: {
@@ -86,9 +90,9 @@ function HomeNavigator() {
           },
     headerTitle: () => (
       <View style={[mystyle.centered,{flexDirection: 'row', marginTop: 10}]}>
-      <Text style={{fontSize: 16, color: '#30303b'}}>Kitchen </Text>
-      <Entypo name={'leaf'} size={20} color={Colors.light.tint}/>
-      <Text style={{fontSize: 16, color: '#30303b'}}> Buddy</Text>
+      <Text style={{fontSize: 16, color: Colors.light.background}}>Kitchen </Text>
+      <Entypo name={'leaf'} size={20} color={Colors.light.gray}/>
+      <Text style={{fontSize: 16, color: Colors.light.background}}> Buddy</Text>
       </View>
       ),
   }}

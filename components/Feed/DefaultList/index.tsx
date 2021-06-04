@@ -36,10 +36,11 @@ return (
     <SearchBar 
       round
       searchIcon={{ size: 24 }}
-      placeholder="Type Here..."
+      placeholder="Search Ingredient"
       onChangeText={(text:string) => searchFilterFunction(text)}
       onClear={() => searchFilterFunction('')}
       value={search}
+      inputContainerStyle={{backgroundColor: '#f5f5f5'}}
       containerStyle={{backgroundColor: 'transparent', borderBottomColor: 'transparent', borderTopColor: 'transparent'}}
       color='white'>
     </SearchBar>

@@ -12,7 +12,7 @@ const OptionList = ({handleUpdate, titleArr, arrIndex, groupArr}:myFormElementPr
         <List.Section 
         style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
         <List.Accordion
-        titleStyle={mystyle.blackText}
+        titleStyle={[mystyle.blackText]}
         title={titleArr[arrIndex] === ''? 'Please select an option' : titleArr[arrIndex]}>
           {groupArr? groupArr.map((c) =>
           <List.Item style={{paddingVertical: 2}} 

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import Colors from '../constants/Colors';
 
 import { View } from '../components/Themed';
 import Feed from '../components/Feed';
@@ -18,5 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: Colors.light.tint,
   },
 });

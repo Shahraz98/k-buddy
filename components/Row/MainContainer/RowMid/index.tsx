@@ -4,6 +4,8 @@ import { RowProps} from '../../../../types';
 import firebase from '../../../../utils/firebase'
 import { sub,format, add} from 'date-fns'
 import mystyle from '../../../../constants/mystyle'
+import {LinearGradient} from 'expo-linear-gradient';
+import Colors from '../../../../constants/Colors';
 
 const RowMid = ({product}: RowProps) => {
 
@@ -43,18 +45,33 @@ const RowMid = ({product}: RowProps) => {
 
 return (
 <View style={[mystyle.myClmContainer, {marginTop: 'auto', marginBottom:'auto'}]}>
-    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainBlackBtn]}  onPress={handleDelete}>
-        <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.coloredText, mystyle.centered]} >Delete</Text>
+    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn]}  onPress={handleDelete}>
+    <LinearGradient
+              colors={[Colors.light.gray, Colors.light.dsecondary]}
+              start={[0.2, 0.5]}
+              style={{borderRadius: 15}}>
+        <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.whiteText, mystyle.centered]} >Delete</Text>
+        </LinearGradient>
     </TouchableOpacity>
     
     {product.maturity?
     <View>
     {product.confection === 'Frozen'? 
-    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn]} onPress={unFreeze}>
+    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainWhiteBtn]} onPress={unFreeze}>
+        <LinearGradient
+              colors={[Colors.light.tint,Colors.light.tsecondary]}
+              start={[0.3, 0.5]}
+              style={{borderRadius: 15}}>
         <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.whiteText, mystyle.centered]}>Unfreeze</Text>
+        </LinearGradient>
     </TouchableOpacity>
-    : <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn]}  onPress={handleFreeze}>
-        <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.whiteText, mystyle.centered]}>Freeze</Text>
+    : <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainWhiteBtn]}  onPress={handleFreeze}>
+        <LinearGradient
+              colors={[Colors.light.tint,Colors.light.tsecondary]}
+              start={[0.2, 0.5]}
+              style={{borderRadius: 15}}>
+        <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.coloredText, mystyle.centered]}>Freeze</Text>
+        </LinearGradient>
       </TouchableOpacity>
     }
     </View>

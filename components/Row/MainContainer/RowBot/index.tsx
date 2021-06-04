@@ -38,15 +38,15 @@ return (
 <View style={mystyle.myClmContainer}>
     {product.isOpen? 
     <View style={[mystyle.centered, {marginBottom: 5}]}>
-        <FontAwesome name="dropbox" size={65} color={Colors.light.background} />
+        <FontAwesome name="dropbox" size={65} color={Colors.light.gray} />
     </View>
     : <View style={[mystyle.centered, {marginBottom: 5}]}>
-        <MaterialCommunityIcons name="cube" size={50} color={Colors.light.tint} />
+        <MaterialCommunityIcons name="cube" size={50} color={Colors.light.gray} />
       </View>}
       <Switch
       style={[mystyle.centered, {marginBottom: 10}]}
-      trackColor={{ true: "white", false: Colors.light.tint }}
-      thumbColor={Colors.light.gray}
+      trackColor={{ true: Colors.light.tint, false: Colors.light.tint }}
+      thumbColor={'#FF7F50'}
       ios_backgroundColor="white"
       onValueChange={handleOpen}
       disabled={isEnabled}

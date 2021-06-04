@@ -9,6 +9,7 @@ import {FormProps} from '../../types';
 import mystyle from '../../constants/mystyle'
 import OptionList from './OptionList/index';
 import TextField from './TextField/index';
+import {LinearGradient} from 'expo-linear-gradient';
 
 const Form = ({onDataReady, product, editor}:FormProps)  => {
   const [datepick, setDatepick] = useState<Date | undefined>(product? 
@@ -80,7 +81,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
   }
   
   return (
-  <View style={[mystyle.myFormContainer, mystyle.centered, mystyle.myMainWhiteBtn]}>
+  <View style={[mystyle.myFormContainer, mystyle.centered]}>
     {editor? <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Edit {inputsArray[0]}</Text>
     : <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Add Ingredient</Text>}
                     <View style={{flexDirection: 'row'}}>
@@ -119,12 +120,22 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                     </TouchableOpacity> 
                     : <>
                     <TouchableOpacity 
-                    style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]} 
+                    style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]}  
                     onPress={() => onDataReady(inputsArray[0], inputsArray[1], inputsArray[2], inputsArray[3], inputsArray[4], inputsArray[5], datepick)}>
-                    <Text style={[mystyle.myformBtnText, mystyle.smText, mystyle.whiteText]}>Add</Text>
+                      <LinearGradient
+                      colors={[Colors.light.tint,Colors.light.tsecondary]}
+                      start={[0.3, 0.5]}
+                      style={{borderRadius: 15}}>
+                       <Text style={[mystyle.myformBtnText, mystyle.smText, mystyle.whiteText]}>Add</Text>
+                      </LinearGradient>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainBlackBtn, mystyle.centered]} onPress={()=>setScanner(true)}>
+                    <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainWhiteBtn, mystyle.centered]} onPress={()=>setScanner(true)}>
+                    <LinearGradient
+                      colors={[Colors.light.gray, Colors.light.dsecondary]}
+                      start={[0.2, 0.5]}
+                      style={{borderRadius: 15}}>
                     <Text style={[mystyle.myformBtnText, mystyle.smText, mystyle.whiteText]}>Scan QR Code</Text>
+                    </LinearGradient>
                     </TouchableOpacity>
                     {scanner?
                     <>

@@ -75,7 +75,10 @@ export default function NewItemScreen() {
             <ScrollView style={{flex: 0}}>
               
                 {added? 
-                <Success addAnother={() => setAdded(false)}></Success>
+                <Success addAnother={() => setAdded(false)} 
+                mainText='Item added successfully.' 
+                subText='Go to the new tab to view it, or'
+                buttonText='Add another'></Success>
                 : <View><Form onDataReady={handleIncomingData} editor={false}></Form></View>
                 }
                 

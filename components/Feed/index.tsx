@@ -28,14 +28,14 @@ const Feed = () => {
 
     const activeExpiring = () => {
       setShowExpiring(true);
-      setexpColor(Colors.light.tint);
+      setexpColor(Colors.light.background);
       setlistColor(Colors.light.gray);
   }
   
   const activeList = () => {
       setShowExpiring(false);
       setexpColor(Colors.light.gray);
-      setlistColor(Colors.light.tint);
+      setlistColor(Colors.light.background);
   }
 
 return (
@@ -44,7 +44,7 @@ return (
         <TouchableOpacity onPress={activeList}>
         <Text style={[mystyle.myHeaderText, mystyle.stnText,{color: listColor, paddingHorizontal: 10}]}>My Ingredients </Text>
         </TouchableOpacity>
-        <View style={{height: 50,width: 0.5,backgroundColor: Colors.light.tint}}></View>
+        <View style={{height: 50,width: 1,backgroundColor: Colors.light.background}}></View>
         <TouchableOpacity onPress={activeExpiring}>
         <Text style={[mystyle.myHeaderText, mystyle.stnText, {color: expColor, paddingHorizontal: 10}]}> Expiring Soon</Text>
         </TouchableOpacity>
