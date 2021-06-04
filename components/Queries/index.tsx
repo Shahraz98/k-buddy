@@ -13,8 +13,6 @@ const Queries = () => {
 
 const [displayList, setdisplayList] = useState<ProductType[] | undefined>(undefined);
 const [showfiltered, setShowFiltered] = useState<boolean>(true)
-const [filterColor, setfilterColor] = useState<string>('#FF5733')
-const [addColor, setaddColor] = useState<string>('#30303b')
 
 useEffect(()=> {
     const ProductRef = firebase.database().ref("Product");
@@ -28,33 +26,21 @@ useEffect(()=> {
     })
 }, []);
 
-const activeFiltered = () => {
-    setShowFiltered(true);
-    setfilterColor(Colors.light.tint);
-    setaddColor(Colors.light.gray);
-}
-
-const activeAdditional = () => {
-    setShowFiltered(false);
-    setfilterColor(Colors.light.gray);
-    setaddColor(Colors.light.tint);
-}
-
 return (
 <ScrollView style={mystyle.myFeedContainer}>
-    <View style={[mystyle.centered, {flexDirection: 'row', marginTop: 'auto', marginBottom: 'auto'}]}>
-        <TouchableOpacity onPress={activeFiltered}>
-        <Text style={[mystyle.myHeaderText, mystyle.stnText,{color: filterColor, paddingHorizontal: 10}]}>Filtered Views </Text>
+<View style={[mystyle.centered, mystyle.myNav]}>
+    <TouchableOpacity style={[mystyle.myNavBtn,{backgroundColor: showfiltered? Colors.light.background : 'white'}]} onPress={() => setShowFiltered(true)}>
+        <Text style={[mystyle.myHeaderText, mystyle.smText, mystyle.blackText, {paddingHorizontal: 10}]}>Filtered Views</Text>
         </TouchableOpacity>
-        <View style={{height: 50,width: 0.5,backgroundColor: Colors.light.tint}}></View>
-        <TouchableOpacity onPress={activeAdditional}>
-        <Text style={[mystyle.myHeaderText, mystyle.stnText, {color: addColor, paddingHorizontal: 10}]}> Additional Info</Text>
+        <View style={{height: 50,width: 10,backgroundColor: 'white'}}></View>
+        <TouchableOpacity style={[mystyle.myNavBtn,{backgroundColor: showfiltered? 'white' : Colors.light.background}]} onPress={() => setShowFiltered(false)}>
+        <Text style={[mystyle.myHeaderText, mystyle.smText, mystyle.blackText, {paddingHorizontal: 10}]}>Additional Info</Text>
         </TouchableOpacity>
     </View>
     {showfiltered?
     displayList? <Grouped items={displayList}></Grouped> 
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
-    : <View style={{marginTop: 20}}>
+    : <View style={{marginTop: 10}}>
         { displayList? <Maturity items={displayList}></Maturity> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
       <View>
         { displayList? <Missing items={displayList}></Missing> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 

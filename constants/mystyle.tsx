@@ -94,7 +94,7 @@ const mystyle = StyleSheet.create({
         marginHorizontal: 13,  
         shadowColor: Colors.light.gray,
         shadowOffset: {
-            width: 2,
+            width: 0,
             height: 3
         },
         shadowOpacity: 0.2,
@@ -114,7 +114,7 @@ const mystyle = StyleSheet.create({
        marginBottom: 10,
        shadowColor: Colors.light.gray,
        shadowOffset: {
-        width: 4,
+        width: 0,
         height: 4
       },
       shadowOpacity: 0.3,
@@ -146,6 +146,19 @@ const mystyle = StyleSheet.create({
     myQueriesText: {
         paddingTop: 5,
     },
+    myNav: {
+        height: 60, 
+        marginBottom: 15,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        borderRadius: 15
+    },
+    myNavBtn: {
+        maxHeight: 50, 
+        marginVertical: 5, 
+        marginHorizontal: 5, 
+        borderRadius: 15
+    }
 });
 
 export default mystyle;

@@ -23,7 +23,7 @@ return (
      || formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[2]) > -1
      || formatDistanceToNow(new Date(product.expiry!), { addSuffix: true }).indexOf(words[3]) > -1
      || product.maturity === 'Ripe').map((product, i) => <Row key={i} item={product}/>)
-     : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />
+     : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.dsecondary} />
    }
 </>
 )}

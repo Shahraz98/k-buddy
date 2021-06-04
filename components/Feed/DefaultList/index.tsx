@@ -33,16 +33,10 @@ const DefaultList = ({items}: DefListProps) => {
 return (
 <>
 <View>
-    <SearchBar 
-      round
-      searchIcon={{ size: 24 }}
-      placeholder="Search Ingredient"
-      onChangeText={(text:string) => searchFilterFunction(text)}
-      onClear={() => searchFilterFunction('')}
-      value={search}
-      inputContainerStyle={{backgroundColor: '#f5f5f5'}}
-      containerStyle={{backgroundColor: 'transparent', borderBottomColor: 'transparent', borderTopColor: 'transparent'}}
-      color='white'>
+    <SearchBar round searchIcon={{ size: 24 }} placeholder="Search Ingredient"
+      onChangeText={(text:string) => searchFilterFunction(text)} onClear={() => searchFilterFunction('')}
+      value={search} inputContainerStyle={{backgroundColor: '#f5f5f5'}} color='white'
+      containerStyle={{backgroundColor: 'transparent', borderBottomColor: 'transparent', borderTopColor: 'transparent'}}>
     </SearchBar>
 
     {showFull?

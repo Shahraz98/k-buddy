@@ -7,7 +7,7 @@ import mystyle from '../../../constants/mystyle';
 
 const Recent = ({items}: DefListProps) => {
 
-const ripewords = ['2 days','a day', 'hour', 'second', 'minute','year', 'month'] //Used to filter ripeness status check of items and recently added items
+const ripewords = ['year', 'month'] //Used to filter recently added items
 
 return (
 <>

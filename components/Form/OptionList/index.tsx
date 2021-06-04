@@ -10,7 +10,7 @@ const OptionList = ({handleUpdate, titleArr, arrIndex, groupArr}:myFormElementPr
     
     return (
         <List.Section 
-        style={[mystyle.centered,{backgroundColor: Colors.light.background, width: '80%', borderRadius: 15}]}>
+        style={[mystyle.centered, mystyle.myMainWhiteBtn,{ width: '80%', borderRadius: 15}]}>
         <List.Accordion
         titleStyle={[mystyle.blackText]}
         title={titleArr[arrIndex] === ''? 'Please select an option' : titleArr[arrIndex]}>

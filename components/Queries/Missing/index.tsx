@@ -13,7 +13,8 @@ return (
 <Text style={[mystyle.centered, mystyle.xsText, {marginBottom: 10}]}>(no items will be shown if every item is complete.)</Text>
     {items ?
     items.filter((product) => {
-        if(product.category === '' || product.brand === '' || product.confection === '' || product.expiry === '' || product.location === ''){
+        if(product.name === 'Name not found' || product.category === '' || product.category === 'Category not found' || product.brand === '' || product.brand === 'Brand not found' || 
+        product.confection === '' || product.expiry === '' || product.location === ''){
             return product; }
     }).map((product) => <Row key={product.id} item={product}/> ) : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
     }

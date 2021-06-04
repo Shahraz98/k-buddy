@@ -27,8 +27,7 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        tabStyle: { 
-        backgroundColor: Colors.light.background},
+        tabStyle: mystyle.myMainWhiteBtn,
         activeTintColor: Colors[colorScheme].tint,
         showLabel: false}}>
       <BottomTab.Screen
@@ -44,11 +43,11 @@ export default function BottomTabNavigator() {
         options={{
           tabBarIcon: ({ color }) => 
             <LinearGradient
-          colors={[Colors.light.gray,Colors.light.dsecondary]}
-          start={[0.3, 0.5]}
-          style={{marginTop: -30, 
-            backgroundColor: Colors.light.gray, width: 70, height: 70, borderRadius: 35}}>
-            <Entypo style={{marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto'}} name={'leaf'} size={30} color={color}/>
+            colors={[Colors.light.gray,Colors.light.dsecondary]}
+            start={[0.3, 0.5]}
+            style={{marginTop: -30, backgroundColor: Colors.light.gray, width: 70, 
+            height: 70, borderRadius: 35}}>
+            <Entypo style={[mystyle.centered,{marginTop: 'auto', marginBottom: 'auto'}]} name={'leaf'} size={30} color={color}/>
             </LinearGradient>,
         }}
       />
