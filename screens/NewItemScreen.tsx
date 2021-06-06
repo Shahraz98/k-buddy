@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect} from 'react';
 import { View, Text, ScrollView, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
 import firebase from '../utils/firebase';
-import { format} from 'date-fns'
+import { format, add, isAfter} from 'date-fns'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Success from '../components/Success';
 import Form from '../components/Form/index';
@@ -28,8 +28,15 @@ export default function NewItemScreen() {
    }
 
     const handleIncomingData = (name:string, brand?:string, category?:string, location?:string, confection?:string, maturity?:string, datepick?:Date) => {
-        const now = format(new Date(),"yyyy-MM-dd'T'HH:mm");
-        const expiry = format(datepick!,"yyyy-MM-dd'T'HH:mm");
+        const now:string = format(new Date(),"yyyy-MM-dd'T'HH:mm");
+        const temp:Date = add(new Date(), {
+            days: 1,
+        })
+        let expiry:string = format(temp, "yyyy-MM-dd'T'HH:mm");
+        if(datepick){
+        if(!isAfter(new Date(), new Date(datepick))){
+          expiry = format(datepick,"yyyy-MM-dd'T'HH:mm");
+        }}
         if(name != '') {
             const ProductRef = firebase.database().ref("Product");
             if(confection != 'Fresh'){

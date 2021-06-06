@@ -7,7 +7,7 @@ import Colors from '../../../../constants/Colors';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 const SingleGroup = ({items, filterby, groupIcon}: GroupProps) => {
-    const defList: string[] = [];
+    const defList: string[] = []; //Array used to avoid duplicates in the group
 
 return (
 <View>

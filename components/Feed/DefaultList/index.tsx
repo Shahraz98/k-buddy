@@ -10,7 +10,7 @@ const DefaultList = ({items}: DefListProps) => {
   const [search, setSearch] = useState<string>('');
   
   const searchFilterFunction = (text:string) => {
-        // Check if searched text is not blank
+        // Check if searched text is not blank and manage the displayed list based on input
         if (text) {
           if(items){
             const newData:ProductType[] = items.filter(function (item) {

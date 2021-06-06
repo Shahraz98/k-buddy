@@ -11,7 +11,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 
 
 const Square = ({proname, proadd, proexp}: SquareProps) => {
-  
+  //added and expiry both are used to get the relevant info about the product and save it in a specific way inside the arrays
   const added:Array<string> = formatDistanceToNowStrict(new Date(proadd), { addSuffix: false }).split(' ');
   const expiry:Array<string> = formatDistanceToNowStrict(new Date(proexp), { addSuffix: false }).split(' ');
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -28,13 +28,12 @@ const Square = ({proname, proadd, proexp}: SquareProps) => {
     
     
 return (
-    <DataTable style={mystyle.mydTable}>
+    <DataTable style={[mystyle.mydTable, mystyle.centered]}>
       <Animated.View style={{opacity: fadeAnim}}>
       <LinearGradient
         colors={['white', Colors.light.background]}
         start={[0.5, 0.4]}
-        style={{borderRadius: 15}}
-      >
+        style={{borderRadius: 15}}>
       <DataTable.Header style={{borderBottomWidth: 0}}>
         <Text style={[mystyle.mydTableheader, mystyle.smText, mystyle.coloredText]}>
           {isAfter(new Date(), new Date(proexp))? 

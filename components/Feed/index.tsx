@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, View, ActivityIndicator, ImageBackground, TouchableOpacity, Text} from 'react-native';
+import {ScrollView, View, ActivityIndicator, TouchableOpacity, Text} from 'react-native';
 import firebase from '../../utils/firebase';
 import { ProductType } from '../../types';
 import ExpiringSoon from './ExpiringSoon';

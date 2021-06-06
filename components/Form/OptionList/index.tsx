@@ -2,7 +2,6 @@ import React from 'react';
 import {View} from 'react-native';
 import { List } from 'react-native-paper';
 import mystyle from '../../../constants/mystyle';
-import Colors from '../../../constants/Colors'
 import {myFormElementProps} from '../../../types';
 
 

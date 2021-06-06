@@ -11,8 +11,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../../../constants/Colors';
 
 const MainContainer = ({product}: RowProps) => {
-  const [modal, OpenModal] = useState<boolean>(true);
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [modal, OpenModal] = useState<boolean>(true); 
+  const fadeAnim = useRef(new Animated.Value(0)).current; //For fading-in animation
     useEffect(() => {
         Animated.timing(
           fadeAnim,
@@ -37,14 +37,13 @@ const MainContainer = ({product}: RowProps) => {
       <LinearGradient
         colors={['white', Colors.light.background]}
         start={[0.5, 0.4]}
-        style={{borderRadius: 15}}
-      >
+        style={{borderRadius: 15}}>
         <View style={{paddingHorizontal: 25,paddingVertical: 10}}>
-          <RowTop product={product}></RowTop>
+          <RowTop product={product}></RowTop> 
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <RowBot product={product}></RowBot>
+            <RowBot product={product}></RowBot> 
             <View>
-            <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn]} onPress={handleEdit}>
+            <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn]} onPress={handleEdit}> 
                <LinearGradient
               colors={[Colors.light.tint,Colors.light.tsecondary]}
               start={[0.3, 0.5]}
@@ -52,7 +51,7 @@ const MainContainer = ({product}: RowProps) => {
                 <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.whiteText, mystyle.centered]} >Edit</Text>
                 </LinearGradient>
               </TouchableOpacity>
-              <RowMid product={product}></RowMid>
+              <RowMid product={product}></RowMid> 
             </View>
           </View>
         </View>
@@ -62,9 +61,9 @@ const MainContainer = ({product}: RowProps) => {
   </View> 
 : <View style={mystyle.centered}>
   <TouchableOpacity onPress={handleEdit}>
-<Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.blackText, {marginTop: 20}]} >Close</Text>
-</TouchableOpacity>
-    <Modal item={product}></Modal>
+    <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.blackText, {marginTop: 20}]}>Close</Text>
+  </TouchableOpacity>
+  <Modal item={product}></Modal>
 </View>
 }
 </>

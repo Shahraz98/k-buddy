@@ -25,10 +25,12 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
   const ripeness:Array<string>  = ['Underripe', 'Barely Ripe', 'Ripe', 'Very Ripe', 'Overripe'];
 
   const handleUpdate = (val:string,i:number) => {
+    //handling update of each value inside the inputs array
     let items = [...inputsArray]; items[i] = val; setInputsArray(items);
   }
 
   const handleAll = (myName:string, myBrand:string, myCategory:string) => {
+    //Saving scanned values in inputs
     let items = [...inputsArray]; 
     items[0] = myName;
     items[1] = myBrand;
@@ -43,7 +45,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
   }
 
   const handleBarCodeScanned = async ({data}:any) => {
-    try {
+    try { //Querying data and saving it using handleAll, if data is not found simply set input as data not found
       const response = await fetch(`https://world.openfoodfacts.org/api/v0/product/${data}`)
       const json = await toJson(response);
       let myCategory = 'Category not found';
@@ -68,6 +70,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
   };
 
   const onConfirmSingle = React.useCallback(
+    //Handling picking of date from params
     (params) => {
       setOpen(false);
       setDatepick(params.date);
@@ -76,6 +79,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
   );
   
   const onDismiss = () => {
+  //Resetting the date when closing date modal
   setDatepick(new Date())
   setOpen(false);
   }
@@ -108,8 +112,14 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                     </View>
                     : <View></View>}
                     <TouchableOpacity style={mystyle.myMainWhiteBtn} onPress={() => setOpen(true)}>
-                      <Text style={[mystyle.coloredText, mystyle.centered, mystyle.smText, {marginVertical: 22}]}>Select Expiry Date</Text>
-                    </TouchableOpacity> 
+                    <Text style={[mystyle.coloredText, mystyle.centered, mystyle.smText, {marginBottom: 10}]}>{editor? <Text>Change </Text> : <Text>Select </Text>}Expiry Date</Text>
+                    </TouchableOpacity>
+                    {!editor?
+                      <View>
+                      <Text style={[mystyle.centered, mystyle.xsText, mystyle.secondaryColored]}>IMPORTANT NOTE</Text>
+                      <Text style={[mystyle.centered, mystyle.xsText, mystyle.secondaryBlack, {alignContent: 'center'}]}>If the expiry is omitted or does not exist,</Text>
+                      <Text style={[mystyle.centered, mystyle.xsText, mystyle.secondaryBlack, {alignContent: 'center'}]}>your ingredient will be set as "Expiring in 24 hours".</Text>
+                      <Text style={[mystyle.centered, mystyle.xsText, mystyle.secondaryBlack, {alignContent: 'center'}]}>You will be able to later change that by providing a date.</Text></View> : <View></View>}
                     <DatePickerModal mode="single" visible={open} onDismiss={onDismiss} date={datepick}
                     onConfirm={onConfirmSingle} validRange={{startDate: new Date()}} saveLabel="Confirm"/>
                     {editor?

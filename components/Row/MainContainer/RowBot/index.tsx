@@ -12,13 +12,14 @@ const [isEnabled, setIsEnabled] = useState(product.isOpen);
 const ProductRef = firebase.database().ref("Product").child(product.id);
 
 const handleOpen =  () => {
+    //Pretty much same logic as the unFreeze method in the RowMid component, only difference is in setting the isOpen property to true
     try {
         if(formatDistanceToNow(new Date(product.expiry!)).includes('year')
         || formatDistanceToNow(new Date(product.expiry!)).includes('month')
         || formatDistanceToNow(new Date(product.expiry!)).includes('days')){
             const temp = add(new Date(), {
                 days: 1,
-              })
+            })
             const minEx = format(temp, "yyyy-MM-dd'T'HH:mm")
              ProductRef.update({
              expiry: minEx,

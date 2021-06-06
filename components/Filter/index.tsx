@@ -27,10 +27,10 @@ const Filter = ({filterby, filterto}:FilterProps) => {
 return (
    <View>
        <Text style={[mystyle.centered, mystyle.smText, mystyle.coloredText, {marginTop: 20}]}>{filterto}</Text>
-       <View style={[mystyle.centered, {flexDirection: 'row',flexWrap: 'wrap'}]}>
+       <View style={[{flexDirection: 'row',flexWrap: 'wrap'}]}>
            {tempList?
            tempList.map((product) => <Square key={product.id} proname={product.name} proadd={product.addedOn} proexp={product.expiry? product.expiry : ''}></Square>)
-           : <ActivityIndicator style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
+           : <ActivityIndicator style={mystyle.centered} size="large" color={Colors.light.tint} />
            }
        </View> 
    </View>

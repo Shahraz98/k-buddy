@@ -25,7 +25,7 @@ const Modal = ({item}: ProductProps) => {
     try {
        const now = format(new Date(),"yyyy-MM-dd'T'HH:mm");
        const ProductRef = firebase.database().ref("Product").child(item.id);
-       if(nmaturity){
+       if(nmaturity){ //handling products with maturity separately to avoid errors related to additional properties
         await ProductRef.update({
            name: nname,
            brand: nbrand,
@@ -36,9 +36,9 @@ const Modal = ({item}: ProductProps) => {
            maturitydate: now,
            expiry: format(nexpiry!,"yyyy-MM-dd'T'HH:mm")
         })
-       } else {
+       } else { //handling standard products without maturity
            await ProductRef.update({
-            name: nname,
+           name: nname,
            brand: nbrand,
            confection: nconfection,
            category: ncategory,

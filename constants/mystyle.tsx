@@ -87,11 +87,9 @@ const mystyle = StyleSheet.create({
         textTransform: 'uppercase',
     },
     mydTable: {
-        backgroundColor: 'white', 
         borderRadius: 15, 
         width: 160, 
-        marginVertical: 10, 
-        marginHorizontal: 13,  
+        marginVertical: 10,   
         shadowColor: Colors.light.gray,
         shadowOffset: {
             width: 0,
@@ -108,6 +106,11 @@ const mystyle = StyleSheet.create({
     mydTableCellRight: {
         borderRightColor: Colors.light.gray, 
         borderRightWidth: 0.3
+    },
+    myRectangle: {
+        width: 175, 
+        maxHeight: 185,
+        marginVertical: 15
     },
     myMainBlock: {
        marginTop: 15,

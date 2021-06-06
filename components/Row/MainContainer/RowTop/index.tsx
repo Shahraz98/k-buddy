@@ -11,6 +11,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 const RowTop = ({product}: RowProps) => {
 
 const translateRipeness = (ripeness:string) => {
+    //Returning the progress status based on ripeness, probably would have been nicer to use a switch statement
     if(ripeness === 'Underripe') return 0.1;
     if(ripeness === 'Barely Ripe') return 0.2;
     if(ripeness === 'Ripe') return 0.4;
@@ -20,6 +21,7 @@ const translateRipeness = (ripeness:string) => {
 
 return (
 <View style={mystyle.myClmContainer}>
+   
     <View style={mystyle.myRowHeader}>
         <View>
         <Text style={[mystyle.blackText, mystyle.bigText, {fontWeight: 'bold', marginRight: 5}]}>{product.name}</Text>
@@ -39,16 +41,21 @@ return (
     : <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 5}]}>Status: Closed <MaterialCommunityIcons name="cube" size={19} color={Colors.light.dsecondary} /></Text>}
     </View>
     </LinearGradient>
-    {isAfter(new Date(), new Date(product.expiry!))? 
+   
+    {product.expiry? 
     <View style={{marginLeft: 'auto'}}>
-    <MaterialCommunityIcons name="alert-circle" style={mystyle.centered} size={55} color={Colors.light.tsecondary} />
-    <Text style={[mystyle.secondaryColored, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>Expired</Text>
-    <Text style={[mystyle.secondaryColored, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>{product.expiry? formatDistanceToNow(new Date(product.expiry), { addSuffix: true }) : ''}</Text></View>
-    : <View style={{marginLeft: 'auto'}}><EvilIcons name="clock" style={mystyle.centered} size={65} color={Colors.light.tsecondary}/>
-    <Text style={[mystyle.secondaryBlack, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>Expiring</Text>
-    <Text style={[mystyle.secondaryBlack, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>{product.expiry? formatDistanceToNow(new Date(product.expiry), { addSuffix: true }) : ''}</Text></View>}
+        {isAfter(new Date(), new Date(product.expiry))? 
+        <View>
+        <MaterialCommunityIcons name="alert-circle" style={mystyle.centered} size={55} color={Colors.light.tsecondary} />
+        <Text style={[mystyle.secondaryColored, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>Expired</Text>
+        <Text style={[mystyle.secondaryColored, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>{product.expiry? formatDistanceToNow(new Date(product.expiry), { addSuffix: true }) : ''}</Text></View>
+        : <View style={{marginLeft: 'auto'}}><EvilIcons name="clock" style={mystyle.centered} size={65} color={Colors.light.tsecondary}/>
+        <Text style={[mystyle.secondaryBlack, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>Expiring</Text>
+        <Text style={[mystyle.secondaryBlack, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>{product.expiry? formatDistanceToNow(new Date(product.expiry), { addSuffix: true }) : ''}</Text></View>}
     </View>
-
+    : <View></View>}
+    </View>
+    
     {product.maturity?
     <View style={[mystyle.centered,{marginVertical: 15}]}>
         <Text style={[mystyle.centered,mystyle.blackText]}>Checked {formatDistanceToNow(new Date(product.maturitydate!), { addSuffix: true })} as: 

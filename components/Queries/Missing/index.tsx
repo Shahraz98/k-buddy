@@ -11,7 +11,7 @@ return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ingredients missing data</Text> 
 <Text style={[mystyle.centered, mystyle.xsText, {marginBottom: 10}]}>(no items will be shown if every item is complete.)</Text>
-    {items ?
+    {items ? 
     items.filter((product) => {
         if(product.name === 'Name not found' || product.category === '' || product.category === 'Category not found' || product.brand === '' || product.brand === 'Brand not found' || 
         product.confection === '' || product.expiry === '' || product.location === ''){

@@ -16,6 +16,7 @@ const [showfiltered, setShowFiltered] = useState<boolean>(true)
 
 useEffect(()=> {
     const ProductRef = firebase.database().ref("Product");
+    //Getting data from Firebase and saving it in displayList
     ProductRef.on("value", (snapshot) => {
         const elements = snapshot.val();
         const productList:Array<ProductType> = [];
@@ -40,7 +41,7 @@ return (
     {showfiltered?
     displayList? <Grouped items={displayList}></Grouped> 
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
-    : <View style={{marginTop: 10}}>
+    : <View style={{marginTop: 10}}> 
         { displayList? <Maturity items={displayList}></Maturity> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
       <View>
         { displayList? <Missing items={displayList}></Missing> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
