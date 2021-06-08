@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, ScrollView, View, Button, TouchableOpacity, Text} from 'react-native';
-import firebase from '../../utils/firebase';
+import {ActivityIndicator, ScrollView, View, TouchableOpacity, Text} from 'react-native';
 import mystyle from '../../constants/mystyle'
 import { ProductType } from '../../types';
 import Grouped from './Grouped';
@@ -8,6 +7,7 @@ import Maturity from './Maturity';
 import Missing from './Missing';
 import Recent from './Recent';
 import Colors from '../../constants/Colors'
+import {getProducts} from '../../utils/actions';
 
 const Queries = () => {
 
@@ -15,7 +15,7 @@ const [displayList, setdisplayList] = useState<ProductType[] | undefined>(undefi
 const [showfiltered, setShowFiltered] = useState<boolean>(true)
 
 useEffect(()=> {
-    const ProductRef = firebase.database().ref("Product");
+    const ProductRef = getProducts();
     //Getting data from Firebase and saving it in displayList
     ProductRef.on("value", (snapshot) => {
         const elements = snapshot.val();

@@ -91,10 +91,6 @@ export type ProductProps = {
   item: ProductType,
 }
 
-export type RowProps = {
-  product: ProductType,
-}
-
 export type GroupProps = {
   items: ProductType[],
   filterby: "Category" | "Location" | "Confection",

@@ -1,28 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, View, ActivityIndicator, TouchableOpacity, Text} from 'react-native';
-import firebase from '../../utils/firebase';
 import { ProductType } from '../../types';
 import ExpiringSoon from './ExpiringSoon';
 import DefaultList from './DefaultList';
 import Colors from '../../constants/Colors'
 import mystyle from '../../constants/mystyle'
+import {getProducts} from '../../utils/actions';
 
 const Feed = () => {
     const [showExpiring, setShowExpiring] = useState<boolean>(false)
     const [fullList, setfullList] = useState<ProductType[] | undefined>(undefined);
-
+    
+  
     useEffect(()=> {
-    const ProductRef = firebase.database().ref("Product"); //Get products from Firebase
-
-    ProductRef.on("value", (snapshot) => {
-        const elements = snapshot.val();
-        const productList:Array<ProductType> = [];
-        for (let id in elements){
-            productList.push({id, ...elements[id]});
-        }
-        setfullList(productList);
-    })
-    }, []);
+        const ProductRef = getProducts();
+        ProductRef.on("value", (snapshot) => {
+            const elements = snapshot.val();
+            const productList:Array<ProductType> = [];
+            for (let id in elements){
+                productList.push({id, ...elements[id]});
+            }
+            setfullList(productList);
+        })
+        }, []);
 
 return (
 <ScrollView style={mystyle.myFeedContainer}>

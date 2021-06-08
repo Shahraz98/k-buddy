@@ -16,6 +16,7 @@ const Rectangle = ({item}: ProductProps) => {
   const ripe = require(`../../assets/images/Ripe.png`);
   const vripe = require(`../../assets/images/VRipe.png`);
   const oripe = require(`../../assets/images/ORipe.png`);
+  const def = require(`../../assets/images/Default.png`);
 
 
   const translateRipeness = (ripeness:string) => {
@@ -24,7 +25,8 @@ const Rectangle = ({item}: ProductProps) => {
     if(ripeness === 'Barely Ripe') return bripe;
     if(ripeness === 'Ripe') return ripe;
     if(ripeness === 'Very Ripe') return vripe;
-    else return oripe;
+    if(ripeness === 'Overripe') return oripe;
+    else return def;
 }
 
     useEffect(() => {
@@ -44,21 +46,24 @@ return (
   <View style={mystyle.centered}>
   <Animated.View style={{opacity: fadeAnim}}>
       <LinearGradient
-              colors={['black', Colors.light.dsecondary]}
-              start={[0.6, 0.2]}
+              colors={[Colors.light.gray, Colors.light.dsecondary]}
+              start={[0.7, 0.8]}
               style={[mystyle.myRectangle,{borderRadius: 15}]}>
       
       <Text style={[ mystyle.centered, mystyle.smText, mystyle.coloredText, {fontWeight: 'bold', marginTop: 5}]}>{item.name}</Text>
       <Text style={[ mystyle.centered, mystyle.xsText, mystyle.whiteText, {marginVertical: 5}]}>Checked {formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true })} as:</Text>
       <Image style={[mystyle.centered, {maxHeight: 100, maxWidth: 100}]} source={url}></Image>
-      <View style={[mystyle.centered, mystyle.myMainColoredBtn, {minWidth: 100, marginTop: 6, borderTopLeftRadius: 15, borderTopRightRadius: 15}]}><Text style={[  
-        mystyle.centered, 
-        mystyle.xsText, 
-        mystyle.whiteText, {paddingVertical: 5}]}> {item.maturity} </Text></View>
-       
+      <View style={[mystyle.centered, {minWidth: 120, marginVertical: 5}]}>
+      <LinearGradient
+              colors={[Colors.light.gray, Colors.light.dsecondary]}
+              start={[0.2, 0.5]}
+              style={{borderRadius: 15}}>
+        <Text style={[ mystyle.xsText, mystyle.whiteText, mystyle.centered, {paddingVertical: 10}]}>{item.maturity}</Text>
+      </LinearGradient>
+      </View>
       </LinearGradient>
       </Animated.View>
-      </View>
+  </View>
 )}
 
 export default Rectangle;

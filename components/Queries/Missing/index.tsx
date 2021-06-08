@@ -10,11 +10,11 @@ const Missing = ({items}: DefListProps) => {
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ingredients missing data</Text> 
-<Text style={[mystyle.centered, mystyle.xsText, {marginBottom: 10}]}>(no items will be shown if every item is complete.)</Text>
+<Text style={[mystyle.centered, mystyle.xsText, {marginBottom: 10}]}>(no items will be shown if every item is complete)</Text>
     {items ? 
     items.filter((product) => {
         if(product.name === 'Name not found' || product.category === '' || product.category === 'Category not found' || product.brand === '' || product.brand === 'Brand not found' || 
-        product.confection === '' || product.expiry === '' || product.location === ''){
+        product.confection === '' || product.expiry === '' || product.location === '' || product.maturity === 'Not specified'){
             return product; }
     }).map((product) => <Row key={product.id} item={product}/> ) : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
     }

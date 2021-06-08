@@ -109,7 +109,7 @@ const mystyle = StyleSheet.create({
     },
     myRectangle: {
         width: 175, 
-        maxHeight: 185,
+        maxHeight: 200,
         marginVertical: 15
     },
     myMainBlock: {

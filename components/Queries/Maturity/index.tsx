@@ -3,7 +3,6 @@ import { DefListProps} from '../../../types';
 import {Text, ActivityIndicator, View} from 'react-native';
 import { formatDistanceToNow} from 'date-fns'
 import Colors from '../../../constants/Colors'
-import Row from '../../Row';
 import { ProductType } from '../../../types';
 import mystyle from '../../../constants/mystyle';
 import Rectangle from '../../Rectangle';
@@ -21,10 +20,10 @@ const Maturity = ({items}: DefListProps) => {
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Unchecked Ripeness</Text>
-<Text style={[mystyle.centered, mystyle.xsText, {marginBottom: 10}]}>(no items will be shown if every item has been checked recently.)</Text>
-<View style={{flex: 1, flexDirection: 'row'}}>
+<Text style={[mystyle.centered, mystyle.xsText, {marginBottom: 10}]}>(no items will be shown if every item has been checked recently)</Text>
+<View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
 {freshList? 
-   freshList.filter((product) => product.confection === 'Fresh').filter( (item) => formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[0]) === false 
+   freshList.filter((product) => product.confection === 'Fresh' || product.confection === 'Frozen').filter( (item) => formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[0]) === false 
    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[1]) === false
    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[2]) === false
    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[3]) === false

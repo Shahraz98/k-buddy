@@ -1,12 +1,13 @@
 import firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBCf5MR-DPeO_oWeyZK7iI4w2ZcH5xvzqM",
-    authDomain: "k-buddy-8a3bf.firebaseapp.com",
-    projectId: "k-buddy-8a3bf",
-    storageBucket: "k-buddy-8a3bf.appspot.com",
-    messagingSenderId: "132561395789",
-    appId: "1:132561395789:web:02c93412f9e8b9d48dbc04"
+    apiKey: "AIzaSyAfjPCn_4Q8q7NmRDJoUT-1mapu1Q2C8n0",
+    authDomain: "kitchen-8fc40.firebaseapp.com",
+    databaseURL: "https://kitchen-8fc40-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "kitchen-8fc40",
+    storageBucket: "kitchen-8fc40.appspot.com",
+    messagingSenderId: "769995716009",
+    appId: "1:769995716009:web:2c51aec129e1a9920c40b8"
   };
-  // Initialize Firebase
-  export default !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+// Initialize Firebase
+export default !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();

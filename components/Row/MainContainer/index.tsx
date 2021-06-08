@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {View, Text, Animated} from 'react-native';
-import { RowProps} from '../../../types';
+import { ProductProps} from '../../../types';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Modal from '../../Modal';
 import RowTop from './RowTop';
@@ -10,7 +10,7 @@ import mystyle from '../../../constants/mystyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../../../constants/Colors';
 
-const MainContainer = ({product}: RowProps) => {
+const MainContainer = ({item}: ProductProps) => {
   const [modal, OpenModal] = useState<boolean>(true); 
   const fadeAnim = useRef(new Animated.Value(0)).current; //For fading-in animation
     useEffect(() => {
@@ -33,15 +33,15 @@ const MainContainer = ({product}: RowProps) => {
   {modal?
   <View style={{flex: 1, marginHorizontal: 10}}>
     <Animated.View style={{opacity: fadeAnim}}>
-    <View key={product.id} style={mystyle.myMainBlock}>
+    <View key={item.id} style={mystyle.myMainBlock}>
       <LinearGradient
         colors={['white', Colors.light.background]}
         start={[0.5, 0.4]}
         style={{borderRadius: 15}}>
         <View style={{paddingHorizontal: 25,paddingVertical: 10}}>
-          <RowTop product={product}></RowTop> 
+          <RowTop item={item}></RowTop> 
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <RowBot product={product}></RowBot> 
+            <RowBot item={item}></RowBot> 
             <View>
             <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn]} onPress={handleEdit}> 
                <LinearGradient
@@ -51,7 +51,7 @@ const MainContainer = ({product}: RowProps) => {
                 <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.whiteText, mystyle.centered]} >Edit</Text>
                 </LinearGradient>
               </TouchableOpacity>
-              <RowMid product={product}></RowMid> 
+              <RowMid item={item}></RowMid> 
             </View>
           </View>
         </View>
@@ -63,7 +63,7 @@ const MainContainer = ({product}: RowProps) => {
   <TouchableOpacity onPress={handleEdit}>
     <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.blackText, {marginTop: 20}]}>Close</Text>
   </TouchableOpacity>
-  <Modal item={product}></Modal>
+  <Modal item={item}></Modal>
 </View>
 }
 </>

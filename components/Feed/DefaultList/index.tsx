@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View} from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { ProductType, DefListProps} from '../../../types';
+import Colors from '../../../constants/Colors';
 import SingleList from './SingleList';
 
 const DefaultList = ({items}: DefListProps) => {
@@ -35,7 +36,7 @@ return (
 <View>
     <SearchBar round searchIcon={{ size: 24 }} placeholder="Search Ingredient"
       onChangeText={(text:string) => searchFilterFunction(text)} onClear={() => searchFilterFunction('')}
-      value={search} inputContainerStyle={{backgroundColor: '#f5f5f5'}} color='white'
+      value={search} inputContainerStyle={{backgroundColor: '#f5f5f5'}} color={Colors.light.gray}
       containerStyle={{backgroundColor: 'transparent', borderBottomColor: 'transparent', borderTopColor: 'transparent'}}>
     </SearchBar>
 

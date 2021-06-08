@@ -1,11 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {View, Animated, Text} from 'react-native';
-import firebase from '../../utils/firebase';
 import {format} from 'date-fns';
 import Form from '../Form'
 import {ProductProps} from '../../types';
 import mystyle from '../../constants/mystyle';
 import Success from '../Success';
+import {getSingleProduct} from '../../utils/actions';
 
 const Modal = ({item}: ProductProps) => {
     const [changed, setChanged] = useState<boolean>(false);
@@ -24,7 +24,7 @@ const Modal = ({item}: ProductProps) => {
     const handleChange = async (nname?:string,nbrand?:string,ncategory?:string,nlocation?:string,nconfection?:string,nmaturity?:string, nexpiry?:Date) => {
     try {
        const now = format(new Date(),"yyyy-MM-dd'T'HH:mm");
-       const ProductRef = firebase.database().ref("Product").child(item.id);
+       const ProductRef = getSingleProduct(item.id);
        if(nmaturity){ //handling products with maturity separately to avoid errors related to additional properties
         await ProductRef.update({
            name: nname,

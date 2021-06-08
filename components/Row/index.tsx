@@ -7,7 +7,7 @@ const Row = ({item}: ProductProps) => {
     
     return (
     <View style={{width: '100%', flexDirection: 'row'}}>
-        <MainContainer product={item}/>
+        <MainContainer item={item}/>
     </View>
     )
 }

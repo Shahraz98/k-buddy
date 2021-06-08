@@ -10,11 +10,13 @@ import mystyle from '../../constants/mystyle'
 import OptionList from './OptionList/index';
 import TextField from './TextField/index';
 import {LinearGradient} from 'expo-linear-gradient';
+import {handleBarCodeScanned} from '../../utils/query';
 
 const Form = ({onDataReady, product, editor}:FormProps)  => {
   const [datepick, setDatepick] = useState<Date | undefined>(product? 
   product.expiry? new Date(product.expiry) : new Date() : new Date());
   const [open, setOpen] = useState(false);
+  const [code, setCode] = useState(0);
   const [scanner, setScanner] = useState<boolean>(false);
   const [inputsArray, setInputsArray] = useState<string[]>(product?
   [product.name, product.brand? product.brand : '', product.category? product.category : '', 
@@ -38,35 +40,12 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
     setInputsArray(items);
   }
 
-  const toJson = (response: Response): Promise<any> => {
-    if (!response.ok) 
-      throw new Error("error in the response: " + response.status)
-    return response.json()
-  }
+  const handleCodeScanned = async ({data}:any) => {
 
-  const handleBarCodeScanned = async ({data}:any) => {
-    try { //Querying data and saving it using handleAll, if data is not found simply set input as data not found
-      const response = await fetch(`https://world.openfoodfacts.org/api/v0/product/${data}`)
-      const json = await toJson(response);
-      let myCategory = 'Category not found';
-      let myName = 'Name not found';
-      let myBrand = 'Brand not found';
-      if(json.product.categories_hierarchy){
-        const categoryName = json.product.categories_hierarchy[0].substring(3);
-        myCategory = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
-      }
-      if(json.product.product_name){
-        myName = json.product.product_name;
-      }
-      if(json.product.brands){
-        myBrand = json.product.brands;
-      }
-      handleAll(myName, myBrand, myCategory);
+      const resultArray:Array<string> = await handleBarCodeScanned(data);
+      handleAll(resultArray[0], resultArray[1], resultArray[2]);
       setScanner(false)
-      } catch(err) {
-          console.log("error", err)
-          setScanner(false)
-      }
+  
   };
 
   const onConfirmSingle = React.useCallback(
@@ -150,7 +129,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
                     {scanner?
                     <>
                     <BarCodeScanner
-                    onBarCodeScanned={handleBarCodeScanned}
+                    onBarCodeScanned={ handleCodeScanned}
                     style={StyleSheet.absoluteFill}>
                       <Text style={[mystyle.myScannerText, mystyle.centered, mystyle.whiteText]}>Scan QR Code</Text>
                       <Button color={Colors.light.background} title={'Close'} onPress={() => setScanner(false)}></Button>

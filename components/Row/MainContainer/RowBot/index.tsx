@@ -1,43 +1,22 @@
 import React, {useState} from 'react';
 import {View, Switch} from 'react-native';
-import { RowProps} from '../../../../types';
-import firebase from '../../../../utils/firebase';
-import { format, formatDistanceToNow, add} from 'date-fns'
+import { ProductProps} from '../../../../types';
 import { FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons';
 import Colors from '../../../../constants/Colors';
 import mystyle from '../../../../constants/mystyle';
+import {handleOpen} from '../../../../utils/actions';
 
-const RowBot = ({product}: RowProps) => {
-const [isEnabled, setIsEnabled] = useState(product.isOpen);
-const ProductRef = firebase.database().ref("Product").child(product.id);
+const RowBot = ({item}: ProductProps) => {
+const [isEnabled, setIsEnabled] = useState(item.isOpen);
 
-const handleOpen =  () => {
-    //Pretty much same logic as the unFreeze method in the RowMid component, only difference is in setting the isOpen property to true
-    try {
-        if(formatDistanceToNow(new Date(product.expiry!)).includes('year')
-        || formatDistanceToNow(new Date(product.expiry!)).includes('month')
-        || formatDistanceToNow(new Date(product.expiry!)).includes('days')){
-            const temp = add(new Date(), {
-                days: 1,
-            })
-            const minEx = format(temp, "yyyy-MM-dd'T'HH:mm")
-             ProductRef.update({
-             expiry: minEx,
-             isOpen: true,
-            })
-            setIsEnabled(true);
-        } else {
-             ProductRef.update({
-             isOpen: true,
-            })
-            setIsEnabled(true);
-        }
- } catch(error) {console.log('error',error)}
+const openItem = () => {
+    handleOpen(item);
+    setIsEnabled(true);  
 }
 
 return (
 <View style={mystyle.myClmContainer}>
-    {product.isOpen? 
+    {item.isOpen? 
     <View style={[mystyle.centered, {marginBottom: 5}]}>
         <FontAwesome name="dropbox" size={65} color={Colors.light.gray} />
     </View>
@@ -49,7 +28,7 @@ return (
       trackColor={{ true: Colors.light.tint, false: Colors.light.tint }}
       thumbColor={'#FF7F50'}
       ios_backgroundColor="white"
-      onValueChange={handleOpen}
+      onValueChange={openItem}
       disabled={isEnabled}
       value={isEnabled}/>
 </View>
