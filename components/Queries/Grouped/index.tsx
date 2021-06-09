@@ -4,15 +4,17 @@ import SingleGroup from './SingleGroup';
 import { View ,Text} from '../../Themed';
 import {AntDesign} from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import mystyle from '../../../constants/mystyle'
-import Colors from '../../../constants/Colors'
+import mystyle from '../../../constants/mystyle';
+import Colors from '../../../constants/Colors';
+import Warning from '../../Warning';
 
 const Grouped = ({items}: DefListProps) => {
     const [myVar, setMyVar] = useState<number>(0); //Used to switch between views
 
 return (
 <View style={{marginTop: 20}}>
-{myVar === 0? <View style={{flexDirection: 'column'}}>
+{items.length > 0?
+<View>{myVar === 0? <View style={{flexDirection: 'column'}}>
     <View style={[mystyle.myRowHeader, mystyle.centered]}>
         <AntDesign name="arrowright" style={{marginRight: 50}} size={24} color='transparent' />
         <View style={mystyle.myClmContainer}>
@@ -49,7 +51,14 @@ return (
         </View>
         <AntDesign name="arrowright" style={{marginLeft: 50}} size={24} color="transparent" />
     </View>
-    <SingleGroup items={items} filterby="Confection" groupIcon="shopping-basket"/></View> : <View></View>}
+    <SingleGroup items={items} filterby="Confection" groupIcon="shopping-basket"/></View> : <View></View>}</View> 
+    : <View style={[mystyle.centered, {marginTop: '30%'}]}><Warning 
+    positive={false} 
+    mainColor={Colors.light.tint} 
+    subColor={Colors.light.gray} 
+    iconColor={Colors.light.dsecondary} 
+    mainText='Nothing to see here.' 
+    subText='Please add an item to your ingredients.'></Warning></View> }
 </View>
 )}
 

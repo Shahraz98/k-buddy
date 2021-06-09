@@ -6,6 +6,7 @@ import Colors from '../../../constants/Colors'
 import { ProductType } from '../../../types';
 import mystyle from '../../../constants/mystyle';
 import Rectangle from '../../Rectangle';
+import Warning from '../../Warning';
 
 const Maturity = ({items}: DefListProps) => {
 
@@ -17,17 +18,27 @@ const Maturity = ({items}: DefListProps) => {
     setfreshList(tempList);
     }, []);
 
+    const myList = freshList? freshList.filter((product) => product.confection === 'Fresh' || product.confection === 'Frozen').filter( (item) => formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[0]) === false 
+    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[1]) === false
+    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[2]) === false
+    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[3]) === false
+    && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[4]) === false) : []
+
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Unchecked Ripeness</Text>
-<Text style={[mystyle.centered, mystyle.xsText, {marginBottom: 10}]}>(no items will be shown if every item has been checked recently)</Text>
 <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-{freshList? 
-   freshList.filter((product) => product.confection === 'Fresh' || product.confection === 'Frozen').filter( (item) => formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[0]) === false 
-   && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[1]) === false
-   && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[2]) === false
-   && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[3]) === false
-   && formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true }).includes(ripewords[4]) === false).map((product) => <Rectangle key={product.id} item={product}/>)
+{freshList?
+   myList.length > 0?
+   <>{myList.map((product) => <Rectangle key={product.id} item={product}/>)}</>
+   : <View style={mystyle.centered}>
+    <Warning 
+    mainText='Well done.' 
+    subText='All fresh items have been checked regularly.'
+    positive={true}
+    mainColor={Colors.light.gray}
+    subColor={Colors.light.tint}
+    iconColor={Colors.light.tint}></Warning></View> 
    : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
 }</View>
 </>

@@ -1,22 +1,33 @@
 import React from 'react';
 import mystyle from '../../../constants/mystyle';
 import { DefListProps} from '../../../types';
-import {Text, ActivityIndicator} from 'react-native';
+import {Text, ActivityIndicator, View} from 'react-native';
 import Row from '../../Row';
 import Colors from '../../../constants/Colors'
+import Warning from '../../Warning';
 
 const Missing = ({items}: DefListProps) => {
+    const myList =  items? items.filter((product) => {
+        if(product.name === 'Name not found' || product.category === '' || product.category === 'Category not found' || product.brand === '' || product.brand === 'Brand not found' || 
+        product.confection === '' || product.expiry === '' || product.location === '' || product.maturity === 'Not specified'){
+            return product; }
+    }) : []
 
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ingredients missing data</Text> 
-<Text style={[mystyle.centered, mystyle.xsText, {marginBottom: 10}]}>(no items will be shown if every item is complete)</Text>
-    {items ? 
-    items.filter((product) => {
-        if(product.name === 'Name not found' || product.category === '' || product.category === 'Category not found' || product.brand === '' || product.brand === 'Brand not found' || 
-        product.confection === '' || product.expiry === '' || product.location === '' || product.maturity === 'Not specified'){
-            return product; }
-    }).map((product) => <Row key={product.id} item={product}/> ) : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
+    {items ? myList.length > 0? 
+    <>{myList.map((product) => <Row key={product.id} item={product}/> )}</>
+    : <View style={mystyle.centered}>
+    <Warning 
+    mainText='Good job.' 
+    subText='All items are complete.'
+    positive={true}
+    mainColor={Colors.light.gray}
+    subColor={Colors.light.tint}
+    iconColor={Colors.light.tint}></Warning>
+   </View>
+    : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
     }
 </>
 )}

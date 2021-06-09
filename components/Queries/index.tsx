@@ -8,6 +8,7 @@ import Missing from './Missing';
 import Recent from './Recent';
 import Colors from '../../constants/Colors'
 import {getProducts} from '../../utils/actions';
+import Warning from '../Warning';
 
 const Queries = () => {
 
@@ -41,14 +42,22 @@ return (
     {showfiltered?
     displayList? <Grouped items={displayList}></Grouped> 
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
-    : <View style={{marginTop: 10}}> 
-        { displayList? <Maturity items={displayList}></Maturity> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
+    : <View style={{marginTop: 10}}>
+      {displayList ? displayList.length > 0? <View>
+        <Maturity items={displayList}></Maturity>
       <View>
-        { displayList? <Missing items={displayList}></Missing> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
+        <Missing items={displayList}></Missing>
       </View>
       <View>
-        { displayList? <Recent items={displayList}></Recent> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />} 
+        <Recent items={displayList}></Recent>
       </View>
+      </View> : <View style={[mystyle.centered, {marginTop: '30%'}]}><Warning 
+      positive={false} 
+      mainColor={Colors.light.tint} 
+      subColor={Colors.light.gray} 
+      iconColor={Colors.light.dsecondary} 
+      mainText='Wow, such emptiness.' 
+      subText='Please add an item to your ingredients.'></Warning></View> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />}
       </View>}
 </ScrollView>
 )}

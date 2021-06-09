@@ -6,7 +6,16 @@ export type SuccessProps = {
   addAnother?: () => void,
   mainText: string,
   subText: string,
-  buttonText?: string
+  buttonText?: string,
+}
+
+export type WarningProps = {
+  mainText: string,
+  subText?: string,
+  mainColor: string,
+  subColor?: string,
+  iconColor: string,
+  positive: boolean
 }
 
 export type FilterProps = {

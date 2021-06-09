@@ -64,6 +64,42 @@ export const handleDelete = async (product:ProductType) => {
     catch(error) {console.log('error',error)}
 }
 
+export const handleUpdate = async (
+    item:ProductType,
+    nname?:string,
+    nbrand?:string,
+    ncategory?:string,
+    nlocation?:string,
+    nconfection?:string,
+    nmaturity?:string, 
+    nexpiry?:Date) => {
+    try {
+       const now = format(new Date(),"yyyy-MM-dd'T'HH:mm");
+       const ProductRef = getSingleProduct(item.id);
+       if(nmaturity){ //handling products with maturity separately to avoid errors related to additional properties
+        await ProductRef.update({
+           name: nname,
+           brand: nbrand,
+           confection: nconfection,
+           category: ncategory,
+           location: nlocation,
+           maturity: nmaturity,
+           maturitydate: now,
+           expiry: format(nexpiry!,"yyyy-MM-dd'T'HH:mm")
+        })
+       } else { //handling standard products without maturity
+           await ProductRef.update({
+           name: nname,
+           brand: nbrand,
+           confection: nconfection,
+           category: ncategory,
+           location: nlocation,
+           expiry: format(nexpiry!,"yyyy-MM-dd'T'HH:mm")
+       })};
+       }
+       catch(error) {console.log('error', error)}
+    }
+
 export const handleAdd = async (name:string, brand?:string, category?:string, location?:string, confection?:string, maturity?:string, datepick?:Date) => {
     const ProductRef = getProducts();
     const now:string = format(new Date(),"yyyy-MM-dd'T'HH:mm");
