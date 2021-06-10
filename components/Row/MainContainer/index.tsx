@@ -9,6 +9,7 @@ import RowBot from './RowBot';
 import mystyle from '../../../constants/mystyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../../../constants/Colors';
+import { AntDesign } from '@expo/vector-icons'; 
 
 const MainContainer = ({item}: ProductProps) => {
   const [modal, OpenModal] = useState<boolean>(true); 
@@ -61,7 +62,7 @@ const MainContainer = ({item}: ProductProps) => {
   </View> 
 : <View style={mystyle.centered}>
   <TouchableOpacity onPress={handleEdit}>
-    <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.blackText, {marginTop: 20}]}>Close</Text>
+  <AntDesign name="closecircle" size={24} color={Colors.light.gray} style={[mystyle.centered,{marginVertical: 7}]} />
   </TouchableOpacity>
   <Modal item={item}></Modal>
 </View>

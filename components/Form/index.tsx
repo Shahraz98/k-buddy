@@ -75,13 +75,14 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
     <View>
       <TouchableOpacity style={mystyle.myMainWhiteBtn} onPress={() => setOpen(true)}>
         <Text style={[mystyle.coloredText, mystyle.centered, mystyle.smText, {marginTop: 30}]}>{editor? <Text>Change </Text> : <Text>Select </Text>}Expiry Date</Text>
+        <View style={[mystyle.centered, {backgroundColor: Colors.light.tint, width: '30%', height: 1, marginTop: 10}]}></View>
       </TouchableOpacity>
       <DatePickerModal mode="single" visible={open} onDismiss={onDismiss} date={datepick}
       onConfirm={onConfirmSingle} validRange={{startDate: new Date()}} saveLabel="Confirm"/>
     {editor?
     <View>
       {inputsArray[4] === 'Fresh' || inputsArray[4] === 'Frozen'?
-      <><Text style={[mystyle.centered, mystyle.coloredText, mystyle.xsText, {marginTop: 20, textAlign: 'center'}]}>
+      <><Text style={[mystyle.centered, mystyle.coloredText, mystyle.xsText, {marginTop: 10, textAlign: 'center'}]}>
         Fresh items can only be set as Fresh or Frozen, use the 'Freeze' and 'Unfreeze' Buttons to handle your item's freezing status.</Text>
         <OptionList handleUpdate={handleUpdate} titleArr={inputsArray} groupArr={ripeness} arrIndex={5}/></>
         : <OptionList handleUpdate={handleUpdate} titleArr={inputsArray} groupArr={confectionsWOFresh} arrIndex={4}/>}
@@ -93,7 +94,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
     </TouchableOpacity> 
     </View>
     :  <>
-    <Text style={[mystyle.coloredText, mystyle.xsText, {marginTop: 20, marginHorizontal: 15, textAlign: 'center'}]}>
+    <Text style={[mystyle.coloredText, mystyle.xsText, {marginTop: 10, marginHorizontal: 15, textAlign: 'center'}]}>
     If the expiry is omitted or does not exist, your ingredient will be set as "Expiring in 24 hours".</Text>
     <OptionList handleUpdate={handleUpdate} titleArr={inputsArray} groupArr={confectionsWFresh} arrIndex={4}/>
          {inputsArray[4] === 'Fresh'?

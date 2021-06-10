@@ -57,8 +57,8 @@ const mystyle = StyleSheet.create({
         height: '110%',
     },
     myModalContainer: {
-        width:'95%',
-        height: 550,
+        width:'97%',
+        height: 560,
         flexDirection: 'row',
         borderRadius: 30,
         marginBottom: 20,
@@ -70,7 +70,7 @@ const mystyle = StyleSheet.create({
         paddingTop: 10,
         marginTop: 10,
         borderRadius: 15,
-        borderWidth: 0.5,
+        borderWidth: 1,
         borderColor: Colors.light.tint
     },
     myScannerText: {
