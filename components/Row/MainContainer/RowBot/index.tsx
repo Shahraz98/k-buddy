@@ -8,10 +8,6 @@ import {handleOpen} from '../../../../utils/actions';
 
 const RowBot = ({item}: ProductProps) => {
 
-const openItem = async () => {
-    await handleOpen(item);
-}
-
 return (
 <View style={mystyle.myClmContainer}>
     {item.isOpen? 
@@ -26,7 +22,7 @@ return (
       trackColor={{ true: Colors.light.tint, false: Colors.light.tint}}
       thumbColor={'#FF7F50'}
       ios_backgroundColor="white"
-      onValueChange={openItem}
+      onValueChange={() => handleOpen(item)}
       disabled={item.isOpen}
       value={item.isOpen}/>
 </View>

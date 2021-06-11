@@ -1,7 +1,6 @@
 import React from 'react';
 import {TextInput} from 'react-native';
 import mystyle from '../../../constants/mystyle';
-import Colors from '../../../constants/Colors'
 import {myFormElementProps} from '../../../types';
 
 
