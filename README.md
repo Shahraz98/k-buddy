@@ -27,11 +27,14 @@ properties for certain ingredients (f.e. a non-fresh item getting properties ref
 not allows users to switch the 'Fresh' confection at will.</p>
 <p>3. A user can edit an ingredient by clicking on the 'EDIT' button, one particular aspect that may not have been as obvious is that whenever a user edits a Fresh ingredient,
 its maturity date gets updated and set as the moment of the update, by making this choice, I am assuming that whenever a user changes an ingredient, they are viewing
-and therefore also checking every (displayed) property of the that specific ingredient.</p>
+and therefore also checking every (displayed) property of the that specific ingredient. Ingredients that are expired cannot be edited.</p>
 <p>4. An ingredient can only be opened once, this is another choice made to keep the application as realistic as possible. Once opened, the expiry date of the ingredient
 will be set to 24 hours (and will therefore also be added to the Expiring Soon section).</p>
 <p>5. Freezing/Unfreezing works in a similar way to Opening; when Freezing, the ingredient's confection is set as 'Frozen' and extra time is added to the expiry date (so that it is minimum 6 months), on the other hand,
 when Unfreezing, the ingredient's confection is set as 'Fresh' again and the expiry date is set to 24 hours (nothing will change if the expiry date, at the moment of unfreezing, is already less than or equal to 24 hours). Ingredients that are already expired cannot be freezed or unfreezed.
+</p>
+<p>5. Re-newing/Re-activating an ingredient means having bought the same ingredient again from the store after its previous version was expired. By re-newing, a 
+  user is basically resetting the expiry date of that ingredient to a specific duration calculated between the date-time value of the addition of the ingredient and its expiry (F. e. if the ingredient was added 1 month ago and today is its expiry date, by re-newing it we are adding the duration in between these dates as the new expiry date, in this example it will be 1 month). Once re-newed, an ingredient can be again edited and freezed/unfreezed. The Re-newing function helps the user avoiding unnecessary insertions and increases the re-usability of expired ingredients and their data.
 </p>
 <h3>Components</h3>
 <p>Feed: contains to sections, one with the default list with all the ingredients and one with the ingredients expiring soon (divided between those expiring within the next 24 hours and those already expired).</p>
