@@ -1,6 +1,6 @@
 import firebase from './firebase';
 import { ProductType } from '../types';
-import { format, add, isAfter, formatDistanceToNow} from 'date-fns'
+import { format, add, isAfter, formatDistanceToNow, intervalToDuration} from 'date-fns'
 
 export const getProducts = () => {
     return firebase.database().ref("Product"); 
@@ -45,17 +45,43 @@ try {
     if(product.expiry){
         if(isAfter(new Date(), new Date(product.expiry))) {
         alert("This item is expired, you can't freeze an expired Item.")}
-        else { const temp = add(new Date(product.expiry!), {
+        else { 
+        const temp = add(new Date(product.expiry), {
             months: 6,
         })
+        const future = add(new Date(), {
+            months: 6,
+        })
+        if(isAfter(new Date(product.expiry), future)){
+            await ProductRef.update({
+                confection: 'Frozen'
+            })
+        } else {
         const extended = format(temp, "yyyy-MM-dd'T'HH:mm")
         await ProductRef.update({
          expiry: extended,
          confection: 'Frozen'
         })
         }
+     }
     } else alert('This item does not have an expiry date, please set an expiry date before freezing it.');
 } catch(error) {console.log('error',error)}
+}
+
+export const handleReNew = async (product:ProductType) => {
+    const ProductRef = getSingleProduct(product.id);
+    //Same logic as unfreeze, this time we are adding 6 months to the product's expiry, if it exists and if it is in the future
+    try {   
+            const interval = intervalToDuration({
+                start: new Date(product.addedOn),
+                end: new Date(product.expiry!)
+            })
+            const temp = add(new Date(), interval)
+            const extended = format(temp, "yyyy-MM-dd'T'HH:mm")
+            await ProductRef.update({
+             expiry: extended,
+            })
+    } catch(error) {console.log('error',error)}
 }
 
 export const handleDelete = async (product:ProductType) => {
