@@ -31,10 +31,10 @@ and therefore also checking every (displayed) property of the that specific ingr
 <p>4. An ingredient can only be opened once, this is another choice made to keep the application as realistic as possible. Once opened, the expiry date of the ingredient
 will be set to 24 hours (and will therefore also be added to the Expiring Soon section).</p>
 <p>5. Freezing/Unfreezing works in a similar way to Opening; when Freezing, the ingredient's confection is set as 'Frozen' and extra time is added to the expiry date (so that it is minimum 6 months), on the other hand,
-when Unfreezing, the ingredient's confection is set as 'Fresh' again and the expiry date is set to 24 hours (nothing will change if the expiry date, at the moment of unfreezing, is already less than or equal to 24 hours).
+when Unfreezing, the ingredient's confection is set as 'Fresh' again and the expiry date is set to 24 hours (nothing will change if the expiry date, at the moment of unfreezing, is already less than or equal to 24 hours). Ingredients that are already expired cannot be freezed or unfreezed.
 </p>
 <h3>Components</h3>
-<p>Feed: contains to sections, one with the default list with all the ingredients and one with the ingredients expiring soon (within next 24 hours).</p>
+<p>Feed: contains to sections, one with the default list with all the ingredients and one with the ingredients expiring soon (divided between those expiring within the next 24 hours and those already expired).</p>
 <p>Filter: auxiliary component used to filter ingredients that have the same value in a certain property.</p>
 <p>Form: the largest single component of the app, contains the bar code scanner, the text fields, two option lists and a date picker for data insertion.</p>
 <p>Modal: a simple modal that pops up by clicking 'EDIT' on an ingredient, it contains the form component adjusted based on the individual ingredient's characteristics..</p>
