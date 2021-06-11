@@ -29,7 +29,7 @@ const MainContainer = ({item}: ProductProps) => {
     
   const handleEdit = () => {
     if(isAfter(new Date(), new Date(item.expiry!))){
-  alert("Can't edit an expired ingredient! Please buy another one and re-new it through the 'Re-New' button.")
+      alert("Expired ingredients can't be edited. Please buy another portion and then click on 'Re-New'.");
     } else OpenModal(!modal);
   }
   
@@ -49,15 +49,11 @@ const MainContainer = ({item}: ProductProps) => {
     <View>
         {isAfter(new Date(), new Date(item.expiry))? 
       <View>
-        <Text style={[mystyle.xsText, mystyle.centered, mystyle.coloredText]}>Ingredient is currently expired.</Text>
-        <Text style={[mystyle.xsText, mystyle.centered]}>Click the button below to re-activate it.</Text>
-        <TouchableOpacity style={[mystyle.centered, mystyle.myMainBtn, mystyle.myMainColoredBtn]} onPress={() => handleReNew(item)}> 
-               <LinearGradient
-              colors={[Colors.light.gray, Colors.light.dsecondary]}
-              start={[0.2, 0.5]}
-              style={{borderRadius: 15}}>
-                <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.whiteText, mystyle.centered]}>Re-New</Text>
-                </LinearGradient>
+        <Text style={[mystyle.centered, mystyle.blackText, mystyle.xsText]}>Click "RE-NEW" to re-activate ingredient.</Text>
+        <TouchableOpacity style={[mystyle.centered, mystyle.myMainBtn, mystyle.myMainWhiteBtn]} onPress={() => handleReNew(item)}> 
+               
+                <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.coloredText, mystyle.centered]}>Re-New</Text>
+                
         </TouchableOpacity></View>
     : <View></View>}</View> : <View></View>}
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>

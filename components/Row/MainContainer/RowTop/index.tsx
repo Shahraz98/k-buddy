@@ -67,7 +67,7 @@ return (
     
     {item.maturity?
     <View style={[mystyle.centered,{marginVertical: 15}]}>
-        <Text style={[mystyle.centered,mystyle.blackText]}>Set {formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true })} as: 
+        <Text style={[mystyle.centered,mystyle.blackText, mystyle.xsText]}>Set {formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true })} as: 
         <Text style={mystyle.secondaryColored}> {item.maturity}</Text></Text>
         <ProgressBar 
         style={[mystyle.centered, mystyle.myProgress, mystyle.myMainWhiteBtn]} 

@@ -15,7 +15,7 @@ export const unFreeze =  (product:ProductType) => {
     try {
         if(product.expiry){ //Check if expiry exists
             if(isAfter(new Date(), new Date(product.expiry))) { //Check if product is expired
-            alert("This item is expired, you can't unfreeze an expired Item anymore.")}
+                alert("Expired ingredients can't be unfreezed. Please buy another portion and then click on 'Re-New'.");}
             else { //If the product's expiry is in some days, months or years, it will be set to 1 day and the product will be set as Fresh
                 if(formatDistanceToNow(new Date(product.expiry)).includes('year')
                 || formatDistanceToNow(new Date(product.expiry)).includes('month')
@@ -44,7 +44,7 @@ const ProductRef = getSingleProduct(product.id);
 try {
     if(product.expiry){
         if(isAfter(new Date(), new Date(product.expiry))) {
-        alert("This item is expired, you can't freeze an expired Item.")}
+            alert("Expired ingredients can't be freezed. Please buy another portion and then click on 'Re-New'.");}
         else { 
         const temp = add(new Date(product.expiry), {
             months: 6,
@@ -77,10 +77,24 @@ export const handleReNew = async (product:ProductType) => {
                 end: new Date(product.expiry!)
             })
             const temp = add(new Date(), interval)
+            const now = format(new Date(), "yyyy-MM-dd'T'HH:mm")
             const extended = format(temp, "yyyy-MM-dd'T'HH:mm")
-            await ProductRef.update({
-             expiry: extended,
-            })
+
+            if(product.confection === 'Fresh' || product.confection === 'Frozen'){
+                await ProductRef.update({
+                    expiry: extended,
+                    isOpen: false,
+                    addedOn: now,
+                    maturitydate: now,
+                    maturity: 'Not specified'
+                   })
+            } else {
+                await ProductRef.update({
+                    expiry: extended,
+                    isOpen: false,
+                    addedOn: now,
+                   })
+            }
     } catch(error) {console.log('error',error)}
 }
 
@@ -189,9 +203,13 @@ export const handleOpen =  async (product:ProductType) => {
     const ProductRef = getSingleProduct(product.id);
     //Pretty much same logic as the unFreeze method in the RowMid component, only difference is in setting the isOpen property to true
     try {
-        if(formatDistanceToNow(new Date(product.expiry!)).includes('year')
-        || formatDistanceToNow(new Date(product.expiry!)).includes('month')
-        || formatDistanceToNow(new Date(product.expiry!)).includes('days')){
+        if(product.expiry){
+        if(isAfter(new Date(), new Date(product.expiry))){
+            alert("Expired ingredients can't be opened. Please buy another portion and then click on 'Re-New'.");
+        } else {
+        if(formatDistanceToNow(new Date(product.expiry)).includes('year')
+        || formatDistanceToNow(new Date(product.expiry)).includes('month')
+        || formatDistanceToNow(new Date(product.expiry)).includes('days')){
             const temp = add(new Date(), {
                 days: 1,
             })
@@ -205,5 +223,7 @@ export const handleOpen =  async (product:ProductType) => {
              isOpen: true,
             })
         }
- } catch(error) {console.log('error',error)}
+    }
+}
+} catch(error) {console.log('error',error)}
 }

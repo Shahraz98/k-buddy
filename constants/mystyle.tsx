@@ -71,7 +71,7 @@ const mystyle = StyleSheet.create({
         marginTop: 10,
         borderRadius: 15,
         borderWidth: 1,
-        borderColor: Colors.light.tint
+        borderColor: Colors.light.dsecondary
     },
     myScannerText: {
         fontSize: 35, 

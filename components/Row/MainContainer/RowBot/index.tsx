@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Switch} from 'react-native';
 import { ProductProps} from '../../../../types';
 import { FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -7,11 +7,9 @@ import mystyle from '../../../../constants/mystyle';
 import {handleOpen} from '../../../../utils/actions';
 
 const RowBot = ({item}: ProductProps) => {
-const [isEnabled, setIsEnabled] = useState(item.isOpen);
 
-const openItem = () => {
-    handleOpen(item);
-    setIsEnabled(true);  
+const openItem = async () => {
+    await handleOpen(item);
 }
 
 return (
@@ -25,12 +23,12 @@ return (
       </View>}
       <Switch
       style={[mystyle.centered, {marginBottom: 10}]}
-      trackColor={{ true: Colors.light.tint, false: Colors.light.tint }}
+      trackColor={{ true: Colors.light.tint, false: Colors.light.tint}}
       thumbColor={'#FF7F50'}
       ios_backgroundColor="white"
       onValueChange={openItem}
-      disabled={isEnabled}
-      value={isEnabled}/>
+      disabled={item.isOpen}
+      value={item.isOpen}/>
 </View>
 )}
 
