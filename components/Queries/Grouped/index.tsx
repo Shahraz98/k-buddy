@@ -13,7 +13,7 @@ const Grouped = ({items}: DefListProps) => {
 
 return (
 <View style={{marginTop: 20}}>
-{items.length > 0?
+{items.length != 0?
 <View>{myVar === 0? <View style={{flexDirection: 'column'}}>
     <View style={[mystyle.myRowHeader, mystyle.centered]}>
         <AntDesign name="arrowright" style={{marginRight: 50}} size={24} color='transparent' />

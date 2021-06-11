@@ -16,17 +16,14 @@ const Missing = ({items}: DefListProps) => {
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ingredients missing data</Text> 
-    {items ? myList.length > 0? 
+    {items ? myList.length != 0? 
     <>{myList.map((product) => <Row key={product.id} item={product}/> )}</>
-    : <View style={mystyle.centered}>
+    : <View style={[mystyle.centered, {marginVertical: 50}]}>
     <Warning 
-    mainText='Good job.' 
-    subText='All items are complete.'
+    subText='No ingredient is missing data.'
     positive={true}
-    mainColor={Colors.light.gray}
     subColor={Colors.light.tint}
-    iconColor={Colors.light.tint}></Warning>
-   </View>
+    iconColor={Colors.light.tint}></Warning></View> 
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
     }
 </>

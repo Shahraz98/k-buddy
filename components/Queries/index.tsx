@@ -43,7 +43,7 @@ return (
     displayList? <Grouped items={displayList}></Grouped> 
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
     : <View style={{marginTop: 10}}>
-      {displayList ? displayList.length > 0? <View>
+      {displayList ? displayList.length != 0? <View>
         <Maturity items={displayList}></Maturity>
       <View>
         <Missing items={displayList}></Missing>

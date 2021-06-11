@@ -10,12 +10,12 @@ export type SuccessProps = {
 }
 
 export type WarningProps = {
-  mainText: string,
-  subText?: string,
-  mainColor: string,
-  subColor?: string,
   iconColor: string,
-  positive: boolean
+  positive: boolean,
+  mainText?: string,
+  subText?: string,
+  mainColor?: string,
+  subColor?: string,
 }
 
 export type FilterProps = {

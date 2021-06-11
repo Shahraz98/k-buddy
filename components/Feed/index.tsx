@@ -37,7 +37,7 @@ return (
         </TouchableOpacity>
     </View>
     {showExpiring?
-      <View>{fullList? fullList.length > 0? <ExpiringSoon items={fullList}></ExpiringSoon> 
+      <View>{fullList? fullList.length != 0? <ExpiringSoon items={fullList}></ExpiringSoon> 
       : <View style={[mystyle.centered, {marginTop: '30%'}]}><Warning 
       positive={false} 
       mainColor={Colors.light.background} 
@@ -45,7 +45,7 @@ return (
       iconColor={Colors.light.gray} 
       mainText='Your list seems a little empty.' 
       subText='Please add an item to your ingredients.'></Warning></View> : <View></View>}</View>
-      : <View>{fullList? fullList.length > 0? <DefaultList items={fullList}></DefaultList> 
+      : <View>{fullList? fullList.length != 0? <DefaultList items={fullList}></DefaultList> 
       : <View style={[mystyle.centered, {marginTop: '30%'}]}><Warning 
       positive={false} 
       mainColor={Colors.light.background} 

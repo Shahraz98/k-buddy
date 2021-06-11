@@ -29,14 +29,12 @@ return (
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Unchecked Ripeness</Text>
 <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
 {freshList?
-   myList.length > 0?
+   myList.length != 0?
    <>{myList.map((product) => <Rectangle key={product.id} item={product}/>)}</>
-   : <View style={mystyle.centered}>
+   : <View style={[mystyle.centered, {marginVertical: 50}]}>
     <Warning 
-    mainText='Well done.' 
     subText='All fresh items have been checked regularly.'
     positive={true}
-    mainColor={Colors.light.gray}
     subColor={Colors.light.tint}
     iconColor={Colors.light.tint}></Warning></View> 
    : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />

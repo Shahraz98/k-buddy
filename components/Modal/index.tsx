@@ -4,7 +4,6 @@ import {format} from 'date-fns';
 import Form from '../Form'
 import {ProductProps} from '../../types';
 import mystyle from '../../constants/mystyle';
-import {getSingleProduct} from '../../utils/actions';
 import Warning from '../Warning';
 import {handleUpdate} from '../../utils/actions';
 import Colors from '../../constants/Colors';
