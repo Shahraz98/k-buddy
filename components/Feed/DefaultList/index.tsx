@@ -6,6 +6,7 @@ import Colors from '../../../constants/Colors';
 import mystyle from '../../../constants/mystyle';
 import ArrowNav from '../../ArrowNav';
 import Displayer from '../../Displayer';
+import RecentlyBought from './RecentlyBought';
 
 const DefaultList = ({items}: DefListProps) => {
   const [displayList, setdisplayList] = useState<ProductType[] | undefined>(undefined);
@@ -45,7 +46,7 @@ return (
     {showFull?
       <View>
       <ArrowNav comp1={<Displayer items={items} text='No Ingredients found.'></Displayer>} 
-      comp2={<Displayer items={items} text='No recently bought Ingredients found.'></Displayer>} text1='Your Ingredients' text2='Recently bought'></ArrowNav>
+      comp2={<RecentlyBought items={items}/>} text1='Your Ingredients' text2='Recently bought'></ArrowNav>
       </View>
       :  <View>
           {displayList?
@@ -53,7 +54,7 @@ return (
           <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Your Ingredients</Text>
           <Displayer items={items} text='No Ingredients found.'></Displayer>
           <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Recently bought</Text>
-          <Displayer items={items} text='No recently bought Ingredients found.'></Displayer></View>
+          <RecentlyBought items={items}/></View>
           : <View></View>}
          </View>
     }
