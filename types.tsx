@@ -1,3 +1,5 @@
+import { Component } from "react";
+
 /**
  * Learn more about using TypeScript with React Navigation:
  * https://reactnavigation.org/docs/typescript/
@@ -90,14 +92,31 @@ export type ProductType = {
   maturity?: string,
   maturitydate?: string,
   isOpen?: boolean,
+  recentlyBought?: boolean,
+  boughtOn?: string,
 }
 
 export type DefListProps = {
   items: ProductType[],
 }
 
+export type ArrowNavProps = {
+  text1: string,
+  text2: string,
+  comp1: any,
+  comp2: any,
+  comp3?: any,
+  text3?: string
+}
+
 export type ProductProps = {
   item: ProductType,
+}
+
+export type DisplayerProps = {
+  items: ProductType[],
+  text: string,
+  colored?: boolean,
 }
 
 export type GroupProps = {

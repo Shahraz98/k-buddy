@@ -5,6 +5,7 @@ import {Text, ActivityIndicator, View} from 'react-native';
 import Row from '../../Row';
 import Colors from '../../../constants/Colors'
 import Warning from '../../Warning';
+import Displayer from '../../Displayer';
 
 const Missing = ({items}: DefListProps) => {
     const myList =  items? items.filter((product) => {
@@ -16,14 +17,8 @@ const Missing = ({items}: DefListProps) => {
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ingredients missing data</Text> 
-    {items ? myList.length != 0? 
-    <>{myList.map((product) => <Row key={product.id} item={product}/> )}</>
-    : <View style={[mystyle.centered, {marginVertical: 50}]}>
-    <Warning 
-    subText='No ingredient is missing data.'
-    positive={true}
-    subColor={Colors.light.tint}
-    iconColor={Colors.light.tint}></Warning></View> 
+    {items ? 
+    <Displayer items={myList} text='No Ingredients missing data.' colored={true}></Displayer>
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
     }
 </>

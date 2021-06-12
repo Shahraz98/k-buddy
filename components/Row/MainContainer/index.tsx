@@ -11,7 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../../../constants/Colors';
 import { AntDesign } from '@expo/vector-icons'; 
 import { isAfter } from 'date-fns';
-import {handleReNew} from '../../../utils/actions';
+import {handleReNew, handleSetExpired} from '../../../utils/actions';
 
 const MainContainer = ({item}: ProductProps) => {
   const [modal, OpenModal] = useState<boolean>(true); 
@@ -51,11 +51,13 @@ const MainContainer = ({item}: ProductProps) => {
       <View>
         <Text style={[mystyle.centered, mystyle.blackText, mystyle.xsText]}>Click "RE-NEW" to re-activate ingredient.</Text>
         <TouchableOpacity style={[mystyle.centered, mystyle.myMainBtn, mystyle.myMainWhiteBtn]} onPress={() => handleReNew(item)}> 
-               
-                <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.coloredText, mystyle.centered]}>Re-New</Text>
-                
+          <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.coloredText, mystyle.centered]}>Re-New</Text>
         </TouchableOpacity></View>
-    : <View></View>}</View> : <View></View>}
+    : <View>
+    <Text style={[mystyle.centered, mystyle.blackText, mystyle.xsText]}>Click to set ingredient as expired.</Text>
+    <TouchableOpacity style={[mystyle.centered, mystyle.myMainBtn, mystyle.myMainWhiteBtn]} onPress={() => handleSetExpired(item)}> 
+      <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.coloredText, mystyle.centered]}>Set as Expired</Text>
+    </TouchableOpacity></View>}</View> : <View></View>}
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <RowBot item={item}></RowBot> 
             <View>

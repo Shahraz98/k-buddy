@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { ProductType, DefListProps} from '../../../types';
 import Colors from '../../../constants/Colors';
-import SingleList from './SingleList';
+import mystyle from '../../../constants/mystyle';
+import ArrowNav from '../../ArrowNav';
+import Displayer from '../../Displayer';
 
 const DefaultList = ({items}: DefListProps) => {
   const [displayList, setdisplayList] = useState<ProductType[] | undefined>(undefined);
@@ -39,13 +41,19 @@ return (
       value={search} inputContainerStyle={{backgroundColor: '#f5f5f5'}} color={Colors.light.gray}
       containerStyle={{backgroundColor: 'transparent', borderBottomColor: 'transparent', borderTopColor: 'transparent'}}>
     </SearchBar>
-
+   
     {showFull?
       <View>
-        <SingleList items={items}></SingleList>
+      <ArrowNav comp1={<Displayer items={items} text='No Ingredients found.'></Displayer>} 
+      comp2={<Displayer items={items} text='No recently bought Ingredients found.'></Displayer>} text1='Your Ingredients' text2='Recently bought'></ArrowNav>
       </View>
       :  <View>
-          {displayList? <SingleList items={displayList}></SingleList> 
+          {displayList?
+          <View>
+          <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Your Ingredients</Text>
+          <Displayer items={items} text='No Ingredients found.'></Displayer>
+          <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Recently bought</Text>
+          <Displayer items={items} text='No recently bought Ingredients found.'></Displayer></View>
           : <View></View>}
          </View>
     }

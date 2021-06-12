@@ -70,7 +70,6 @@ try {
 
 export const handleReNew = async (product:ProductType) => {
     const ProductRef = getSingleProduct(product.id);
-    //Same logic as unfreeze, this time we are adding 6 months to the product's expiry, if it exists and if it is in the future
     try {   
             const interval = intervalToDuration({
                 start: new Date(product.addedOn),
@@ -86,15 +85,29 @@ export const handleReNew = async (product:ProductType) => {
                     isOpen: false,
                     addedOn: now,
                     maturitydate: now,
-                    maturity: 'Not specified'
+                    maturity: 'Not specified',
+                    recentlyBought: true,
+                    boughtOn: now,
                    })
             } else {
                 await ProductRef.update({
                     expiry: extended,
                     isOpen: false,
                     addedOn: now,
+                    recentlyBought: true,
+                    boughtOn: now,
                    })
             }
+    } catch(error) {console.log('error',error)}
+}
+
+export const handleSetExpired = async (product:ProductType) => {
+    const ProductRef = getSingleProduct(product.id);
+    try {   
+            const now = format(new Date(), "yyyy-MM-dd'T'HH:mm")
+                await ProductRef.update({
+                    expiry: now,
+                   })
     } catch(error) {console.log('error',error)}
 }
 
@@ -161,11 +174,14 @@ export const handleAdd = async (name:string, brand?:string, category?:string, lo
                     expiry,
                     addedOn:now,
                     isOpen: false,
+                    recentlyBought: false,
                 }
                 ProductRef.push(product);
             }
             else {
-                if(maturity != ''){
+                if(maturity === ''){
+                    maturity = 'Not specified'}
+                    
                     const product = {
                         name,
                         brand,
@@ -177,26 +193,10 @@ export const handleAdd = async (name:string, brand?:string, category?:string, lo
                         expiry,
                         addedOn:now,
                         isOpen: false,
+                        recentlyBought: false,
                     }
                     ProductRef.push(product);
                 }
-                    else {
-                        maturity = 'Not specified';
-                        const product = {
-                        name,
-                        brand,
-                        category,
-                        location,
-                        confection,
-                        maturity,
-                        maturitydate:now,
-                        expiry,
-                        addedOn:now,
-                        isOpen: false,
-                    }
-                    ProductRef.push(product);
-        }
-    }
 }
 
 export const handleOpen =  async (product:ProductType) => {
