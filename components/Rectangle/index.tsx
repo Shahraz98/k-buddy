@@ -3,12 +3,12 @@ import {Text, View, Animated, Image} from 'react-native';
 import Colors from '../../constants/Colors';
 import { formatDistanceToNow} from 'date-fns'; 
 import mystyle from '../../constants/mystyle';
-import {ProductProps} from '../../types';
+import {RectangleProps} from '../../types';
 import {LinearGradient} from 'expo-linear-gradient';
 
 
 
-const Rectangle = ({item}: ProductProps) => {
+const Rectangle = ({proname, prodate, promaturity}: RectangleProps) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const [url, setUrl] = useState<any>();
   const uripe = require(`../../assets/images/URipe.png`);
@@ -38,7 +38,7 @@ const Rectangle = ({item}: ProductProps) => {
             useNativeDriver: true
           }
         ).start();
-        const uri = translateRipeness(item.maturity!);
+        const uri = translateRipeness(promaturity);
         setUrl(uri);
       }, [url]) 
 
@@ -49,16 +49,15 @@ return (
               colors={[Colors.light.gray, Colors.light.dsecondary]}
               start={[0.7, 0.8]}
               style={[mystyle.myRectangle,{borderRadius: 15}]}>
-      
-      <Text style={[ mystyle.centered, mystyle.smText, mystyle.coloredText, {fontWeight: 'bold', marginTop: 5}]}>{item.name}</Text>
-      <Text style={[ mystyle.centered, mystyle.xsText, mystyle.whiteText, {marginVertical: 5}]}>Checked {formatDistanceToNow(new Date(item.maturitydate!), { addSuffix: true })} as:</Text>
+      <Text style={[ mystyle.centered, mystyle.smText, mystyle.coloredText, {fontWeight: 'bold', marginTop: 5}]}>{proname}</Text>
+      <Text style={[ mystyle.centered, mystyle.xsText, mystyle.whiteText, {marginVertical: 5}]}>Checked {formatDistanceToNow(new Date(prodate), { addSuffix: true })} as:</Text>
       <Image style={[mystyle.centered, {maxHeight: 100, maxWidth: 100}]} source={url}></Image>
       <View style={[mystyle.centered, {minWidth: 120, marginVertical: 5}]}>
       <LinearGradient
               colors={[Colors.light.gray, Colors.light.dsecondary]}
               start={[0.2, 0.5]}
               style={{borderRadius: 15}}>
-        <Text style={[ mystyle.xsText, mystyle.whiteText, mystyle.centered, {paddingVertical: 10}]}>{item.maturity}</Text>
+        <Text style={[ mystyle.xsText, mystyle.whiteText, mystyle.centered, {paddingVertical: 10}]}>{promaturity}</Text>
       </LinearGradient>
       </View>
       </LinearGradient>

@@ -7,6 +7,7 @@ import { ProductType } from '../../../types';
 import mystyle from '../../../constants/mystyle';
 import Rectangle from '../../Rectangle';
 import Warning from '../../Warning';
+import Displayer from '../../Displayer';
 
 const Maturity = ({items}: DefListProps) => {
 
@@ -27,18 +28,10 @@ const Maturity = ({items}: DefListProps) => {
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Unchecked Ripeness</Text>
-<View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
 {freshList?
-   myList.length != 0?
-   <>{myList.map((product) => <Rectangle key={product.id} item={product}/>)}</>
-   : <View style={[mystyle.centered, {marginVertical: 50}]}>
-    <Warning 
-    subText='All fresh items have been checked regularly.'
-    positive={true}
-    subColor={Colors.light.tint}
-    iconColor={Colors.light.tint}></Warning></View> 
+   <Displayer items={myList} text='All Ingredients have been checked recently.' shape='Rectangle'></Displayer>
    : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
-}</View>
+}
 </>
 )}
 

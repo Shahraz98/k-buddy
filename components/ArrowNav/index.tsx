@@ -14,37 +14,37 @@ return (
 <View>
 {myVar === 0? <View style={{flexDirection: 'column'}}>
     <View style={[mystyle.myRowHeader, mystyle.centered]}>
-        <AntDesign name="arrowright" style={{marginRight: 50, marginTop: 15}} size={24} color='transparent' />
+        <AntDesign name="left" style={{marginRight: 50, marginTop: 16}} size={21} color='transparent' />
         
-        <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>{text1}</Text>
+        <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>{text1}</Text>
         
         <TouchableOpacity onPress={() => setMyVar(1)}>
-            <AntDesign name="arrowright" style={{marginLeft: 50, marginTop: 15}} size={24} color={Colors.light.dsecondary}/>
+            <AntDesign name="right" style={{marginLeft: 50, marginTop: 16}} size={21} color={Colors.light.tint}/>
         </TouchableOpacity>
     </View>
     {comp1}</View> : <View></View>}
     {myVar === 1? <View style={{flexDirection: 'column'}}>
     <View style={[mystyle.myRowHeader, mystyle.centered]}>
         <TouchableOpacity onPress={() => setMyVar(0)}>
-            <AntDesign name="arrowleft" style={{marginRight: 50, marginTop: 15}} size={24} color={Colors.light.dsecondary}/>
+            <AntDesign name="left" style={{marginRight: 50, marginTop: 16}} size={21} color={Colors.light.tint}/>
         </TouchableOpacity>
        
-        <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>{text2}</Text>
+        <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>{text2}</Text>
         {comp3?
          <TouchableOpacity onPress={() => setMyVar(2)}>
-         <AntDesign name="arrowright" style={{marginLeft: 50, marginTop: 15}} size={24} color={Colors.light.dsecondary}/>
+         <AntDesign name="right" style={{marginLeft: 50, marginTop: 16}} size={21} color={Colors.light.tint}/>
      </TouchableOpacity> 
-     : <AntDesign name="arrowright" style={{marginLeft: 50, marginTop: 15}} size={24} color="transparent"/>}
+     : <AntDesign name="right" style={{marginLeft: 50, marginTop: 16}} size={21} color="transparent"/>}
         </View>
        {comp2}</View> : <View></View>}
     {myVar === 2? <View style={{flexDirection: 'column'}}>
     <View style={[mystyle.myRowHeader, mystyle.centered]}>
         <TouchableOpacity onPress={() => setMyVar(1)}>
-            <AntDesign name="arrowleft" style={{marginRight: 50, marginTop: 15}} size={24} color={Colors.light.dsecondary}/>
+            <AntDesign name="left" style={{marginRight: 50, marginTop: 16}} size={21} color={Colors.light.tint}/>
         </TouchableOpacity>
        
-        <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>{text3}</Text>
-        <AntDesign name="arrowright" style={{marginLeft: 50, marginTop: 15}} size={24} color="transparent"/>
+        <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>{text3}</Text>
+        <AntDesign name="right" style={{marginLeft: 50, marginTop: 16}} size={21} color="transparent"/>
         </View>
     {comp3}</View> : <View></View>}
 </View>

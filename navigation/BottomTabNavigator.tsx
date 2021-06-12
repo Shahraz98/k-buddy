@@ -80,7 +80,7 @@ function HomeNavigator() {
         component={HomeScreen}
         options={{ 
           headerStyle: {
-            backgroundColor: Colors.light.tint,
+            backgroundColor: Colors.light.background,
             height: 60,
             shadowRadius: 0,
             shadowOffset: {
@@ -89,9 +89,9 @@ function HomeNavigator() {
           },
     headerTitle: () => (
       <View style={[mystyle.centered,{flexDirection: 'row', marginTop: 10}]}>
-      <Text style={{fontSize: 16, color: Colors.light.background}}>Kitchen </Text>
-      <Entypo name={'leaf'} size={20} color={Colors.light.gray}/>
-      <Text style={{fontSize: 16, color: Colors.light.background}}> Buddy</Text>
+      <Text style={{fontSize: 16, color: Colors.light.gray}}>Kitchen </Text>
+      <Entypo name={'leaf'} size={20} color={Colors.light.tint}/>
+      <Text style={{fontSize: 16, color: Colors.light.gray}}> Buddy</Text>
       </View>
       ),
   }}
@@ -119,9 +119,9 @@ function NewItem() {
           },
     headerTitle: () => (
       <View style={[mystyle.centered,{flexDirection: 'row', marginTop: 10}]}>
-      <Text style={{fontSize: 16, color: '#30303b'}}>Kitchen </Text>
+      <Text style={{fontSize: 16, color: Colors.light.gray}}>Kitchen </Text>
       <Entypo name={'leaf'} size={20} color={Colors.light.tint}/>
-      <Text style={{fontSize: 16, color: '#30303b'}}> Buddy</Text>
+      <Text style={{fontSize: 16, color: Colors.light.gray}}> Buddy</Text>
       </View>
       ),
         }}

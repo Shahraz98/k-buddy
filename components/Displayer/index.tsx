@@ -5,14 +5,24 @@ import Row from '../Row';
 import {DisplayerProps} from '../../types';
 import mystyle from '../../constants/mystyle';
 import Warning from '../Warning';
+import Rectangle from '../Rectangle';
+import Square from '../Square';
+import BoughtView from '../BoughtView';
 
-const Displayer = ({items, text, colored}: DisplayerProps) => {
+const Displayer = ({items, text, colored, shape}: DisplayerProps) => {
 
 return (
 <>
-<View>
+<View style={[{flexDirection: 'row', flexWrap: 'wrap'}]}>
    {items.length != 0?
-     items.map((product) => <Row key={product.id} item={product}/>)
+     items.map((product) => {
+       if(shape === 'Square'){ return <Square key={product.id} 
+       proname={product.name} proadd={product.addedOn} proexp={product.expiry!}/>}
+      else if(shape === 'Rectangle'){return <Rectangle key={product.id} proname={product.name} 
+      promaturity={product.maturity!} prodate={product.maturitydate!}/>}
+      else if(shape === 'Bought'){return <BoughtView key={product.id} proname={product.name} 
+      bought={product.boughtOn!} />}
+      else return <Row key={product.id} item={product}/>})
      : <View style={[mystyle.centered, {marginVertical: 50}]}><Warning 
      positive={true} 
      subColor={colored? Colors.light.tint : Colors.light.gray} 

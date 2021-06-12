@@ -26,7 +26,7 @@ return (
 {myList?
 <View>
 <ArrowNav comp1={<Displayer items={expiredList} text='No expired Ingredients found.'></Displayer>} 
-comp2={<Displayer items={twentyFourList} text='No ingredient is going to expire within 24 hours.'></Displayer>} 
+comp2={<Displayer items={twentyFourList} text='No ingredient is going to expire within 24 hours.' shape='Square'></Displayer>} 
 comp3={<Displayer items={ripeList} text='No ripe Ingredients found.'></Displayer>} 
 text1='Expired Ingredients' text2='Expiring within 24 hours' text3='Ripe Ingredients'></ArrowNav>
 </View>

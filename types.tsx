@@ -11,6 +11,11 @@ export type SuccessProps = {
   buttonText?: string,
 }
 
+export type BoughtProps = {
+  proname: string,
+  bought: string
+}
+
 export type WarningProps = {
   iconColor: string,
   positive: boolean,
@@ -116,7 +121,14 @@ export type ProductProps = {
 export type DisplayerProps = {
   items: ProductType[],
   text: string,
+  shape?: string,
   colored?: boolean,
+}
+
+export type RectangleProps = {
+  proname: string,
+  promaturity: string,
+  prodate: string
 }
 
 export type GroupProps = {

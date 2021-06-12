@@ -28,7 +28,7 @@ const Square = ({proname, proadd, proexp}: SquareProps) => {
     
     
 return (
-    <DataTable style={[mystyle.mydTable, mystyle.centered]}>
+    <DataTable style={[mystyle.mydTable, mystyle.centered, mystyle.myShadow]}>
       <Animated.View style={{opacity: fadeAnim}}>
       <LinearGradient
         colors={['white', Colors.light.background]}

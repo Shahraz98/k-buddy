@@ -38,7 +38,7 @@ const MainContainer = ({item}: ProductProps) => {
   {modal?
   <View style={{flex: 1, marginHorizontal: 10}}>
     <Animated.View style={{opacity: fadeAnim}}>
-    <View key={item.id} style={mystyle.myMainBlock}>
+    <View key={item.id} style={[mystyle.myMainBlock, mystyle.myShadow]}>
       <LinearGradient
         colors={['white', Colors.light.background]}
         start={[0.5, 0.4]}

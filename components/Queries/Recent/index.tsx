@@ -6,6 +6,7 @@ import mystyle from '../../../constants/mystyle';
 import Square from '../../Square';
 import Warning from '../../Warning';
 import Colors from '../../../constants/Colors';
+import Displayer from '../../Displayer';
 
 const Recent = ({items}: DefListProps) => {
 
@@ -17,15 +18,9 @@ const myList = items? items.filter((product) => formatDistanceToNow(new Date(pro
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Recently added</Text>
-<View style={[{flexDirection: 'row',flexWrap: 'wrap', marginBottom: 50}]}>
+<View style={{marginBottom: 50}}>
   {items? 
-    myList.length != 0? myList.map((product) => <Square key={product.id} proname={product.name} proadd={product.addedOn} proexp={product.expiry? product.expiry : ''}></Square>)
-    : <View style={[mystyle.centered, {marginVertical: 50}]}>
-    <Warning 
-    subText='No additions during the last 24 hours.'
-    positive={false}
-    subColor={Colors.light.tint}
-    iconColor={Colors.light.tint}></Warning></View> 
+    <Displayer items={myList} text='No additions during last 24 hours.' shape='Square'></Displayer>
     : <View></View>
   }
   </View>

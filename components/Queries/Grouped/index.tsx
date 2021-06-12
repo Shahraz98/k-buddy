@@ -16,40 +16,40 @@ return (
 {items.length != 0?
 <View>{myVar === 0? <View style={{flexDirection: 'column'}}>
     <View style={[mystyle.myRowHeader, mystyle.centered]}>
-        <AntDesign name="arrowright" style={{marginRight: 50}} size={24} color='transparent' />
+        <AntDesign name="right" style={{marginRight: 50}} size={21} color='transparent' />
         <View style={mystyle.myClmContainer}>
             <Text style={[mystyle.bigText,mystyle.centered]}>View</Text>
             <Text style={mystyle.smText}>by Category</Text>
         </View>
         <TouchableOpacity onPress={() => setMyVar(1)}>
-            <AntDesign name="arrowright" style={{marginLeft: 50}} size={24} color={Colors.light.dsecondary}/>
+            <AntDesign name="right" style={{marginLeft: 50, marginTop: 4}} size={21} color={Colors.light.tint}/>
         </TouchableOpacity>
     </View>
     <SingleGroup items={items} filterby="Category" groupIcon="fastfood"/></View> : <View></View>}
 {myVar === 1? <View style={{flexDirection: 'column'}}>
     <View style={[mystyle.myRowHeader, mystyle.centered]}>
         <TouchableOpacity onPress={() => setMyVar(0)}>
-            <AntDesign name="arrowleft" style={{marginRight: 50}} size={24} color={Colors.light.dsecondary}/>
+            <AntDesign name="left" style={{marginRight: 50, marginTop: 4}} size={21} color={Colors.light.tint}/>
         </TouchableOpacity>
         <View style={mystyle.myClmContainer}>
             <Text style={[mystyle.bigText,mystyle.centered]}>View</Text>
             <Text style={mystyle.smText}>by Location</Text>
         </View>
         <TouchableOpacity onPress={() => setMyVar(2)}>
-            <AntDesign name="arrowright" style={{marginLeft: 50}} size={24} color={Colors.light.dsecondary}/>
+            <AntDesign name="right" style={{marginLeft: 50, marginTop: 4}} size={21} color={Colors.light.tint}/>
         </TouchableOpacity>
         </View>
         <SingleGroup items={items} filterby="Location" groupIcon="kitchen"/></View> : <View></View>}
 {myVar === 2? <View style={{flexDirection: 'column'}}>
     <View style={[mystyle.myRowHeader, mystyle.centered]}>
         <TouchableOpacity onPress={() => setMyVar(1)}>
-            <AntDesign name="arrowleft" style={{marginRight: 50}} size={24} color={Colors.light.dsecondary}/>
+            <AntDesign name="left" style={{marginRight: 50, marginTop: 4}} size={21} color={Colors.light.tint}/>
         </TouchableOpacity>
         <View style={mystyle.myClmContainer}>
             <Text style={[mystyle.bigText,mystyle.centered]}>View</Text>
             <Text style={mystyle.smText}>by Confection</Text>
         </View>
-        <AntDesign name="arrowright" style={{marginLeft: 50}} size={24} color="transparent" />
+        <AntDesign name="right" style={{marginLeft: 50, marginTop: 4}} size={21} color="transparent" />
     </View>
     <SingleGroup items={items} filterby="Confection" groupIcon="shopping-basket"/></View> : <View></View>}</View> 
     : <View style={[mystyle.centered, {marginTop: '30%'}]}><Warning 

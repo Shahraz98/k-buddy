@@ -54,10 +54,13 @@ const mystyle = StyleSheet.create({
     },
     myFormContainer: {
         width: '95%',
-        height: '110%',
+        height: '100%',
+        backgroundColor: 'white',
+        borderRadius: 15,
+        marginBottom: 10
     },
     myModalContainer: {
-        width:'97%',
+        width:'100%',
         height: 560,
         flexDirection: 'row',
         borderRadius: 30,
@@ -65,13 +68,11 @@ const mystyle = StyleSheet.create({
     },
     myMainInput: {
         height: 40,
-        width: '45%',
+        width: '42%',
         paddingLeft: 10,
         paddingTop: 10,
         marginTop: 10,
         borderRadius: 15,
-        borderWidth: 1,
-        borderColor: Colors.light.dsecondary
     },
     myScannerText: {
         fontSize: 35, 
@@ -87,16 +88,18 @@ const mystyle = StyleSheet.create({
         paddingVertical: 10,
         textTransform: 'uppercase',
     },
+    myShadow: {
+        shadowColor: Colors.light.gray,
+        shadowOffset: {
+         width: 0,
+         height: 2
+       },
+       shadowOpacity: 0.3,
+    },
     mydTable: {
         borderRadius: 15, 
         width: 160, 
-        marginVertical: 10,   
-        shadowColor: Colors.light.gray,
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
-        shadowOpacity: 0.2,
+        marginVertical: 10, 
     },
     mydTableheader: {
         marginRight: 'auto', 
@@ -116,12 +119,6 @@ const mystyle = StyleSheet.create({
     myMainBlock: {
        marginTop: 15,
        marginBottom: 10,
-       shadowColor: Colors.light.gray,
-       shadowOffset: {
-        width: 0,
-        height: 4
-      },
-      shadowOpacity: 0.3,
     },
     myClmContainer: {
         flexDirection: 'column',

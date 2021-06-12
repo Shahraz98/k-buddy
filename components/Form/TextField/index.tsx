@@ -8,7 +8,7 @@ const TextField = ({handleUpdate, titleArr, arrIndex, placeHold}:myFormElementPr
     
     return (
         <TextInput value={titleArr[arrIndex]} onChangeText={(e) => handleUpdate(e, arrIndex)} numberOfLines={3}
-        multiline={true} style={[mystyle.myMainInput, mystyle.myMainBlackBtn,mystyle.centered, mystyle.smText, mystyle.whiteText]}
+        multiline={true} style={[mystyle.myMainInput, mystyle.myMainWhiteBtn, mystyle.centered, mystyle.smText, mystyle.secondaryBlack]}
         placeholder={placeHold} placeholderTextColor="lightgray"></TextInput>
     )
 }
