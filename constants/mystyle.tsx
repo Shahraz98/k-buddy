@@ -68,7 +68,7 @@ const mystyle = StyleSheet.create({
     },
     myMainInput: {
         height: 40,
-        width: '42%',
+        width: '43%',
         paddingLeft: 10,
         paddingTop: 10,
         marginTop: 10,

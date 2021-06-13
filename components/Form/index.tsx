@@ -39,9 +39,15 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
   }
 
   const handleCodeScanned = async ({data}:any) => {
-      const resultArray:Array<string> = await handleBarCodeScanned(data);
-      handleAll(resultArray[0], resultArray[1], resultArray[2]);
-      setScanner(false)
+      try{
+      const resultArray:Array<string> | undefined = await handleBarCodeScanned(data);
+      if(resultArray){
+        handleAll(resultArray[0], resultArray[1], resultArray[2]);
+      } else handleAll('Name not found', 'Brand nor found', 'Category not found');
+      setScanner(false)}
+      catch(err) {
+        console.log("error", err)
+    }
   };
 
   const onConfirmSingle = React.useCallback(
@@ -110,7 +116,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
           </LinearGradient>
         </TouchableOpacity>
     {scanner?
-    <><BarCodeScanner onBarCodeScanned={handleCodeScanned} style={StyleSheet.absoluteFill}>
+    <><BarCodeScanner onBarCodeScanned={handleCodeScanned} style={{top: -155,height: '200%', width: '100%', position: 'absolute', zIndex: 100}}>
         <Text style={[mystyle.myScannerText, mystyle.centered, mystyle.whiteText]}>Scan Bar Code</Text>
         <Button color={Colors.light.background} title={'Close'} onPress={() => setScanner(false)}></Button>
         <Image style={[mystyle.centered, mystyle.myScannerImg]} source={require('../../assets/images/scan.png')}/>
