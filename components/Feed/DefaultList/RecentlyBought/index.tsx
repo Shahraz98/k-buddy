@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
-import { DefListProps, ProductType} from '../../../../types';
+import { DefListProps} from '../../../../types';
 import Displayer from '../../../Displayer';
 import { formatDistanceToNow} from 'date-fns'
 

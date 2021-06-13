@@ -8,6 +8,8 @@ import Warning from '../Warning';
 import Rectangle from '../Rectangle';
 import Square from '../Square';
 import BoughtView from '../BoughtView';
+import ExpiredView from '../ExpiredView';
+import ShortView from '../ShortView';
 
 const Displayer = ({items, text, colored, shape}: DisplayerProps) => {
 
@@ -20,6 +22,8 @@ return (
        proname={product.name} proadd={product.addedOn} proexp={product.expiry!}/>}
       else if(shape === 'Rectangle'){return <Rectangle key={product.id} proname={product.name} 
       promaturity={product.maturity!} prodate={product.maturitydate!}/>}
+      else if(shape === 'Short'){return <ShortView key={product.id} item={product} />}
+      else if(shape === 'Expired'){return <ExpiredView key={product.id} item={product}/>}
       else if(shape === 'Bought'){return <BoughtView key={product.id} proname={product.name} 
       bought={product.boughtOn!} />}
       else return <Row key={product.id} item={product}/>})

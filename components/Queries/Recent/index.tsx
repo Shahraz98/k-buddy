@@ -3,9 +3,6 @@ import { DefListProps} from '../../../types';
 import {Text, View} from 'react-native';
 import { formatDistanceToNow} from 'date-fns'
 import mystyle from '../../../constants/mystyle';
-import Square from '../../Square';
-import Warning from '../../Warning';
-import Colors from '../../../constants/Colors';
 import Displayer from '../../Displayer';
 
 const Recent = ({items}: DefListProps) => {

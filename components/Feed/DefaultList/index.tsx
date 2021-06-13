@@ -4,7 +4,6 @@ import { SearchBar } from 'react-native-elements';
 import { ProductType, DefListProps} from '../../../types';
 import Colors from '../../../constants/Colors';
 import mystyle from '../../../constants/mystyle';
-import ArrowNav from '../../ArrowNav';
 import Displayer from '../../Displayer';
 import RecentlyBought from './RecentlyBought';
 
@@ -45,16 +44,18 @@ return (
    
     {showFull?
       <View>
-      <ArrowNav comp1={<Displayer items={items} text='No Ingredients found.'></Displayer>} 
-      comp2={<RecentlyBought items={items}/>} text1='Your Ingredients' text2='Recently bought'></ArrowNav>
+      <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Recently bought</Text>
+      <RecentlyBought items={items}/>
+      <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Active Ingredients</Text>
+      <Displayer items={items} text='No Ingredients found.'></Displayer>
       </View>
       :  <View>
           {displayList?
           <View>
-          <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Your Ingredients</Text>
-          <Displayer items={items} text='No Ingredients found.'></Displayer>
           <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Recently bought</Text>
-          <RecentlyBought items={items}/></View>
+          <RecentlyBought items={items}/>
+          <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Active Ingredients</Text>
+          <Displayer items={items} text='No Ingredients found.'></Displayer></View>
           : <View></View>}
          </View>
     }

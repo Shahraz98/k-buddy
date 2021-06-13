@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { DefListProps} from '../../../types';
-import {Text, ActivityIndicator, View} from 'react-native';
+import {Text, ActivityIndicator} from 'react-native';
 import { formatDistanceToNow} from 'date-fns'
 import Colors from '../../../constants/Colors'
 import { ProductType } from '../../../types';
 import mystyle from '../../../constants/mystyle';
-import Rectangle from '../../Rectangle';
-import Warning from '../../Warning';
 import Displayer from '../../Displayer';
 
 const Maturity = ({items}: DefListProps) => {

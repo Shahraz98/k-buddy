@@ -1,10 +1,8 @@
 import React from 'react';
 import mystyle from '../../../constants/mystyle';
 import { DefListProps} from '../../../types';
-import {Text, ActivityIndicator, View} from 'react-native';
-import Row from '../../Row';
+import {Text, ActivityIndicator} from 'react-native';
 import Colors from '../../../constants/Colors'
-import Warning from '../../Warning';
 import Displayer from '../../Displayer';
 
 const Missing = ({items}: DefListProps) => {
@@ -18,7 +16,7 @@ return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ingredients missing data</Text>
     {items ? 
-    <Displayer items={myList} text='No Ingredients missing data.' colored={true}></Displayer>
+    <Displayer items={myList} text='No Ingredients missing data.' colored={true} shape='Short'></Displayer>
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
     }
 </>

@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {Text, View, Animated} from 'react-native';
 import Colors from '../../constants/Colors';
 import { formatDistanceToNow} from 'date-fns';
-import { AntDesign, Ionicons} from '@expo/vector-icons'; 
+import { AntDesign} from '@expo/vector-icons'; 
 import mystyle from '../../constants/mystyle';
 import {BoughtProps} from '../../types';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -32,9 +32,11 @@ return (
               colors={[Colors.light.tint, Colors.light.tsecondary]}
               start={[0.1, 0.3]}
               style={[mystyle.myRectangle,{borderRadius: 15}]}>
-      
-      <Text style={[ mystyle.centered, mystyle.smText, mystyle.whiteText, {fontWeight: 'bold', marginTop: 5}]}>{proname}</Text>
-      <View style={[mystyle.myMainWhiteBtn, {marginTop: 10, 
+      <View style={{flexDirection: 'row', marginTop: 5}}>
+      <Text style={[mystyle.stnText, mystyle.whiteText, {fontWeight: 'bold', marginLeft: 10, marginRight: 'auto'}]}>{proname}</Text>
+      <AntDesign name="shoppingcart" size={24} style={{marginRight: 10}} color={Colors.light.background} />
+      </View>
+      <View style={[mystyle.myMainWhiteBtn, {marginTop: 5, 
         borderTopEndRadius: 15, borderTopStartRadius: 15}]}>
       <Text style={[ mystyle.centered, mystyle.xsText, mystyle.coloredText, {marginVertical: 10}]}>Bought</Text>
       <Text style={[ mystyle.centered, mystyle.xsText, mystyle.blackText, {marginBottom: 10}]}>{formatDistanceToNow(new Date(bought), { addSuffix: true })}.</Text>

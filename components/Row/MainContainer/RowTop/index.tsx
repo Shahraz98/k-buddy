@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import { ProductProps} from '../../../../types';
 import { AntDesign, Entypo, SimpleLineIcons, FontAwesome, MaterialCommunityIcons, EvilIcons} from '@expo/vector-icons'; 
 import {ProgressBar} from 'react-native-paper';
-import {formatDistanceToNow,isAfter} from 'date-fns'
+import {formatDistanceToNow} from 'date-fns'
 import Colors from '../../../../constants/Colors'
 import mystyle from '../../../../constants/mystyle'
 import {LinearGradient} from 'expo-linear-gradient';
@@ -51,18 +51,14 @@ return (
     </View>
     </LinearGradient>
    
-    {item.expiry? 
+    
     <View style={{marginLeft: 'auto'}}>
-        {isAfter(new Date(), new Date(item.expiry))? 
-        <View>
-        <MaterialCommunityIcons name="alert-circle" style={mystyle.centered} size={55} color={Colors.light.tsecondary} />
-        <Text style={[mystyle.secondaryColored, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>Expired</Text>
-        <Text style={[mystyle.secondaryColored, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>{item.expiry? formatDistanceToNow(new Date(item.expiry), { addSuffix: true }) : ''}</Text></View>
-        : <View style={{marginLeft: 'auto'}}><EvilIcons name="clock" style={mystyle.centered} size={65} color={Colors.light.tsecondary}/>
+        <View style={{marginLeft: 'auto'}}>
+        <EvilIcons name="clock" style={mystyle.centered} size={65} color={Colors.light.tsecondary}/>
         <Text style={[mystyle.secondaryBlack, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>Expiring</Text>
-        <Text style={[mystyle.secondaryBlack, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>{item.expiry? formatDistanceToNow(new Date(item.expiry), { addSuffix: true }) : ''}</Text></View>}
+        <Text style={[mystyle.secondaryBlack, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>{item.expiry? formatDistanceToNow(new Date(item.expiry), { addSuffix: true }) : ''}</Text>
+        </View>
     </View>
-    : <View></View>}
     </View>
     
     {item.maturity?

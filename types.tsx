@@ -90,28 +90,19 @@ export type ProductType = {
   brand?: string,
   category?: string,
   name: string,
-  expiry?: string,
+  expiry: string,
   confection?: string,
   location?: string,
   addedOn: string,
   maturity?: string,
   maturitydate?: string,
-  isOpen?: boolean,
+  isOpen: boolean,
   recentlyBought?: boolean,
   boughtOn?: string,
 }
 
 export type DefListProps = {
   items: ProductType[],
-}
-
-export type ArrowNavProps = {
-  text1: string,
-  text2: string,
-  comp1: any,
-  comp2: any,
-  comp3?: any,
-  text3?: string
 }
 
 export type ProductProps = {

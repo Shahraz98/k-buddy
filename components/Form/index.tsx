@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState} from 'react';
 import { View, Text, StyleSheet,Image,Button} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { TouchableOpacity, TextInput} from 'react-native-gesture-handler';
+import { TouchableOpacity} from 'react-native-gesture-handler';
 import Colors from '../../constants/Colors'
 import { DatePickerModal } from 'react-native-paper-dates';
 import {FormProps} from '../../types';
