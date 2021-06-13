@@ -13,8 +13,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 import {handleBarCodeScanned} from '../../utils/query';
 
 const Form = ({onDataReady, product, editor}:FormProps)  => {
-  const [datepick, setDatepick] = useState<Date | undefined>(product? 
-  product.expiry? new Date(product.expiry) : new Date() : new Date());
+  const [datepick, setDatepick] = useState<Date | undefined>(product? new Date(product.expiry) : new Date());
   const [open, setOpen] = useState(false);
   const [scanner, setScanner] = useState<boolean>(false);
   const [inputsArray, setInputsArray] = useState<string[]>(product?

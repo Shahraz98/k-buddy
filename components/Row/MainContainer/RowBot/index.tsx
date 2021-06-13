@@ -16,15 +16,11 @@ return (
     </View>
     : <View style={[mystyle.centered, {marginBottom: 5}]}>
         <MaterialCommunityIcons name="cube" size={50} color={Colors.light.gray} />
-      </View>}
-      <Switch
-      style={[mystyle.centered, {marginBottom: 10}]}
-      trackColor={{ true: Colors.light.tint, false: Colors.light.tint}}
-      thumbColor={'#FF7F50'}
-      ios_backgroundColor="white"
-      onValueChange={() => handleOpen(item)}
-      disabled={item.isOpen}
-      value={item.isOpen}/>
+      </View>
+    }
+      <Switch style={[mystyle.centered, {marginBottom: 10}]} trackColor={{ true: Colors.light.tint, false: Colors.light.tint}}
+      thumbColor={'#FF7F50'} ios_backgroundColor="white" onValueChange={() => handleOpen(item)}
+      disabled={item.isOpen} value={item.isOpen}/>
 </View>
 )}
 

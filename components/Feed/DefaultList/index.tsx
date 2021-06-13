@@ -44,10 +44,10 @@ return (
    
     {showFull?
       <View>
-      <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Recently bought</Text>
-      <RecentlyBought items={items}/>
-      <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Active Ingredients</Text>
-      <Displayer items={items} text='No Ingredients found.'></Displayer>
+        <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Recently bought</Text>
+        <RecentlyBought items={items}/>
+        <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Active Ingredients</Text>
+        <Displayer items={items} text='No Ingredients found.'></Displayer>
       </View>
       :  <View>
           {displayList?

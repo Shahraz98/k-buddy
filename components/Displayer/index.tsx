@@ -14,27 +14,23 @@ import ShortView from '../ShortView';
 const Displayer = ({items, text, colored, shape}: DisplayerProps) => {
 
 return (
-<>
 <View style={[{flexDirection: 'row', flexWrap: 'wrap'}]}>
    {items.length != 0?
      items.map((product) => {
        if(shape === 'Square'){ return <Square key={product.id} 
-       proname={product.name} proadd={product.addedOn} proexp={product.expiry!}/>}
-      else if(shape === 'Rectangle'){return <Rectangle key={product.id} proname={product.name} 
-      promaturity={product.maturity!} prodate={product.maturitydate!}/>}
-      else if(shape === 'Short'){return <ShortView key={product.id} item={product} />}
-      else if(shape === 'Expired'){return <ExpiredView key={product.id} item={product}/>}
-      else if(shape === 'Bought'){return <BoughtView key={product.id} proname={product.name} 
-      bought={product.boughtOn!} />}
-      else return <Row key={product.id} item={product}/>})
-     : <View style={[mystyle.centered, {marginVertical: 50}]}><Warning 
-     positive={true} 
-     subColor={colored? Colors.light.tint : Colors.light.gray} 
-     iconColor={colored? Colors.light.tint : Colors.light.gray} 
-     subText={text}></Warning></View>
-}
+       proname={product.name} proadd={product.addedOn} proexp={product.expiry}/>}
+       else if(shape === 'Rectangle'){return <Rectangle key={product.id} proname={product.name} 
+       promaturity={product.maturity!} prodate={product.maturitydate!}/>}
+       else if(shape === 'Short'){return <ShortView key={product.id} item={product} />}
+       else if(shape === 'Expired'){return <ExpiredView key={product.id} item={product}/>}
+       else if(shape === 'Bought'){return <BoughtView key={product.id} proname={product.name} bought={product.boughtOn!} />}
+       else return <Row key={product.id} item={product}/>})
+    : <View style={[mystyle.centered, {marginVertical: 50}]}>
+        <Warning positive={true} subColor={colored? Colors.light.tint : Colors.light.gray} 
+        iconColor={colored? Colors.light.tint : Colors.light.gray} subText={text}></Warning>
+      </View>
+   }
 </View>
-</>
 )}
 
 export default Displayer;

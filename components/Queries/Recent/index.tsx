@@ -15,7 +15,7 @@ const myList = items? items.filter((product) => formatDistanceToNow(new Date(pro
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Recently added</Text>
-<View style={{marginBottom: 50}}>
+  <View style={{marginBottom: 50}}>
   {items? 
     <Displayer items={myList} text='No additions during last 24 hours.' shape='Square'></Displayer>
     : <View></View>

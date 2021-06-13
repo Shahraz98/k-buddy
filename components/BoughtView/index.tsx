@@ -10,7 +10,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 
 
 const BoughtView = ({proname, bought}: BoughtProps) => {
-  //added and expiry both are used to get the relevant info about the product and save it in a specific way inside the arrays
+
   const fadeAnim = useRef(new Animated.Value(0)).current;
     useEffect(() => {
         Animated.timing(
@@ -21,30 +21,24 @@ const BoughtView = ({proname, bought}: BoughtProps) => {
             useNativeDriver: true
           }
         ).start();
-      }, [])
+  }, [])
     
     
 return (
-   <>
     <View style={[mystyle.centered, mystyle.myShadow]}>
-  <Animated.View style={{opacity: fadeAnim}}>
-      <LinearGradient
-              colors={[Colors.light.tint, Colors.light.tsecondary]}
-              start={[0.1, 0.3]}
-              style={[mystyle.myRectangle,{borderRadius: 15}]}>
-      <View style={{flexDirection: 'row', marginTop: 5}}>
-      <Text style={[mystyle.stnText, mystyle.whiteText, {fontWeight: 'bold', marginLeft: 10, marginRight: 'auto'}]}>{proname}</Text>
-      <AntDesign name="shoppingcart" size={24} style={{marginRight: 10}} color={Colors.light.background} />
-      </View>
-      <View style={[mystyle.myMainWhiteBtn, {marginTop: 5, 
-        borderTopEndRadius: 15, borderTopStartRadius: 15}]}>
-      <Text style={[ mystyle.centered, mystyle.xsText, mystyle.coloredText, {marginVertical: 10}]}>Bought</Text>
-      <Text style={[ mystyle.centered, mystyle.xsText, mystyle.blackText, {marginBottom: 10}]}>{formatDistanceToNow(new Date(bought), { addSuffix: true })}.</Text>
-      </View>
-      </LinearGradient>
+      <Animated.View style={{opacity: fadeAnim}}>
+        <LinearGradient colors={[Colors.light.tint, Colors.light.tsecondary]} start={[0.1, 0.3]} style={[mystyle.myRectangle,{borderRadius: 15}]}>
+          <View style={{flexDirection: 'row', marginTop: 5}}>
+            <Text style={[mystyle.stnText, mystyle.whiteText, {fontWeight: 'bold', marginLeft: 10, marginRight: 'auto'}]}>{proname}</Text>
+            <AntDesign name="shoppingcart" size={24} style={{marginRight: 10}} color={Colors.light.background} />
+          </View>
+          <View style={[mystyle.myMainWhiteBtn, {marginTop: 5, borderTopEndRadius: 15, borderTopStartRadius: 15}]}>
+            <Text style={[ mystyle.centered, mystyle.xsText, mystyle.coloredText, {marginVertical: 10}]}>Bought</Text>
+            <Text style={[ mystyle.centered, mystyle.xsText, mystyle.blackText, {marginBottom: 10}]}>{formatDistanceToNow(new Date(bought), { addSuffix: true })}.</Text>
+          </View>
+        </LinearGradient>
       </Animated.View>
-  </View>
-   </>)
+    </View>)
 }
 
 export default BoughtView;

@@ -19,14 +19,14 @@ return (
 <>
 {myList?
 <View>
-<Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Expired Ingredients</Text>
-<Displayer items={expiredList} text='No expired Ingredients found.' shape='Expired'></Displayer> 
-<Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Expiring within 24H</Text>
-<Displayer items={twentyFourList} text='No ingredient is going to expire within 24 hours.' shape='Square'></Displayer> 
-<Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ripe Ingredients</Text>
-<Displayer items={ripeList} text='No ripe Ingredients found.' shape='Short'></Displayer>
+    <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Expired Ingredients</Text>
+    <Displayer items={expiredList} text='No expired Ingredients found.' shape='Expired'></Displayer> 
+    <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Expiring within 24H</Text>
+    <Displayer items={twentyFourList} text='No ingredient is going to expire within 24 hours.' shape='Square'></Displayer> 
+    <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ripe Ingredients</Text>
+    <Displayer items={ripeList} text='No ripe Ingredients found.' shape='Short'></Displayer>
 </View>
-: <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.dsecondary} />}
+: <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />}
 </>
 )}
 

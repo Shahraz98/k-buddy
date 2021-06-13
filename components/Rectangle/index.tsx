@@ -43,26 +43,20 @@ const Rectangle = ({proname, prodate, promaturity}: RectangleProps) => {
       }, [url]) 
 
 return (
-  <View style={mystyle.centered}>
+<View style={mystyle.centered}>
   <Animated.View style={{opacity: fadeAnim}}>
-      <LinearGradient
-              colors={[Colors.light.gray, Colors.light.dsecondary]}
-              start={[0.7, 0.8]}
-              style={[mystyle.myRectangle,{borderRadius: 15}]}>
-      <Text style={[ mystyle.centered, mystyle.smText, mystyle.coloredText, {fontWeight: 'bold', marginTop: 5}]}>{proname}</Text>
-      <Text style={[ mystyle.centered, mystyle.xsText, mystyle.whiteText, {marginVertical: 5}]}>Checked {formatDistanceToNow(new Date(prodate), { addSuffix: true })} as:</Text>
-      <Image style={[mystyle.centered, {maxHeight: 100, maxWidth: 100}]} source={url}></Image>
-      <View style={[mystyle.centered, {minWidth: 120, marginVertical: 5}]}>
-      <LinearGradient
-              colors={[Colors.light.gray, Colors.light.dsecondary]}
-              start={[0.2, 0.5]}
-              style={{borderRadius: 15}}>
-        <Text style={[ mystyle.xsText, mystyle.whiteText, mystyle.centered, {paddingVertical: 10}]}>{promaturity}</Text>
+      <LinearGradient colors={[Colors.light.gray, Colors.light.dsecondary]} start={[0.7, 0.8]} style={[mystyle.myRectangle,{borderRadius: 15}]}>
+        <Text style={[ mystyle.centered, mystyle.smText, mystyle.coloredText, {fontWeight: 'bold', marginTop: 5}]}>{proname}</Text>
+        <Text style={[ mystyle.centered, mystyle.xsText, mystyle.whiteText, {marginVertical: 5}]}>Checked {formatDistanceToNow(new Date(prodate), { addSuffix: true })} as:</Text>
+        <Image style={[mystyle.centered, {maxHeight: 100, maxWidth: 100}]} source={url}></Image>
+        <View style={[mystyle.centered, {minWidth: 120, marginVertical: 5}]}>
+          <LinearGradient colors={[Colors.light.gray, Colors.light.dsecondary]} start={[0.2, 0.5]} style={{borderRadius: 15}}>
+            <Text style={[ mystyle.xsText, mystyle.whiteText, mystyle.centered, {paddingVertical: 10}]}>{promaturity}</Text>
+          </LinearGradient>
+        </View>
       </LinearGradient>
-      </View>
-      </LinearGradient>
-      </Animated.View>
-  </View>
+  </Animated.View>
+</View>
 )}
 
 export default Rectangle;

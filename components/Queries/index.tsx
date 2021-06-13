@@ -30,34 +30,30 @@ useEffect(()=> {
 
 return (
 <ScrollView style={mystyle.myFeedContainer}>
-<View style={[mystyle.centered, mystyle.myNav]}>
+  <View style={[mystyle.centered, mystyle.myNav]}>
     <TouchableOpacity style={[mystyle.myNavBtn,{backgroundColor: showfiltered? Colors.light.background : 'white'}]} onPress={() => setShowFiltered(true)}>
         <Text style={[mystyle.myHeaderText, mystyle.smText, mystyle.blackText, {paddingHorizontal: 10}]}>Filtered Views</Text>
-        </TouchableOpacity>
-        <View style={{height: 50,width: 10,backgroundColor: 'white'}}></View>
-        <TouchableOpacity style={[mystyle.myNavBtn,{backgroundColor: showfiltered? 'white' : Colors.light.background}]} onPress={() => setShowFiltered(false)}>
+    </TouchableOpacity>
+    <View style={{height: 50,width: 10,backgroundColor: 'white'}}></View>
+    <TouchableOpacity style={[mystyle.myNavBtn,{backgroundColor: showfiltered? 'white' : Colors.light.background}]} onPress={() => setShowFiltered(false)}>
         <Text style={[mystyle.myHeaderText, mystyle.smText, mystyle.blackText, {paddingHorizontal: 10}]}>Additional Info</Text>
-        </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
+  </View>
     {showfiltered?
     displayList? <Grouped items={displayList}></Grouped> 
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
     : <View style={{marginTop: 10}}>
-      {displayList ? displayList.length != 0? <View>
+      {displayList ? displayList.length != 0? 
+      <View>
         <Maturity items={displayList}></Maturity>
-      <View>
-        <Missing items={displayList}></Missing>
-      </View>
-      <View>
-        <Recent items={displayList}></Recent>
-      </View>
-      </View> : <View style={[mystyle.centered, {marginTop: '30%'}]}><Warning 
-      positive={false} 
-      mainColor={Colors.light.tint} 
-      subColor={Colors.light.gray} 
-      iconColor={Colors.light.dsecondary} 
-      mainText='Wow, such emptiness.' 
-      subText='Please add an item to your ingredients.'></Warning></View> : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />}
+        <View><Missing items={displayList}></Missing></View>
+        <View><Recent items={displayList}></Recent></View>
+      </View> 
+      : <View style={[mystyle.centered, {marginTop: '30%'}]}>
+        <Warning positive={false} mainColor={Colors.light.tint} subColor={Colors.light.gray} 
+        iconColor={Colors.light.dsecondary} mainText='Wow, such emptiness.' subText='Please add an item to your ingredients.'></Warning>
+        </View> 
+      : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />}
       </View>}
 </ScrollView>
 )}

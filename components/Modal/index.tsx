@@ -1,6 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {View, Animated, Text} from 'react-native';
-import {format} from 'date-fns';
+import {View, Animated} from 'react-native';
 import Form from '../Form'
 import {ProductProps} from '../../types';
 import mystyle from '../../constants/mystyle';
@@ -29,19 +28,15 @@ const Modal = ({item}: ProductProps) => {
 
 return (
 <Animated.View style={{opacity: fadeAnim}}>
-<View style={[mystyle.myModalContainer, mystyle.myMainWhiteBtn, mystyle.centered]}>
+  <View style={[mystyle.myModalContainer, mystyle.myMainWhiteBtn, mystyle.centered]}>
     {changed?
     <View style={[mystyle.centered, {marginTop: '50%'}]}>
-    <Warning 
-    mainText='Item changed successfully.' 
-    subText='You can now close this modal.'
-    positive={true}
-    mainColor={Colors.light.gray}
-    subColor={Colors.light.tint}
-    iconColor={Colors.light.tint}></Warning></View>
+    <Warning mainText='Item changed successfully.' subText='You can now close this modal.'
+    positive={true} mainColor={Colors.light.gray} subColor={Colors.light.tint} iconColor={Colors.light.tint}></Warning>
+    </View>
     : <Form onDataReady={handleChange} editor={true} product={item}></Form>
-}
-</View>
+    }
+  </View>
 </Animated.View>
 )}
 
