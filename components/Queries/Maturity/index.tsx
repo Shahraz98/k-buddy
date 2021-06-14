@@ -10,7 +10,7 @@ import Displayer from '../../Displayer';
 const Maturity = ({items}: DefListProps) => {
 
     const [freshList, setfreshList] =  useState<ProductType[] | undefined>(undefined) 
-    const ripewords = ['2 days','a day', 'hour', 'second', 'minute'] 
+    const ripewords = ['2 days','1 day', 'hour', 'second', 'minute'] 
 
     useEffect(()=> {
     const tempList:Array<ProductType> = items.filter((i) => i.maturity != undefined);
@@ -27,7 +27,7 @@ return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Unchecked Ripeness</Text>
 {freshList?
-   <Displayer items={myList} text='All Ingredients have been checked recently.' shape='Rectangle'></Displayer>
+   <Displayer colored={true} items={myList} text='All Ingredients have been checked recently.' shape='Rectangle'></Displayer>
    : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
 }
 </>

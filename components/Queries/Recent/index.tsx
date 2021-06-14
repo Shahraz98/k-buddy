@@ -17,7 +17,7 @@ return (
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Recently added</Text>
   <View style={{marginBottom: 50}}>
   {items? 
-    <Displayer items={myList} text='No additions during last 24 hours.' shape='Square'></Displayer>
+    <Displayer items={myList} colored={true} text='No additions during last 24 hours.' shape='Square'></Displayer>
     : <View></View>
   }
   </View>

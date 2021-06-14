@@ -61,7 +61,7 @@ const mystyle = StyleSheet.create({
     },
     myModalContainer: {
         width:'100%',
-        height: 560,
+        height: 440,
         flexDirection: 'row',
         borderRadius: 30,
         marginBottom: 20,
@@ -103,7 +103,7 @@ const mystyle = StyleSheet.create({
     },
     mydTableheader: {
         marginRight: 'auto', 
-        marginTop: 10, 
+        marginVertical: 10, 
         marginBottom: 'auto', 
         fontWeight: 'bold', 
     },
@@ -115,6 +115,18 @@ const mystyle = StyleSheet.create({
         width: 175, 
         maxHeight: 200,
         marginVertical: 15
+    },
+    myDotContainer: {
+        flexDirection: 'column', 
+        margin: 10, 
+        marginBottom: 0
+    },
+    myDot: {
+        width: 10, 
+        height: 10, 
+        borderRadius: 5, 
+        borderWidth: 0.5, 
+        borderColor: Colors.light.tint
     },
     myMainBlock: {
        marginTop: 15,

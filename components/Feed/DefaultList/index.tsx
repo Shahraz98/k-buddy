@@ -47,7 +47,7 @@ return (
         <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Recently bought</Text>
         <RecentlyBought items={items}/>
         <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Active Ingredients</Text>
-        <Displayer items={items} text='No Ingredients found.'></Displayer>
+        <Displayer items={items} colored={true} text='No Ingredients found.'></Displayer>
       </View>
       :  <View>
           {displayList?
@@ -55,7 +55,7 @@ return (
           <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Recently bought</Text>
           <RecentlyBought items={items}/>
           <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Active Ingredients</Text>
-          <Displayer items={items} text='No Ingredients found.'></Displayer></View>
+          <Displayer items={items} colored={true} text='No Ingredients found.'></Displayer></View>
           : <View></View>}
          </View>
     }

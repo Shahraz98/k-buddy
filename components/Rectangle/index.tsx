@@ -49,9 +49,9 @@ return (
         <Text style={[ mystyle.centered, mystyle.smText, mystyle.coloredText, {fontWeight: 'bold', marginTop: 5}]}>{proname}</Text>
         <Text style={[ mystyle.centered, mystyle.xsText, mystyle.whiteText, {marginVertical: 5}]}>Checked {formatDistanceToNow(new Date(prodate), { addSuffix: true })} as:</Text>
         <Image style={[mystyle.centered, {maxHeight: 100, maxWidth: 100}]} source={url}></Image>
-        <View style={[mystyle.centered, {minWidth: 120, marginVertical: 5}]}>
-          <LinearGradient colors={[Colors.light.gray, Colors.light.dsecondary]} start={[0.2, 0.5]} style={{borderRadius: 15}}>
-            <Text style={[ mystyle.xsText, mystyle.whiteText, mystyle.centered, {paddingVertical: 10}]}>{promaturity}</Text>
+        <View style={[mystyle.centered, {minWidth: '100%', marginTop: 17}]}>
+          <LinearGradient colors={[Colors.light.tint, Colors.light.tsecondary]} start={[0.2, 0.5]} style={{borderRadius: 15}}>
+            <Text style={[ mystyle.xsText, mystyle.whiteText, mystyle.centered, {paddingVertical: 10, textTransform: 'uppercase'}]}>{promaturity}</Text>
           </LinearGradient>
         </View>
       </LinearGradient>

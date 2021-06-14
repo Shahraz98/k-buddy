@@ -27,7 +27,7 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        tabStyle: mystyle.myMainWhiteBtn,
+        tabStyle: {backgroundColor: 'white'},
         activeTintColor: Colors[colorScheme].tint,
         showLabel: false}}>
       <BottomTab.Screen

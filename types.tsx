@@ -64,8 +64,8 @@ export type QueriesParamList = {
 
 export type myFormElementProps = {
   handleUpdate: (title:string, index: number) => void,
-  titleArr: Array<string>,
   arrIndex: number,
+  titleArr?: Array<string>,
   placeHold?: string,
   groupArr?: Array<string>
 }

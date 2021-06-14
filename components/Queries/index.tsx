@@ -45,9 +45,9 @@ return (
     : <View style={{marginTop: 10}}>
       {displayList ? displayList.length != 0? 
       <View>
+        <Missing items={displayList}></Missing>
         <Maturity items={displayList}></Maturity>
-        <View><Missing items={displayList}></Missing></View>
-        <View><Recent items={displayList}></Recent></View>
+        <Recent items={displayList}></Recent>
       </View> 
       : <View style={[mystyle.centered, {marginTop: '30%'}]}>
         <Warning positive={false} mainColor={Colors.light.tint} subColor={Colors.light.gray} 

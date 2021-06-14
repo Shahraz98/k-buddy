@@ -14,7 +14,7 @@ const recentList = myList.filter((product) => formatDistanceToNow(new Date(produ
 return (
 <>
 {recentList?
-<Displayer items={recentList} text='No recently bought Ingredients.' shape='Bought'></Displayer>
+<Displayer items={recentList} colored={true} text='No recently bought Ingredients.' shape='Bought'></Displayer>
 : <View></View>
 }
 </>
