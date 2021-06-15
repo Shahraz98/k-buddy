@@ -8,7 +8,7 @@ import Displayer from '../../Displayer';
 const Missing = ({items}: DefListProps) => {
     const myList =  items? items.filter((product) => {
         if(product.name === 'Name not found' || product.category === '' || product.category === 'Category not found' || product.brand === '' || product.brand === 'Brand not found' || 
-        product.confection === '' || product.expiry === '' || product.location === '' || product.maturity === 'Not specified'){
+        product.confection === '' || product.expiry === '' || product.location === '' || product.maturity === 'N/A'){
             return product; }
     }) : []
 

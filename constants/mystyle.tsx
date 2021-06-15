@@ -57,7 +57,7 @@ const mystyle = StyleSheet.create({
         height: '100%',
         backgroundColor: 'white',
         borderRadius: 15,
-        marginBottom: 10
+        marginBottom:10
     },
     myModalContainer: {
         width:'100%',
@@ -70,7 +70,6 @@ const mystyle = StyleSheet.create({
         height: 40,
         width: '43%',
         paddingLeft: 10,
-        paddingTop: 10,
         marginTop: 10,
         borderRadius: 15,
     },

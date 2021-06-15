@@ -27,11 +27,11 @@ export default function NewItemScreen() {
    }
 
     const handleIncomingData = (name:string, brand?:string, category?:string, location?:string, confection?:string, maturity?:string, datepick?:Date) => {
-        if(name != '') {
+        if(name != '' && name != ' ') {
             handleAdd(name, brand, category, location, confection, maturity, datepick);
             setAdded(true);
         }
-        else Alert.alert('Name required','To be able to add your ingredient a name will be necessary, please fill out the first text-field.');
+        else Alert.alert('Name required','To be able to add your ingredient a name will be necessary.');
     }
     
     return (
@@ -44,7 +44,7 @@ export default function NewItemScreen() {
                 mainText='Item added successfully.' 
                 subText='Go to the new tab to view it, or'
                 buttonText='Add another'></Success>
-                : <View><Form onDataReady={handleIncomingData} editor={false}></Form></View>
+                : <View style={{marginBottom: 40}}><Form onDataReady={handleIncomingData} editor={false}></Form></View>
                 }
                 
             </ScrollView>

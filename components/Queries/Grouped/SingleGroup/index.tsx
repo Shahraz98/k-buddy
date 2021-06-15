@@ -10,10 +10,7 @@ const SingleGroup = ({items, filterby, groupIcon}: GroupProps) => {
     const defList: string[] = []; //Array used to avoid duplicates in the group
 
 return (
-<View>
-    <View>
-        <MaterialIcons name={groupIcon} size={30} style={[mystyle.centered, {marginTop: 15}]} color={Colors.light.tint} />
-    </View>
+<View style={{marginBottom: 20}}>
     <View>
         {items?
         items.map( (product) =>{ 

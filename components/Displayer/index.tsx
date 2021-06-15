@@ -14,7 +14,7 @@ import ShortView from '../ShortView';
 const Displayer = ({items, text, colored, shape}: DisplayerProps) => {
 
 return (
-<View style={[{flexDirection: 'row', flexWrap: 'wrap'}]}>
+<View style={[{flexDirection: 'row', flexWrap: 'wrap', marginBottom: 20}]}>
    {items.length != 0?
      items.map((product) => {
        if(shape === 'Square'){ return <Square key={product.id} 

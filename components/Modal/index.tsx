@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {View, Animated} from 'react-native';
+import {View, Animated, Alert} from 'react-native';
 import Form from '../Form'
 import {ProductProps} from '../../types';
 import mystyle from '../../constants/mystyle';
@@ -21,9 +21,11 @@ const Modal = ({item}: ProductProps) => {
         ).start();
       }, [])
     
-    const handleChange = async (nname?:string,nbrand?:string,ncategory?:string,nlocation?:string,nconfection?:string,nmaturity?:string, nexpiry?:Date) => {
-       handleUpdate(item, nname, nbrand, ncategory, nlocation, nconfection, nmaturity, nexpiry)
-       setChanged(true);
+    const handleChange = async (nname:string,nbrand?:string,ncategory?:string,nlocation?:string,nconfection?:string,nmaturity?:string, nexpiry?:Date) => {
+      if(nname != '' && nname != ' '){
+      handleUpdate(item, nname, nbrand, ncategory, nlocation, nconfection, nmaturity, nexpiry)
+      setChanged(true);}
+      else Alert.alert('Name required','To be able to add your ingredient a name will be necessary.');
     }
 
 return (

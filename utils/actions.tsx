@@ -73,7 +73,7 @@ export const handleReNew = async (product:ProductType) => {
                     isOpen: false,
                     addedOn: now,
                     maturitydate: now,
-                    maturity: 'Not specified',
+                    maturity: 'N/A',
                     recentlyBought: true,
                     boughtOn: now,
                    })
@@ -86,16 +86,6 @@ export const handleReNew = async (product:ProductType) => {
                     boughtOn: now,
                    })
             }
-    } catch(error) {console.log('error',error)}
-}
-
-export const handleSetExpired = async (product:ProductType) => {
-    const ProductRef = getSingleProduct(product.id);
-    try {   
-            const now = format(new Date(), "yyyy-MM-dd'T'HH:mm")
-                await ProductRef.update({
-                    expiry: now,
-                   })
     } catch(error) {console.log('error',error)}
 }
 
@@ -168,7 +158,7 @@ export const handleAdd = async (name:string, brand?:string, category?:string, lo
             }
             else {
                 if(maturity === ''){
-                    maturity = 'Not specified'}
+                    maturity = 'N/A'}
                     
                     const product = {
                         name,

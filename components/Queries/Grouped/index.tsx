@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import { DefListProps} from '../../../types';
+import {View, Text, TouchableOpacity} from 'react-native';
 import SingleGroup from './SingleGroup';
-import { View ,Text} from '../../Themed';
-import {AntDesign} from '@expo/vector-icons'; 
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {AntDesign, Ionicons, Feather, SimpleLineIcons} from '@expo/vector-icons'; 
 import mystyle from '../../../constants/mystyle';
 import Colors from '../../../constants/Colors';
 import Warning from '../../Warning';
@@ -20,6 +19,7 @@ return (
         <View style={mystyle.myClmContainer}>
             <Text style={[mystyle.bigText,mystyle.centered]}>View</Text>
             <Text style={mystyle.smText}>by Category</Text>
+            <Ionicons name="md-fast-food-outline" style={[mystyle.centered, {marginTop: 5}]} size={26} color={Colors.light.dsecondary} />
         </View>
         <TouchableOpacity onPress={() => setMyVar(1)}>
             <AntDesign name="right" style={{marginLeft: 50, marginTop: 4}} size={21} color={Colors.light.tint}/>
@@ -34,6 +34,7 @@ return (
         <View style={mystyle.myClmContainer}>
             <Text style={[mystyle.bigText,mystyle.centered]}>View</Text>
             <Text style={mystyle.smText}>by Location</Text>
+            <Feather name="shopping-bag" style={[mystyle.centered, {marginTop: 5}]} size={24} color={Colors.light.dsecondary} />
         </View>
         <TouchableOpacity onPress={() => setMyVar(2)}>
             <AntDesign name="right" style={{marginLeft: 50, marginTop: 4}} size={21} color={Colors.light.tint}/>
@@ -48,6 +49,7 @@ return (
         <View style={mystyle.myClmContainer}>
             <Text style={[mystyle.bigText,mystyle.centered]}>View</Text>
             <Text style={mystyle.smText}>by Confection</Text>
+            <SimpleLineIcons name="bag" style={[mystyle.centered, {marginTop: 5}]} size={24} color={Colors.light.dsecondary} />
         </View>
         <AntDesign name="right" style={{marginLeft: 50, marginTop: 4}} size={21} color="transparent" />
     </View>

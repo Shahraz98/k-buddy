@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useState} from 'react';
-import { View, Text, StyleSheet,Image,Button} from 'react-native';
+import { View, Text,Image,Button, TouchableOpacity} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { TouchableOpacity} from 'react-native-gesture-handler';
 import Colors from '../../constants/Colors'
 import { DatePickerModal } from 'react-native-paper-dates';
 import {FormProps} from '../../types';
@@ -89,8 +88,8 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
       {inputsArray[4] === 'Fresh' || inputsArray[4] === 'Frozen'?
       <><Text style={[mystyle.centered, mystyle.coloredText, mystyle.xsText, {marginTop: 10, paddingHorizontal: 10, textAlign: 'center'}]}>
         Fresh items can only be set as Fresh or Frozen, use the 'Freeze' and 'Unfreeze' Buttons to handle your item's freezing status.</Text>
-        <DotList handleUpdate={handleUpdate} groupArr={ripeness} arrIndex={5} placeHold='Ripeness'></DotList></>
-        : <DotList handleUpdate={handleUpdate}  groupArr={confectionsWOFresh} arrIndex={4} placeHold='Confection'></DotList>}
+        <DotList handleUpdate={handleUpdate} titleArr={inputsArray}  groupArr={ripeness} arrIndex={5} placeHold='Ripeness'></DotList></>
+        : <DotList handleUpdate={handleUpdate}  titleArr={inputsArray}  groupArr={confectionsWOFresh} arrIndex={4} placeHold='Confection'></DotList>}
         <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]} 
     onPress={() => onDataReady(inputsArray[0], inputsArray[1], inputsArray[2], inputsArray[3], inputsArray[4], inputsArray[5], datepick)}>
       <LinearGradient colors={[Colors.light.tint,Colors.light.tsecondary]} start={[0.3, 0.5]} style={{borderRadius: 15}}>
@@ -101,9 +100,9 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
     :  <>
     <Text style={[mystyle.coloredText, mystyle.xsText, {marginTop: 10, paddingHorizontal: 10, textAlign: 'center'}]}>
     If the expiry is omitted or does not exist, your ingredient will be set as "Expiring in 24 hours".</Text>
-    <DotList handleUpdate={handleUpdate}  groupArr={confectionsWFresh} arrIndex={4} placeHold='Confection'></DotList>
+    <DotList handleUpdate={handleUpdate}  titleArr={inputsArray}  groupArr={confectionsWFresh} arrIndex={4} placeHold='Confection'></DotList>
          {inputsArray[4] === 'Fresh'?
-         <DotList handleUpdate={handleUpdate}  groupArr={ripeness} arrIndex={5} placeHold='Ripeness'></DotList> : <View></View>}
+         <DotList handleUpdate={handleUpdate}  titleArr={inputsArray} groupArr={ripeness} arrIndex={5} placeHold='Ripeness'></DotList> : <View></View>}
          <><TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn, mystyle.centered]}  
         onPress={() => onDataReady(inputsArray[0], inputsArray[1], inputsArray[2], inputsArray[3], inputsArray[4], inputsArray[5], datepick)}>
           <LinearGradient colors={[Colors.light.tint,Colors.light.tsecondary]} start={[0.3, 0.5]} style={{borderRadius: 15}}>
