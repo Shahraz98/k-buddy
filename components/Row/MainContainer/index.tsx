@@ -10,6 +10,7 @@ import mystyle from '../../../constants/mystyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../../../constants/Colors';
 import { AntDesign } from '@expo/vector-icons'; 
+import MyButton from '../../Button';
 
 const MainContainer = ({item}: ProductProps) => {
   const [modal, OpenModal] = useState<boolean>(true); 
@@ -37,10 +38,8 @@ const MainContainer = ({item}: ProductProps) => {
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <RowBot item={item}></RowBot> 
             <View>
-              <TouchableOpacity style={[mystyle.myMainBtn, mystyle.myMainColoredBtn]} onPress={() => OpenModal(false)}> 
-                <LinearGradient colors={[Colors.light.tint,Colors.light.tsecondary]} start={[0.3, 0.5]} style={{borderRadius: 15}}>
-                  <Text style={[mystyle.myformBtnText, mystyle.xsText, mystyle.whiteText, mystyle.centered]} >Edit</Text>
-                </LinearGradient>
+              <TouchableOpacity style={[mystyle.myMainBtn]} onPress={() => OpenModal(false)}> 
+              <MyButton btnColor='tint' btnText='Edit' btnSize={12}></MyButton>
               </TouchableOpacity>
               <RowMid item={item}></RowMid> 
             </View>

@@ -38,7 +38,7 @@ const mystyle = StyleSheet.create({
         marginTop: 15,
         marginBottom: 10,
         borderRadius: 30,
-        maxWidth: 190
+        minWidth: 110
     },
     myMainColoredBtn: {
         backgroundColor: Colors.light.tint,

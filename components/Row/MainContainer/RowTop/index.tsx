@@ -1,12 +1,13 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import { ProductProps} from '../../../../types';
-import { Ionicons, Entypo, SimpleLineIcons, FontAwesome, MaterialCommunityIcons, EvilIcons, Feather} from '@expo/vector-icons'; 
+import { AntDesign, EvilIcons} from '@expo/vector-icons'; 
 import {ProgressBar} from 'react-native-paper';
 import {formatDistanceToNow} from 'date-fns'
 import Colors from '../../../../constants/Colors'
 import mystyle from '../../../../constants/mystyle'
 import {LinearGradient} from 'expo-linear-gradient';
+import ColoredView from '../../../ColoredView';
 
 const RowTop = ({item}: ProductProps) => {
 
@@ -35,22 +36,13 @@ return (
           <Text style={[mystyle.blackText, mystyle.bigText, {fontWeight: 'bold', marginRight: 5}]}>{item.name}</Text>
           <Text style={[mystyle.coloredText, {marginRight: 1, marginTop: 3}]}>by {item.brand? item.brand : 'N/A'}</Text>
         </View>
-        <Entypo style={{marginLeft: 'auto', marginBottom: 'auto'}} name={'leaf'} size={30} color={Colors.light.tsecondary}/>
+        <AntDesign style={{marginLeft: 'auto', marginBottom: 'auto'}} name='smileo' size={35} color={Colors.light.tsecondary}/>
     </View>
     <View style={[mystyle.myRowHeader, {marginBottom: 15, marginTop: 20}]}>
-      <LinearGradient colors={[Colors.light.tint,Colors.light.tsecondary]} start={[0.3, 0.5]} style={{borderRadius: 15}}>
-          <View style={{borderWidth: 0.5, borderColor: Colors.light.tsecondary, paddingHorizontal: 10, paddingVertical: 10}}>
-          <Text style={[mystyle.whiteText, mystyle.xsText]}>Category: {item.category? item.category : 'N/A'} <Ionicons name="md-fast-food-outline" size={16} color={Colors.light.dsecondary} /></Text>
-          <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 5}]}>Confection Type: {item.confection? item.confection : 'N/A'} <SimpleLineIcons name="bag" size={13} color={Colors.light.dsecondary} /></Text>
-          <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 5}]}>Location: {item.location? item.location : 'N/A'} <Feather name="shopping-bag" size={13} color={Colors.light.dsecondary} /></Text>
-          {item.isOpen? 
-          <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 3}]}>Status: Open <FontAwesome name="dropbox" size={17} color={Colors.light.dsecondary} /></Text>
-          : <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 3}]}>Status: Closed <MaterialCommunityIcons name="cube" size={17} color={Colors.light.dsecondary} /></Text>}
-          </View>
-      </LinearGradient>
+      <ColoredView item={item}></ColoredView>
       <View style={{marginLeft: 'auto'}}>
         <View style={{marginLeft: 'auto'}}>
-            <EvilIcons name="clock" style={mystyle.centered} size={65} color={Colors.light.tsecondary}/>
+            <EvilIcons name="clock" style={mystyle.centered} size={50} color={Colors.light.tsecondary}/>
             <Text style={[mystyle.secondaryBlack, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>Expiring</Text>
             <Text style={[mystyle.secondaryBlack, mystyle.centered, mystyle.xsText, {marginTop: 2}]}>{formatDistanceToNow(new Date(item.expiry), { addSuffix: true })}</Text>
         </View>

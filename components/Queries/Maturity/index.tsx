@@ -26,6 +26,7 @@ const Maturity = ({items}: DefListProps) => {
 return (
 <>
 <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Unchecked Ripeness</Text>
+<Text style={[mystyle.centered, mystyle.secondaryBlack, mystyle.xsText, {marginBottom: 5}]}>Ingredients checked more than 3 days ago.</Text>
 {freshList?
    <Displayer colored={true} items={myList} text='All Ingredients have been checked recently.' shape='Rectangle'></Displayer>
    : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />

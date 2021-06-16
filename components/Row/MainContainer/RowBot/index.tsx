@@ -11,14 +11,14 @@ const RowBot = ({item}: ProductProps) => {
 return (
 <View style={mystyle.myClmContainer}>
     {item.isOpen? 
-    <View style={[mystyle.centered, {marginBottom: 5}]}>
-        <FontAwesome name="dropbox" size={65} color={Colors.light.gray} />
+    <View style={[{marginBottom: 5}]}>
+        <FontAwesome name="dropbox" size={50} color={Colors.light.gray} />
     </View>
     : <View style={[mystyle.centered, {marginBottom: 5}]}>
-        <MaterialCommunityIcons name="cube" size={50} color={Colors.light.gray} />
+        <MaterialCommunityIcons name="cube" size={40} color={Colors.light.gray} />
       </View>
     }
-      <Switch style={[mystyle.centered, {marginBottom: 10}]} trackColor={{ true: Colors.light.tint, false: Colors.light.tint}}
+      <Switch style={[{marginBottom: 10}]} trackColor={{ true: Colors.light.tint, false: Colors.light.tint}}
       thumbColor={'#FF7F50'} ios_backgroundColor="white" onValueChange={() => handleOpen(item)}
       disabled={item.isOpen} value={item.isOpen}/>
 </View>

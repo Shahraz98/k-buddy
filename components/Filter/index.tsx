@@ -29,7 +29,7 @@ return (
        <Text style={[mystyle.centered, mystyle.smText, mystyle.coloredText, {marginTop: 20}]}>{filterto}</Text>
        <View style={[{flexDirection: 'row',flexWrap: 'wrap'}]}>
            {tempList?
-           tempList.map((product) => <Square key={product.id} proname={product.name} proadd={product.addedOn} proexp={product.expiry}></Square>)
+           tempList.map((product) => <Square key={product.id} proname={product.name} prodate2={product.addedOn} prodate1={product.expiry}></Square>)
            : <ActivityIndicator style={mystyle.centered} size="large" color={Colors.light.tint} />
            }
        </View> 

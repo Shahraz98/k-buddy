@@ -18,9 +18,9 @@ return (
    {items.length != 0?
      items.map((product) => {
        if(shape === 'Square'){ return <Square key={product.id} 
-       proname={product.name} proadd={product.addedOn} proexp={product.expiry}/>}
+       proname={product.name} prodate2={product.addedOn} prodate1={product.expiry}/>}
        else if(shape === 'Rectangle'){return <Rectangle key={product.id} proname={product.name} 
-       promaturity={product.maturity!} prodate={product.maturitydate!}/>}
+       prodate1={product.maturity!} prodate2={product.maturitydate!}/>}
        else if(shape === 'Short'){return <ShortView key={product.id} item={product} />}
        else if(shape === 'Expired'){return <ExpiredView key={product.id} item={product}/>}
        else if(shape === 'Bought'){return <BoughtView key={product.id} proname={product.name} bought={product.boughtOn!} />}

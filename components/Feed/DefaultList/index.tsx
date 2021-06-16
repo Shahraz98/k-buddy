@@ -45,16 +45,20 @@ return (
     {showFull?
       <View>
         <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Recently bought</Text>
+        <Text style={[mystyle.centered, mystyle.secondaryBlack, mystyle.xsText, {marginBottom: 8}]}>Ingredients bought in the last 24 hours.</Text>
         <RecentlyBought items={items}/>
         <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Active Ingredients</Text>
+        <Text style={[mystyle.centered, mystyle.secondaryBlack, mystyle.xsText, {marginBottom: 10}]}>Ingredients that are not expired.</Text>
         <Displayer items={items} colored={true} text='No Ingredients found.'></Displayer>
       </View>
       :  <View>
           {displayList?
           <View>
           <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Recently bought</Text>
+          <Text style={[mystyle.centered, mystyle.secondaryBlack, mystyle.xsText, {marginBottom: 8}]}>Ingredients bought in the last 24 hours.</Text>
           <RecentlyBought items={items}/>
           <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.whiteText, mystyle.stnText]}>Active Ingredients</Text>
+          <Text style={[mystyle.centered, mystyle.secondaryBlack, mystyle.xsText, {marginBottom: 10}]}>Ingredients that are not expired.</Text>
           <Displayer items={items} colored={true} text='No Ingredients found.'></Displayer></View>
           : <View></View>}
          </View>

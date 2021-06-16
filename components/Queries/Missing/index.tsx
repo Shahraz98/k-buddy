@@ -14,7 +14,8 @@ const Missing = ({items}: DefListProps) => {
 
 return (
 <>
-<Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ingredients missing data</Text>
+<Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Incomplete Ingredients</Text>
+<Text style={[mystyle.centered, mystyle.secondaryBlack, mystyle.xsText, {marginBottom: 22}]}>Ingredients that are missing information.</Text>
     {items ? 
     <Displayer colored={true} items={myList} text='No Ingredients missing data.' shape='Short'></Displayer>
     : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />

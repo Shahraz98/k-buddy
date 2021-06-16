@@ -16,6 +16,11 @@ export type BoughtProps = {
   bought: string
 }
 
+export type FilterProps = {
+  filterby: string, //Property, e.g. location, category, confection
+  filterto: string  //Property name, e.g. fridge, fruit, fresh
+}
+
 export type WarningProps = {
   iconColor: string,
   positive: boolean,
@@ -23,11 +28,6 @@ export type WarningProps = {
   subText?: string,
   mainColor?: string,
   subColor?: string,
-}
-
-export type FilterProps = {
-  filterby: string, //Property, e.g. location, category, confection
-  filterto: string  //Property name, e.g. fridge, fruit, fresh
 }
 
 export type RootStackParamList = {
@@ -38,10 +38,10 @@ export type RootStackParamList = {
   QueriesScreen: undefined;
 };
 
-export type SquareProps = {
+export type ShapeProps = {
   proname: string,
-  proexp: string,
-  proadd: string,
+  prodate1: string,
+  prodate2: string,
 };
 
 export type BottomTabParamList = {
@@ -68,6 +68,16 @@ export type myFormElementProps = {
   titleArr: Array<string>,
   placeHold?: string,
   groupArr?: Array<string>
+}
+
+export type ButtonProps = {
+  btnText: string,
+  btnColor: 'dark' | 'tint' | 'light',
+}
+
+export type ScannerProps = {
+  handleClosing: () => void,
+  handleScanning: ({data}: any) => Promise<void>,
 }
 
 export type  StringCallback = (
@@ -109,17 +119,16 @@ export type ProductProps = {
   item: ProductType,
 }
 
+export type ColoredProps = {
+  item: ProductType,
+  short?: boolean,
+}
+
 export type DisplayerProps = {
   items: ProductType[],
   text: string,
   shape?: string,
   colored?: boolean,
-}
-
-export type RectangleProps = {
-  proname: string,
-  promaturity: string,
-  prodate: string
 }
 
 export type GroupProps = {

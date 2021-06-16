@@ -19,11 +19,14 @@ return (
 <>
 {myList?
 <View>
-<Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ripe Ingredients</Text>
+    <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Ripe Ingredients</Text>
+    <Text style={[mystyle.centered, mystyle.secondaryBlack, mystyle.xsText, {marginBottom: 22}]}>Ingredients set as Ripe.</Text>
     <Displayer items={ripeList} colored={true} text='No ripe Ingredients found.' shape='Short'></Displayer>
     <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Expired Ingredients</Text>
+    <Text style={[mystyle.centered, mystyle.secondaryBlack, mystyle.xsText, {marginBottom: 22}]}>Click "Re-New" to buy Ingredient again.</Text>
     <Displayer items={expiredList} colored={true} text='No expired Ingredients found.' shape='Expired'></Displayer> 
     <Text style={[mystyle.myHeaderText, mystyle.centered, mystyle.blackText, mystyle.stnText]}>Expiring within 24H</Text>
+    <Text style={[mystyle.centered, mystyle.secondaryBlack, mystyle.xsText, {marginBottom: 10}]}>Ingredients expiring in the next 24 hours.</Text>
     <Displayer items={twentyFourList} colored={true} text='No ingredient is going to expire within 24 hours.' shape='Square'></Displayer>
 </View>
 : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />}
