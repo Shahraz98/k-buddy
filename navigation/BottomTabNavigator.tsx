@@ -22,6 +22,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const logo = require('../assets/images/logo.png');
 
   return (
     <BottomTab.Navigator

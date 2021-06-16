@@ -1,12 +1,11 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import { ProductProps} from '../../../../types';
-import { AntDesign, EvilIcons} from '@expo/vector-icons'; 
+import {EvilIcons} from '@expo/vector-icons'; 
 import {ProgressBar} from 'react-native-paper';
 import {formatDistanceToNow} from 'date-fns'
 import Colors from '../../../../constants/Colors'
 import mystyle from '../../../../constants/mystyle'
-import {LinearGradient} from 'expo-linear-gradient';
 import ColoredView from '../../../ColoredView';
 
 const RowTop = ({item}: ProductProps) => {
@@ -36,7 +35,6 @@ return (
           <Text style={[mystyle.blackText, mystyle.bigText, {fontWeight: 'bold', marginRight: 5}]}>{item.name}</Text>
           <Text style={[mystyle.coloredText, {marginRight: 1, marginTop: 3}]}>by {item.brand? item.brand : 'N/A'}</Text>
         </View>
-        <AntDesign style={{marginLeft: 'auto', marginBottom: 'auto'}} name='smileo' size={35} color={Colors.light.tsecondary}/>
     </View>
     <View style={[mystyle.myRowHeader, {marginBottom: 15, marginTop: 20}]}>
       <ColoredView item={item}></ColoredView>
