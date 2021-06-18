@@ -75,7 +75,6 @@ export const handleReNew = async (product:ProductType) => {
                     maturitydate: now,
                     maturity: 'N/A',
                     recentlyBought: true,
-                    boughtOn: now,
                    })
             } else {
                 await ProductRef.update({
@@ -83,7 +82,6 @@ export const handleReNew = async (product:ProductType) => {
                     isOpen: false,
                     addedOn: now,
                     recentlyBought: true,
-                    boughtOn: now,
                    })
             }
     } catch(error) {console.log('error',error)}

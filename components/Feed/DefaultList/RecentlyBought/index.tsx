@@ -7,9 +7,9 @@ import { formatDistanceToNow} from 'date-fns'
 const RecentlyBought = ({items}: DefListProps) => {
 const myList = items.filter((i) => i.recentlyBought === true);
 const words = ['hour', 'minute','second']
-const recentList = myList.filter((product) => formatDistanceToNow(new Date(product.boughtOn!), { addSuffix: true }).indexOf(words[0]) > -1 
-|| formatDistanceToNow(new Date(product.boughtOn!), { addSuffix: true }).indexOf(words[1]) > -1
-|| formatDistanceToNow(new Date(product.boughtOn!), { addSuffix: true }).indexOf(words[2]) > -1)
+const recentList = myList.filter((product) => formatDistanceToNow(new Date(product.addedOn), { addSuffix: true }).indexOf(words[0]) > -1 
+|| formatDistanceToNow(new Date(product.addedOn), { addSuffix: true }).indexOf(words[1]) > -1
+|| formatDistanceToNow(new Date(product.addedOn), { addSuffix: true }).indexOf(words[2]) > -1)
 
 return (
 <>
