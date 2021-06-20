@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useState} from 'react';
-import { View, Text,TouchableOpacity} from 'react-native';
+import { View, Text,TouchableOpacity, Pressable} from 'react-native';
 import Colors from '../../constants/Colors'
-import { DatePickerModal } from 'react-native-paper-dates';
 import {FormProps} from '../../types';
 import mystyle from '../../constants/mystyle'
 import TextField from './TextField/index';
@@ -10,11 +9,12 @@ import {handleBarCodeScanned} from '../../utils/query';
 import DotList from './DotList';
 import MyButton from '../Button';
 import MyScanner from './Scanner';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const Form = ({onDataReady, product, editor}:FormProps)  => {
-  const [datepick, setDatepick] = useState<Date | undefined>(product? new Date(product.expiry) : new Date());
-  const [open, setOpen] = useState(false);
+  const [datepick, setDatepick] = useState<Date>(product? new Date(product.expiry) : new Date());
   const [scanner, setScanner] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
   const [inputsArray, setInputsArray] = useState<string[]>(product?
   [product.name, product.brand? product.brand : '', product.category? product.category : '', 
   product.location? product.location : '', product.confection? product.confection : '', 
@@ -49,21 +49,11 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
         console.log("error", err)
     }
   };
-
-  const onConfirmSingle = React.useCallback(
-    //Handling picking of date from params
-    (params) => {
-      setOpen(false);
-      setDatepick(params.date);
-    },
-    [setOpen, setDatepick]
-  );
-  
-  const onDismiss = () => {
-  //Resetting the date when closing date modal
-  setDatepick(new Date())
-  setOpen(false);
-  }
+ 
+	const handleDatepick = (event: any, selectedDate: any) => {
+		const currentDate = selectedDate || datepick;
+		setDatepick(currentDate);
+	};
   
   return (
   <View style={[mystyle.myFormContainer, mystyle.centered, mystyle.myShadow]}>
@@ -78,17 +68,20 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
       <TextField handleUpdate={handleUpdate} titleArr={inputsArray} arrIndex={3} placeHold={"Location"}></TextField>
     </View>
     <View>
-      <TouchableOpacity onPress={() => setOpen(true)}>
+    <Pressable onPress={() => setOpen(!open)}>
         <Text style={[mystyle.coloredText, mystyle.centered, mystyle.smText, {marginTop: 30}]}>{editor? <Text>Change </Text> : <Text>Select </Text>}Expiry Date</Text>
-        <View style={[mystyle.centered, {backgroundColor: Colors.light.tint, width: '30%', height: 1, marginTop: 10}]}></View>
-      </TouchableOpacity>
-      <DatePickerModal mode="single" visible={open} onDismiss={onDismiss} date={datepick}
-      onConfirm={onConfirmSingle} validRange={{startDate: new Date()}} saveLabel="Confirm"/>
+    </Pressable>
+    <View style={[mystyle.centered,{ marginTop: 5,width: '30%', height: 1, backgroundColor: Colors.light.tint}]}></View>
+    {open && (
+					<DateTimePicker style={[mystyle.centered, { marginTop: 10, minWidth: 120}]}
+						value={datepick} is24Hour={true} minimumDate={new Date()}
+						display='default'onChange={handleDatepick}
+					/>
+				)}
     {editor?
     <View>
       {inputsArray[4] === 'Fresh' || inputsArray[4] === 'Frozen'?
-      <><Text style={[mystyle.centered, mystyle.coloredText, mystyle.xsText, {marginTop: 10, paddingHorizontal: 10, textAlign: 'center'}]}>
-        Fresh items can only be set as Fresh or Frozen, use the 'Freeze' and 'Unfreeze' Buttons to handle your item's freezing status.</Text>
+      <>
         <DotList handleUpdate={handleUpdate} titleArr={inputsArray}  groupArr={ripeness} arrIndex={5} placeHold='Ripeness'></DotList></>
         : <DotList handleUpdate={handleUpdate}  titleArr={inputsArray}  groupArr={confectionsWOFresh} arrIndex={4} placeHold='Confection'></DotList>}
         <TouchableOpacity style={[mystyle.myMainBtn, mystyle.centered, {marginTop: 20}]} 
@@ -97,8 +90,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
     </TouchableOpacity> 
     </View>
     :  <>
-    <Text style={[mystyle.coloredText, mystyle.xsText, {marginTop: 10, paddingHorizontal: 10, textAlign: 'center'}]}>
-    If the expiry is omitted or does not exist, your ingredient will be set as "Expiring in 24 hours".</Text>
+    
     <DotList handleUpdate={handleUpdate}  titleArr={inputsArray}  groupArr={confectionsWFresh} arrIndex={4} placeHold='Confection'></DotList>
          {inputsArray[4] === 'Fresh'?
          <DotList handleUpdate={handleUpdate}  titleArr={inputsArray} groupArr={ripeness} arrIndex={5} placeHold='Ripeness'></DotList> : <View></View>}
