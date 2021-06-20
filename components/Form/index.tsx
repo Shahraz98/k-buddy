@@ -10,7 +10,6 @@ import DotList from './DotList';
 import MyButton from '../Button';
 import MyScanner from './Scanner';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { isAfter } from 'date-fns';
 
 const Form = ({onDataReady, product, editor}:FormProps)  => {
   const [datepick, setDatepick] = useState<Date>(product? new Date(product.expiry) : new Date());
@@ -75,7 +74,7 @@ const Form = ({onDataReady, product, editor}:FormProps)  => {
     <View style={[mystyle.centered,{ marginTop: 5,width: '30%', height: 1, backgroundColor: Colors.light.tint}]}></View>
     {open && (
 					<DateTimePicker style={[mystyle.centered, { marginTop: 10, minWidth: 120}]}
-						value={datepick} is24Hour={true} minimumDate={ isAfter(datepick, new Date())? datepick : new Date()}
+						value={datepick} is24Hour={true} minimumDate={new Date()}
 						display='default'onChange={handleDatepick}
 					/>
 				)}
