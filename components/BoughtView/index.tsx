@@ -32,10 +32,12 @@ return (
             <Text style={[mystyle.stnText, mystyle.whiteText, {fontWeight: 'bold', marginLeft: 10, marginRight: 'auto'}]}>{proname}</Text>
             <AntDesign name="shoppingcart" size={24} style={{marginRight: 10}} color={Colors.light.background} />
           </View>
-          <View style={[mystyle.myMainWhiteBtn, {marginTop: 5, borderTopEndRadius: 15, borderTopStartRadius: 15}]}>
+          <LinearGradient colors={['white', Colors.light.background]} start={[0.1, 0.9]} style={[{borderRadius: 15}]}>
+          <View style={{marginTop: 5, borderTopEndRadius: 15, borderTopStartRadius: 15}}>
             <Text style={[ mystyle.centered, mystyle.xsText, mystyle.coloredText, {marginVertical: 10}]}>Bought</Text>
             <Text style={[ mystyle.centered, mystyle.xsText, mystyle.blackText, {marginBottom: 10}]}>{formatDistanceToNow(new Date(bought), { addSuffix: true })}.</Text>
           </View>
+          </LinearGradient>
         </LinearGradient>
       </Animated.View>
     </View>)

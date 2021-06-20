@@ -8,6 +8,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import mystyle from '../constants/mystyle';
 import {handleAdd} from '../utils/actions';
 
+
 export default function NewItemScreen() {
     const [added, setAdded] = useState<boolean>(false);
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
@@ -35,7 +36,7 @@ export default function NewItemScreen() {
     }
     
     return (
-    <SafeAreaView style={[mystyle.centered, mystyle.myMainWhiteBtn, {width: '100%', height: '100%'}]}>
+    <SafeAreaView style={[mystyle.centered, {width: '100%', height: '100%'}]}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
             <ScrollView style={{flex: 0}}>
               

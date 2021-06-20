@@ -27,12 +27,12 @@ return (
   <LinearGradient colors={[Colors.light.tint,Colors.light.tsecondary]} start={[0.3, 0.5]} style={{borderRadius: 15}}>
   <View style={{paddingHorizontal: 10, paddingVertical: 10}}>
   <Text style={[mystyle.whiteText, mystyle.xsText]}><Ionicons name="md-fast-food-outline" size={16} color={Colors.light.dsecondary} /> Category: {item.category? item.category : 'N/A'}</Text>
-  <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 5}]}><SimpleLineIcons name="bag" size={13} color={Colors.light.dsecondary} /> Confection Type: {item.confection? item.confection : 'N/A'}</Text>
-  <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 5}]}><Feather name="shopping-bag" size={13} color={Colors.light.dsecondary} /> Location: {item.location? item.location : 'N/A'}</Text>
+  <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 5}]}><SimpleLineIcons name="bag" size={13} color={Colors.light.dsecondary} />  Confection Type: {item.confection? item.confection : 'N/A'}</Text>
+  <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 5}]}><Feather name="shopping-bag" size={13} color={Colors.light.dsecondary} />  Location: {item.location? item.location : 'N/A'}</Text>
   {!short? 
     item.isOpen? 
     <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 5}]}><FontAwesome name="dropbox" size={15} color={Colors.light.dsecondary} /> Status: Open</Text>
-    : <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 3}]}><MaterialCommunityIcons name="cube" size={17} color={Colors.light.dsecondary} /> Status: Closed</Text> : <View></View>}
+    : <Text style={[mystyle.whiteText, mystyle.xsText, {marginTop: 3}]}><MaterialCommunityIcons name="cube" size={16} color={Colors.light.dsecondary} /> Status: Closed</Text> : <View></View>}
   </View>
 </LinearGradient>)
 }

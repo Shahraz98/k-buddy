@@ -40,14 +40,14 @@ const Rectangle = ({proname, prodate2, prodate1}: ShapeProps) => {
         ).start();
         const uri = translateRipeness(prodate1);
         setUrl(uri);
-      }, [url]) 
+      }, [prodate1]) 
 
 return (
 <View style={[mystyle.centered, mystyle.myShadow]}>
   <Animated.View style={{opacity: fadeAnim}}>
       <LinearGradient colors={[Colors.light.gray, Colors.light.dsecondary]} start={[0.7, 0.8]} style={[mystyle.myRectangle,{borderRadius: 15}]}>
         <Text style={[ mystyle.centered, mystyle.smText, mystyle.coloredText, {fontWeight: 'bold', marginTop: 5}]}>{proname}</Text>
-        <Text style={[ mystyle.centered, mystyle.xsText, mystyle.whiteText, {marginVertical: 5}]}>Checked {formatDistanceToNow(new Date(prodate2), { addSuffix: true })} as:</Text>
+        <Text style={[ mystyle.centered, mystyle.xsText, mystyle.whiteText, {marginVertical: 5}]}>Set {formatDistanceToNow(new Date(prodate2), { addSuffix: true })} as:</Text>
         <Image style={[mystyle.centered, {maxHeight: 100, maxWidth: 100}]} source={url}></Image>
         <View style={[mystyle.centered, {minWidth: '100%', marginTop: 17}]}>
           <LinearGradient colors={[Colors.light.tint, Colors.light.tsecondary]} start={[0.2, 0.5]} style={{borderRadius: 15}}>

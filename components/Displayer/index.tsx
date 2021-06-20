@@ -23,7 +23,7 @@ return (
        prodate1={product.maturity!} prodate2={product.maturitydate!}/>}
        else if(shape === 'Short'){return <ShortView key={product.id} item={product} />}
        else if(shape === 'Expired'){return <ExpiredView key={product.id} item={product}/>}
-       else if(shape === 'Bought'){return <BoughtView key={product.id} proname={product.name} bought={product.boughtOn!} />}
+       else if(shape === 'Bought'){return <BoughtView key={product.id} proname={product.name} bought={product.addedOn} />}
        else return <Row key={product.id} item={product}/>})
     : <View style={[mystyle.centered, {marginVertical: 50}]}>
         <Warning positive={true} subColor={colored? Colors.light.tint : Colors.light.gray} 

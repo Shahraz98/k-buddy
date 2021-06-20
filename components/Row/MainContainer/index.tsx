@@ -32,7 +32,7 @@ const MainContainer = ({item}: ProductProps) => {
   <View style={{flex: 1, marginHorizontal: 10}}>
     <Animated.View style={{opacity: fadeAnim}}>
     <View key={item.id} style={[mystyle.myMainBlock, mystyle.myShadow]}>
-      <LinearGradient colors={['white', Colors.light.background]} start={[0.5, 0.4]} style={{borderRadius: 15}}>
+      <LinearGradient colors={['white', Colors.light.background]} start={[0.3, 0.5]} style={{borderRadius: 15}}>
         <View style={{paddingHorizontal: 25,paddingVertical: 10}}>
           <RowTop item={item}></RowTop>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>

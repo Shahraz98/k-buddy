@@ -15,7 +15,7 @@ const Modal = ({item}: ProductProps) => {
           fadeAnim,
           {
             toValue: 1,
-            duration: 1500,
+            duration: 1000,
             useNativeDriver: true
           }
         ).start();
