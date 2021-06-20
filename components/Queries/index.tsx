@@ -36,7 +36,9 @@ return (
 <ScrollView style={mystyle.myFeedContainer}>
   <Nav OpenOption1={handleOptions} text1="Filtered Views" text2="Additional Info"></Nav>
     {showfiltered?
-    <View style={{marginTop: 10}}>
+    displayList? <Grouped items={displayList}></Grouped> 
+    : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
+    : <View style={{marginTop: 10}}>
       {displayList ? displayList.length != 0? 
       <View>
         <Missing items={displayList}></Missing>
@@ -48,9 +50,7 @@ return (
         iconColor={Colors.light.dsecondary} mainText='Wow, such emptiness.' subText='Please add an item to your ingredients.'></Warning>
         </View> 
       : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />}
-      </View>
-      : displayList? <Grouped items={displayList}></Grouped> 
-      : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />}
+      </View>}
 </ScrollView>
 )}
 
