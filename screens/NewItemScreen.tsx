@@ -45,7 +45,7 @@ export default function NewItemScreen() {
                 mainText='Item added successfully.' 
                 subText='Go to the new tab to view it, or'
                 buttonText='Add another'></Success>
-                : <View style={{marginVertical: 10}}><Form onDataReady={handleIncomingData} editor={false}></Form></View>
+                : <View style={{marginVertical: 5}}><Form onDataReady={handleIncomingData} editor={false}></Form></View>
                 }
                 
             </ScrollView>
