@@ -9,11 +9,15 @@ import Recent from './Recent';
 import Colors from '../../constants/Colors'
 import {getProducts} from '../../utils/actions';
 import Warning from '../Warning';
+import Nav from '../Nav';
 
 const Queries = () => {
 
 const [displayList, setdisplayList] = useState<ProductType[] | undefined>(undefined);
 const [showfiltered, setShowFiltered] = useState<boolean>(true)
+const handleOptions = () => {
+  setShowFiltered(!showfiltered);
+}
 
 useEffect(()=> {
     const ProductRef = getProducts();
@@ -30,19 +34,9 @@ useEffect(()=> {
 
 return (
 <ScrollView style={mystyle.myFeedContainer}>
-  <View style={[mystyle.centered, mystyle.myNav]}>
-    <TouchableOpacity style={[mystyle.myNavBtn,{backgroundColor: showfiltered? Colors.light.background : 'white'}]} onPress={() => setShowFiltered(true)}>
-        <Text style={[mystyle.myHeaderText, mystyle.smText, mystyle.blackText, {paddingHorizontal: 10}]}>Filtered Views</Text>
-    </TouchableOpacity>
-    <View style={{height: 50,width: 10,backgroundColor: 'white'}}></View>
-    <TouchableOpacity style={[mystyle.myNavBtn,{backgroundColor: showfiltered? 'white' : Colors.light.background}]} onPress={() => setShowFiltered(false)}>
-        <Text style={[mystyle.myHeaderText, mystyle.smText, mystyle.blackText, {paddingHorizontal: 10}]}>Additional Info</Text>
-    </TouchableOpacity>
-  </View>
+  <Nav OpenOption1={handleOptions} text1="Filtered Views" text2="Additional Info"></Nav>
     {showfiltered?
-    displayList? <Grouped items={displayList}></Grouped> 
-    : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />
-    : <View style={{marginTop: 10}}>
+    <View style={{marginTop: 10}}>
       {displayList ? displayList.length != 0? 
       <View>
         <Missing items={displayList}></Missing>
@@ -54,7 +48,9 @@ return (
         iconColor={Colors.light.dsecondary} mainText='Wow, such emptiness.' subText='Please add an item to your ingredients.'></Warning>
         </View> 
       : <ActivityIndicator  style={[mystyle.centered, {marginVertical: 100}]} size="large" color={Colors.light.tint} />}
-      </View>}
+      </View>
+      : displayList? <Grouped items={displayList}></Grouped> 
+      : <ActivityIndicator  style={{marginHorizontal: 25}} size="large" color={Colors.light.tint} />}
 </ScrollView>
 )}
 

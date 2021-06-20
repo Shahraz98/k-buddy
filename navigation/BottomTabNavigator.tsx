@@ -81,8 +81,7 @@ function HomeNavigator() {
         component={HomeScreen}
         options={{ 
           headerStyle: {
-            backgroundColor: Colors.light.background,
-            height: 60,
+            backgroundColor: 'white',
             shadowRadius: 0,
             shadowOffset: {
               height: 0
@@ -111,8 +110,7 @@ function NewItem() {
         component={NewItemScreen}
         options={{ 
           headerStyle: {
-            backgroundColor: Colors.light.background,
-            height: 60,
+            backgroundColor: 'white',
             shadowRadius: 0,
             shadowOffset: {
               height: 0
@@ -141,8 +139,7 @@ function Queries() {
         component={QueriesScreen}
         options={{ 
           headerStyle: {
-            backgroundColor: Colors.light.background,
-            height: 60,
+            backgroundColor: 'white',
             shadowRadius: 0,
             shadowOffset: {
               height: 0

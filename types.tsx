@@ -31,11 +31,11 @@ export type WarningProps = {
 }
 
 export type RootStackParamList = {
-  Root: undefined;
-  NotFound: undefined;
-  AddItem: undefined;
-  Home: undefined;
-  QueriesScreen: undefined;
+  Root: undefined,
+  NotFound: undefined,
+  AddItem: undefined,
+  Home: undefined,
+  QueriesScreen: undefined,
 };
 
 export type ShapeProps = {
@@ -45,21 +45,27 @@ export type ShapeProps = {
 };
 
 export type BottomTabParamList = {
-  Home: undefined;
-  List: undefined;
-  Queries: undefined;
+  Home: undefined,
+  List: undefined,
+  Queries: undefined,
 };
 
+export type NavProps = {
+  OpenOption1: () => void,
+  text1: string,
+  text2: string
+}
+
 export type HomeNavigatorParamList = {
-  HomeScreen: undefined;
+  HomeScreen: undefined,
 };
 
 export type NewItemParamList = {
-  NewItemScreen: undefined;
+  NewItemScreen: undefined,
 };
 
 export type QueriesParamList = {
-  QueriesScreen: undefined;
+  QueriesScreen: undefined,
 };
 
 export type myFormElementProps = {
@@ -117,6 +123,11 @@ export type DefListProps = {
 
 export type ProductProps = {
   item: ProductType,
+}
+
+export type ModalProps = {
+  item: ProductType,
+  handleClosing: () => void
 }
 
 export type ColoredProps = {

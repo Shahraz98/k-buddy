@@ -1,13 +1,14 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {View, Animated, Alert} from 'react-native';
 import Form from '../Form'
-import {ProductProps} from '../../types';
+import {ModalProps} from '../../types';
 import mystyle from '../../constants/mystyle';
 import Warning from '../Warning';
 import {handleUpdate} from '../../utils/actions';
 import Colors from '../../constants/Colors';
+import Success from '../Success';
 
-const Modal = ({item}: ProductProps) => {
+const Modal = ({item, handleClosing}: ModalProps) => {
     const [changed, setChanged] = useState<boolean>(false);
     const fadeAnim = useRef(new Animated.Value(0)).current;
     useEffect(() => {
@@ -30,11 +31,13 @@ const Modal = ({item}: ProductProps) => {
 
 return (
 <Animated.View style={{opacity: fadeAnim}}>
-  <View style={[mystyle.myModalContainer, mystyle.myMainWhiteBtn, mystyle.centered]}>
+  <View style={[mystyle.myModalContainer, mystyle.centered]}>
     {changed?
-    <View style={[mystyle.centered, {marginTop: '50%'}]}>
-    <Warning mainText='Item changed successfully.' subText='You can now close this modal.'
-    positive={true} mainColor={Colors.light.gray} subColor={Colors.light.tint} iconColor={Colors.light.tint}></Warning>
+    <View style={[mystyle.centered]}>
+       <Success addAnother={handleClosing} 
+                mainText='Item changed successfully.' 
+                subText='You can now close this modal.'
+                buttonText='Close'></Success>
     </View>
     : <Form onDataReady={handleChange} editor={true} product={item}></Form>
     }

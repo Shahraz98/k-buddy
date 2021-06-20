@@ -36,7 +36,7 @@ export default function NewItemScreen() {
     }
     
     return (
-    <SafeAreaView style={[mystyle.centered, {width: '100%', height: '100%'}]}>
+    <SafeAreaView style={[mystyle.centered, {backgroundColor: 'white',width: '100%', height: '100%'}]}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
             <ScrollView style={{flex: 0}}>
               
@@ -45,7 +45,7 @@ export default function NewItemScreen() {
                 mainText='Item added successfully.' 
                 subText='Go to the new tab to view it, or'
                 buttonText='Add another'></Success>
-                : <View style={{marginBottom: 40}}><Form onDataReady={handleIncomingData} editor={false}></Form></View>
+                : <View style={{marginVertical: 10}}><Form onDataReady={handleIncomingData} editor={false}></Form></View>
                 }
                 
             </ScrollView>

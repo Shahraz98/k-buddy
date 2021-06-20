@@ -15,6 +15,9 @@ import MyButton from '../../Button';
 const MainContainer = ({item}: ProductProps) => {
   const [modal, OpenModal] = useState<boolean>(true); 
   const fadeAnim = useRef(new Animated.Value(0)).current; //For fading-in animation
+  const handleModal = () => {
+    OpenModal(true)
+  }
     useEffect(() => {
         Animated.timing(
           fadeAnim,
@@ -39,7 +42,7 @@ const MainContainer = ({item}: ProductProps) => {
             <RowBot item={item}></RowBot> 
             <View>
               <TouchableOpacity style={[mystyle.myMainBtn]} onPress={() => OpenModal(false)}> 
-              <MyButton btnColor='tint' btnText='Edit' btnSize={12}></MyButton>
+              <MyButton btnColor='tint' btnText='Edit'></MyButton>
               </TouchableOpacity>
               <RowMid item={item}></RowMid> 
             </View>
@@ -53,7 +56,7 @@ const MainContainer = ({item}: ProductProps) => {
       <TouchableOpacity onPress={() => OpenModal(true)}>
         <AntDesign name="closecircle" size={24} color={Colors.light.gray} style={[mystyle.centered,{marginVertical: 7}]} />
       </TouchableOpacity>
-      <Modal item={item}></Modal>
+      <Modal item={item} handleClosing={handleModal}></Modal>
     </View>
 }
 </>

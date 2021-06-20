@@ -72,6 +72,7 @@ const mystyle = StyleSheet.create({
         paddingLeft: 10,
         marginTop: 10,
         borderRadius: 15,
+        backgroundColor: Colors.light.background
     },
     myScannerText: {
         fontSize: 35, 
