@@ -6,7 +6,7 @@ import mystyle from '../../constants/mystyle'
 
 
 const Nav = ({OpenOption1, text1, text2}: NavProps) => {
-    const [showOption1, setShowOption1] = useState<boolean>(false)
+    const [showOption1, setShowOption1] = useState<boolean>(true)
     const handleSwitch = () => {
         OpenOption1();
         setShowOption1(!showOption1);
